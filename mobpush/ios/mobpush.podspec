@@ -4,17 +4,16 @@
 Pod::Spec.new do |s|
   s.name             = 'mobpush'
   s.version          = '0.0.1'
-  s.summary          = 'A new flutter plugin project.'
-  s.description      = <<-DESC
-A new flutter plugin project.
-                       DESC
-  s.homepage         = 'http://example.com'
+  s.summary          = 'flutter plugin for mobpush.'
+  s.description      = 'MobPush is a Push SDK'
+  s.homepage         = 'http://www.mob.com'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
+  s.author           = { 'Mob' => 'mobproducts@163.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
+  s.dependency 'mob_pushsdk'
 
   s.ios.deployment_target = '8.0'
 end
