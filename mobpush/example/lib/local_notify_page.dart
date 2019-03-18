@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:mobpush/mobpush.dart';
+import 'package:mobpush/mobpush_local_notification.dart';
 import 'package:mobpush/mobpush_notify_message.dart';
 
 class LocalNotifyPage extends StatefulWidget {
@@ -17,40 +18,26 @@ class _LocalNotifyPageState extends State<LocalNotifyPage> {
   @override
   void initState() {
     super.initState();
-    Mobpush.addPushReceiver(_onEvent, _onError);
   }
 
-  void _onEvent(Object event) {
-    setState(() {
-      MobPushNotifyMessage message =
-      new MobPushNotifyMessage.fromJson(json.decode(event));
-
-      showDialog(
-          context: context,
-          child: AlertDialog(
-            content: Text(message.content),
-            actions: <Widget>[
-              FlatButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("确定"),
-              )
-            ],
-          ));
-      print('>>>>>>>>>>>>>>>>>>>>>>>>>>>setStateONEvent:' + event.toString());
-    });
-  }
-
-  void _onError(Object event) {
-    setState(() {
-      print('>>>>>>>>>>>>>>>>>>>>>>>>>>>setStateonError:' + event.toString());
-    });
-  }
 
   void _send() async {
     if (_controller.text.isNotEmpty) {
-      await Mobpush.send(3, _controller.text, 2, "");
+      MobPushLocalNotification localNotification = new MobPushLocalNotification(
+          0,
+          "本地通知",
+          "测试本地通知内容",
+          null,
+          null,
+          new DateTime.now().millisecondsSinceEpoch,
+          0,
+          0,
+          null,
+          true,
+          true,
+          null,
+          true);
+      await Mobpush.addLocalNotification(localNotification);
     }
   }
 
@@ -94,14 +81,14 @@ class _LocalNotifyPageState extends State<LocalNotifyPage> {
                 children: <Widget>[
                   new Expanded(
                       child: new RaisedButton(
-                        padding: EdgeInsets.symmetric(vertical: 12),
-                        color: Color(0xFFFF7D00),
-                        child: Text(
-                          '点击测试',
-                          style: new TextStyle(color: Colors.white),
-                        ),
-                        onPressed: _send,
-                      )),
+                    padding: EdgeInsets.symmetric(vertical: 12),
+                    color: Color(0xFFFF7D00),
+                    child: Text(
+                      '点击测试',
+                      style: new TextStyle(color: Colors.white),
+                    ),
+                    onPressed: _send,
+                  )),
                 ],
               ),
             ],

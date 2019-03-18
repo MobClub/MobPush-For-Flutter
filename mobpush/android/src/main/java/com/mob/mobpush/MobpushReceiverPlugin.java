@@ -24,22 +24,26 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
  * MobpushPlugin
  */
 public class MobpushReceiverPlugin implements EventChannel.StreamHandler {
+    private static MobPushReceiver mobPushReceiver;
+
     private Hashon hashon = new Hashon();
+
+    public static MobPushReceiver getMobPushReceiver(){
+        return mobPushReceiver;
+    }
 
     /**
      * Plugin registration.
      */
     public static void registerWith(Registrar registrar) {
-        System.out.println(">>>>>>>>>>>>>registerWith");
         final EventChannel channel = new EventChannel(registrar.messenger(), "mobpush_receiver");
         channel.setStreamHandler(new MobpushReceiverPlugin());
     }
 
     private MobPushReceiver createMobPushReceiver(final EventChannel.EventSink event) {
-        return new MobPushReceiver() {
+        mobPushReceiver = new MobPushReceiver() {
             @Override
             public void onCustomMessageReceive(Context context, MobPushCustomMessage mobPushCustomMessage) {
-                System.out.println(">>>>>>>>>>>>>>>>>>>>onCustomMessageReceive>>>>>>" + hashon.fromObject(mobPushCustomMessage));
                 HashMap<String, Object> map = new HashMap<String, Object>();
                 map.put("action", 0);
                 map.put("result", hashon.fromObject(mobPushCustomMessage));
@@ -48,7 +52,6 @@ public class MobpushReceiverPlugin implements EventChannel.StreamHandler {
 
             @Override
             public void onNotifyMessageReceive(Context context, MobPushNotifyMessage mobPushNotifyMessage) {
-                System.out.println(">>>>>>>>>>>>>>>>>>>>onNotifyMessageReceive>>>>>>" + hashon.fromObject(mobPushNotifyMessage));
                 HashMap<String, Object> map = new HashMap<String, Object>();
                 map.put("action", 1);
                 map.put("result", hashon.fromObject(mobPushNotifyMessage));
@@ -57,7 +60,6 @@ public class MobpushReceiverPlugin implements EventChannel.StreamHandler {
 
             @Override
             public void onNotifyMessageOpenedReceive(Context context, MobPushNotifyMessage mobPushNotifyMessage) {
-                System.out.println(">>>>>>>>>>>>>>>>>>>>onNotifyMessageOpenedReceive>>>>>>" + hashon.fromObject(mobPushNotifyMessage));
                 HashMap<String, Object> map = new HashMap<String, Object>();
                 map.put("action", 2);
                 map.put("result", hashon.fromObject(mobPushNotifyMessage));
@@ -66,7 +68,6 @@ public class MobpushReceiverPlugin implements EventChannel.StreamHandler {
 
             @Override
             public void onTagsCallback(Context context, String[] tags, int operation, int errorCode) {
-                System.out.println(">>>>>>>>>>>>>>>>>>>>onTagsCallback>>>>>>");
                 HashMap<String, Object> map = new HashMap<String, Object>();
                 map.put("action", 3);
                 map.put("tags", tags);
@@ -77,7 +78,6 @@ public class MobpushReceiverPlugin implements EventChannel.StreamHandler {
 
             @Override
             public void onAliasCallback(Context context, String alias, int operation, int errorCode) {
-                System.out.println(">>>>>>>>>>>>>>>>>>>>onAliasCallback>>>>>>");
                 HashMap<String, Object> map = new HashMap<String, Object>();
                 map.put("action", 4);
                 map.put("alias", alias);
@@ -86,11 +86,13 @@ public class MobpushReceiverPlugin implements EventChannel.StreamHandler {
                 event.success(hashon.fromHashMap(map));
             }
         };
+        return mobPushReceiver;
     }
 
     @Override
     public void onListen(Object o, EventChannel.EventSink eventSink) {
-        MobPush.addPushReceiver(createMobPushReceiver(eventSink));
+        mobPushReceiver = createMobPushReceiver(eventSink);
+        MobPush.addPushReceiver(mobPushReceiver);
     }
 
     @Override

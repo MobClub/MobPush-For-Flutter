@@ -7,8 +7,10 @@ import com.mob.mobpush.req.SimulateRequest;
 import com.mob.pushsdk.MobPush;
 import com.mob.pushsdk.MobPushCallback;
 import com.mob.pushsdk.MobPushCustomMessage;
+import com.mob.pushsdk.MobPushLocalNotification;
 import com.mob.pushsdk.MobPushNotifyMessage;
 import com.mob.pushsdk.MobPushReceiver;
+import com.mob.tools.utils.Hashon;
 import com.mob.tools.utils.ResHelper;
 
 import java.util.ArrayList;
@@ -24,11 +26,13 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
  * MobpushPlugin
  */
 public class MobpushPlugin implements MethodCallHandler {
+    private Hashon hashon = new Hashon();
+
     /**
      * Plugin registration.
      */
     public static void registerWith(Registrar registrar) {
-        final MethodChannel channel = new MethodChannel(registrar.messenger(), "mobpush");
+        final MethodChannel channel = new MethodChannel(registrar.messenger(), "mob.com/mobpush");
         channel.setMethodCallHandler(new MobpushPlugin());
 
         MobpushReceiverPlugin.registerWith(registrar);
@@ -36,7 +40,6 @@ public class MobpushPlugin implements MethodCallHandler {
 
     @Override
     public void onMethodCall(final MethodCall call, final Result result) {
-        System.out.println("onMethodCall>>>>>>>>>>>>>" + call.method);
         if (call.method.equals("getPlatformVersion")) {
             result.success("Android " + android.os.Build.VERSION.RELEASE);
         } else if (call.method.equals("getRegistrationId")) {
@@ -47,7 +50,9 @@ public class MobpushPlugin implements MethodCallHandler {
                 }
             });
         } else if (call.method.equals("removePushReceiver")) {
-
+            if (MobpushReceiverPlugin.getMobPushReceiver() != null) {
+                MobPush.removePushReceiver(MobpushReceiverPlugin.getMobPushReceiver());
+            }
         } else if (call.method.equals("setClickNotificationToLaunchMainActivity")) {
             boolean enable = call.argument("enable");
             MobPush.setClickNotificationToLaunchMainActivity(enable);
@@ -79,12 +84,16 @@ public class MobpushPlugin implements MethodCallHandler {
             int startMinute = call.argument("startMinute");
             int endHour = call.argument("endHour");
             int endMinute = call.argument("endMinute");
-            System.out.println(">>>>>>>>>>>startHour:" + startHour + ">>>startMinute:" + startMinute + ">>>>endHour:" + endHour + ">>>>>endMinute:" + endMinute);
             MobPush.setSilenceTime(startHour, startMinute, endHour, endMinute);
         } else if (call.method.equals("setTailorNotification")) {
 
         } else if (call.method.equals("removeLocalNotification")) {
-//      result.success(MobPush.removeLocalNotification());
+            int notificationId = call.argument("notificationId");
+            result.success(MobPush.removeLocalNotification(notificationId));
+        } else if (call.method.equals("addLocalNotification")) {
+            String json = call.argument("localNotification");
+            MobPushLocalNotification notification = hashon.fromJson(json, MobPushLocalNotification.class);
+            result.success(MobPush.addLocalNotification(notification));
         } else if (call.method.equals("clearLocalNotifications")) {
             result.success(MobPush.clearLocalNotifications());
         } else if (call.method.equals("setNotifyIcon")) {
@@ -95,7 +104,6 @@ public class MobpushPlugin implements MethodCallHandler {
             }
         } else if (call.method.equals("setAppForegroundHiddenNotification")) {
             boolean hidden = call.argument("hidden");
-            System.out.println(">>>>>>>>>>hidden:" + hidden);
             MobPush.setAppForegroundHiddenNotification(hidden);
         } else if (call.method.equals("bindPhoneNum")) {
             String phoneNum = call.argument("phoneNum");

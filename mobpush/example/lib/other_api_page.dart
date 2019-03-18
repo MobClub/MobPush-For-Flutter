@@ -16,34 +16,6 @@ class _OtherApiPageState extends State<OtherApiPage> {
   @override
   void initState() {
     super.initState();
-    Mobpush.addPushReceiver(_onEvent, _onError);
-  }
-
-  void _onEvent(Object event) {
-    setState(() {
-
-
-//      showDialog(
-//          context: context,
-//          child: AlertDialog(
-//            content: Text(message.content),
-//            actions: <Widget>[
-//              FlatButton(
-//                onPressed: () {
-//                  Navigator.pop(context);
-//                },
-//                child: Text("确定"),
-//              )
-//            ],
-//          ));
-      print('>>>>>>>>>>>>>>>>>>>>>>>>>>>setStateONEvent:' + event.toString());
-    });
-  }
-
-  void _onError(Object event) {
-    setState(() {
-      print('>>>>>>>>>>>>>>>>>>>>>>>>>>>setStateonError:' + event.toString());
-    });
   }
 
   void _restartPush() async {
@@ -184,7 +156,7 @@ class _OtherApiPageState extends State<OtherApiPage> {
   }
 
   void _removeLocalNotification() async {
-    await Mobpush.removeLocalNotification();
+    await Mobpush.removeLocalNotification(0);
   }
 
   void _clearLocalNotifications() async {

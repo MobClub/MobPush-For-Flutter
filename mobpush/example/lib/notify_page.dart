@@ -14,40 +14,6 @@ class NotifyPage extends StatefulWidget {
 class _NotifyPageState extends State<NotifyPage> {
   TextEditingController _controller = new TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    Mobpush.addPushReceiver(_onEvent, _onError);
-  }
-
-  void _onEvent(Object event) {
-    setState(() {
-      MobPushNotifyMessage message =
-      new MobPushNotifyMessage.fromJson(json.decode(event));
-
-      showDialog(
-          context: context,
-          child: AlertDialog(
-            content: Text(message.content),
-            actions: <Widget>[
-              FlatButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("确定"),
-              )
-            ],
-          ));
-      print('>>>>>>>>>>>>>>>>>>>>>>>>>>>setStateONEvent:' + event.toString());
-    });
-  }
-
-  void _onError(Object event) {
-    setState(() {
-      print('>>>>>>>>>>>>>>>>>>>>>>>>>>>setStateonError:' + event.toString());
-    });
-  }
-
   void _send() async {
     if (_controller.text.isNotEmpty) {
       await Mobpush.send(1, _controller.text, 0, "");

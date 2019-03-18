@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'mobpush_local_notification.dart';
 
 typedef void EventHandler(Object event);
 
@@ -64,8 +66,8 @@ class Mobpush {
     await _channel.invokeMethod('cleanTags');
   }
 
-  static Future<void> addLocalNotification() async {
-    await _channel.invokeMethod('addLocalNotification');
+  static Future<void> addLocalNotification(MobPushLocalNotification localNotification) async {
+    await _channel.invokeMethod('addLocalNotification', {"localNotification":json.encode(localNotification.toJson())});
   }
 
   static Future<bool> bindPhoneNum (String phoneNum) async {
@@ -82,8 +84,8 @@ class Mobpush {
       await _channel.invokeMethod('setClickNotificationToLaunchMainActivity', {"enable":enable});
   }
 
-  static Future<bool> removeLocalNotification() async {
-    final bool result = await _channel.invokeMethod('removeLocalNotification');
+  static Future<bool> removeLocalNotification(int notificationId) async {
+    final bool result = await _channel.invokeMethod('removeLocalNotification', {"notificationId":notificationId});
     return result;
   }
 

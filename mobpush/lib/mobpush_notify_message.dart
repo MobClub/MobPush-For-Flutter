@@ -13,32 +13,32 @@ class MobPushNotifyMessage {
   bool light;
 
   MobPushNotifyMessage(
-      {this.title,
+      this.title,
       this.content,
-      this.styleContent,
       this.messageId,
-      this.inboxStyleContent,
       this.timestamp,
       this.style,
       this.channel,
-      this.extrasMap,
       this.voice,
       this.shake,
-      this.light});
+      this.extrasMap,
+      this.inboxStyleContent,
+      this.styleContent,
+      this.light);
 
   factory MobPushNotifyMessage.fromJson(Map<String, dynamic> json) {
     return MobPushNotifyMessage(
-        title: json['title'],
-        content: json['content'],
-        styleContent: json['styleContent'],
-        messageId: json['messageId'],
-        inboxStyleContent: json['inboxStyleContent'],
-        timestamp: json['timestamp'],
-        style: json['style'],
-        channel: json['channel'],
-        extrasMap: json['extrasMap'],
-        voice: json['voice'],
-        shake: json['shake'],
-        light: json['light']);
+        json['title'],
+        json['content'],
+        json['messageId'],
+        json['timestamp'],
+        json['style'],
+        json['channel'],
+        json['voice'],
+        json['shake'],
+        json['extrasMap'],
+        json['inboxStyleContent'],
+        json['styleContent'],
+        json['light']);
   }
 }

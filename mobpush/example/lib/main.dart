@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
-import 'package:mobpush/mobpush.dart';
 import 'package:mobpush_example/app_notify_page.dart';
 import 'package:mobpush_example/local_notify_page.dart';
 import 'package:mobpush_example/notify_page.dart';
-import 'package:mobpush_example/open_act_page.dart';
-import 'package:mobpush_example/open_url_page.dart';
 import 'package:mobpush_example/other_api_page.dart';
 import 'package:mobpush_example/timing_notify_page.dart';
 import 'package:mobpush_example/click_container.dart';
+import 'package:mobpush/mobpush.dart';
+import 'package:mobpush/mobpush_notify_message.dart';
+import 'package:mobpush/mobpush_custom_message.dart';
+import 'dart:convert';
 
 void main() => runApp(MyApp());
 
@@ -24,49 +22,79 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MainApp extends StatefulWidget{
+class MainApp extends StatefulWidget {
   @override
   _MainAppState createState() {
     // TODO: implement createState
     return _MainAppState();
   }
-
 }
 
 class _MainAppState extends State<MainApp> {
-//  String _platformVersion = 'Unknown';
-//  String _registrationId = 'Unknown';
-
   @override
   void initState() {
     super.initState();
-    // initPlatformState();
+    Mobpush.addPushReceiver(_onEvent, _onError);
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-//   Future<void> initPlatformState() async {
-//     String platformVersion;
-//     String registrationId;
-//     // Platform messages may fail, so we use a try/catch PlatformException.
-//     try {
-//       platformVersion = await Mobpush.getPlatformVersion();
-//       // registrationId = await Mobpush.getRegistrationId();
-//     } on PlatformException {
-//       platformVersion = 'Failed to get platform version.';
-//     }
+  void _onEvent(Object event) {
+    print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent:' + event.toString());
+    setState(() {
+      Map<String, dynamic> eventMap = json.decode(event);
+      String result = eventMap['result'];
+      int action = eventMap['action'];
 
-//     // If the widget was removed from the tree while the asynchronous platform
-//     // message was in flight, we want to discard the reply rather than calling
-//     // setState to update our non-existent appearance.
-//     if (!mounted) return;
+      switch (action) {
+        case 0:
+          MobPushCustomMessage message =
+              new MobPushCustomMessage.fromJson(json.decode(result));
+          showDialog(
+              context: context,
+              child: AlertDialog(
+                content: Text(message.content),
+                actions: <Widget>[
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("确定"),
+                  )
+                ],
+              ));
+          break;
+        case 1:
+          MobPushNotifyMessage message =
+              new MobPushNotifyMessage.fromJson(json.decode(result));
+          break;
+        case 2:
+          MobPushNotifyMessage message =
+              new MobPushNotifyMessage.fromJson(json.decode(result));
+          break;
+        case 3:
+          List tags = eventMap['tags'];
+          int operation = eventMap['operation'];
+          int errorCode = eventMap['errorCode'];
+          print("tag:>>>>>$tags");
+          print("tags callback: ${operation == 0? "获取":operation==1?"设置":"删除"}别名${errorCode==0?"成功":"失败"}");
+          break;
+        case 4:
+          String alias = eventMap['alias'];
+          int operation = eventMap['operation'];
+          int errorCode = eventMap['errorCode'];
+          print("alias:>>>>>$alias");
+          print("alias callback: ${operation == 0? "获取":operation==1?"设置":"删除"}别名${errorCode==0?"成功":"失败"}");
+          break;
+      }
+    });
+  }
 
-//     setState(() {
-// //      _platformVersion = platformVersion;
-// //      _registrationId = registrationId;
-//     });
-//   }
+  void _onError(Object event) {
+    setState(() {
+      print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onError:' + event.toString());
+    });
+  }
 
-  void _onAppNotifyPageTap(){
+  void _onAppNotifyPageTap() {
     setState(() {
       Navigator.push(
         context,
@@ -75,7 +103,7 @@ class _MainAppState extends State<MainApp> {
     });
   }
 
-  void _onNotifyPageTap(){
+  void _onNotifyPageTap() {
     setState(() {
       Navigator.push(
         context,
@@ -84,7 +112,7 @@ class _MainAppState extends State<MainApp> {
     });
   }
 
-  void _onTimingNotifyPageTap(){
+  void _onTimingNotifyPageTap() {
     setState(() {
       Navigator.push(
         context,
@@ -93,7 +121,7 @@ class _MainAppState extends State<MainApp> {
     });
   }
 
-  void _onLocalNotifyPageTap(){
+  void _onLocalNotifyPageTap() {
     setState(() {
       Navigator.push(
         context,
@@ -102,25 +130,7 @@ class _MainAppState extends State<MainApp> {
     });
   }
 
-  void _onOpenUrlPageTap(){
-    setState(() {
-      Navigator.push(
-        context,
-        new MaterialPageRoute(builder: (context) => new OpenUrlPage()),
-      );
-    });
-  }
-
-  void _onOpenActPageTap(){
-    setState(() {
-      Navigator.push(
-        context,
-        new MaterialPageRoute(builder: (context) => new OpenActPage()),
-      );
-    });
-  }
-
-  void _onOtherAPITap(){
+  void _onOtherAPITap() {
     setState(() {
       Navigator.push(
         context,
@@ -149,9 +159,7 @@ class _MainAppState extends State<MainApp> {
                             top: 15.0,
                             right: 7.5,
                             bottom: 7.5,
-                            onTap: _onAppNotifyPageTap
-                            )
-                    ),
+                            onTap: _onAppNotifyPageTap)),
                     Expanded(
                         child: clickcontainer(
                             content: "通知",
@@ -188,29 +196,6 @@ class _MainAppState extends State<MainApp> {
                   ],
                 ),
               ),
-              Expanded(
-                  child: Row(
-                children: <Widget>[
-                  Expanded(
-                      child: clickcontainer(
-                          content: "推送打开指定链接页面",
-                          res: "assets/images/ic_item_media.png",
-                          left: 15.0,
-                          top: 7.5,
-                          right: 7.5,
-                          bottom: 15.0,
-                          onTap: _onOpenUrlPageTap)),
-                  Expanded(
-                      child: clickcontainer(
-                          content: "推送打开应用内指定页面",
-                          res: "assets/images/ic_item_open_act.png",
-                          left: 7.5,
-                          top: 7.5,
-                          right: 15.0,
-                          bottom: 15.0,
-                          onTap: _onOpenActPageTap))
-                ],
-              )),
               Expanded(
                   child: Row(
                 children: <Widget>[
