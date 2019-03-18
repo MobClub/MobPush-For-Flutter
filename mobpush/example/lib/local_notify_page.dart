@@ -15,28 +15,22 @@ class LocalNotifyPage extends StatefulWidget {
 class _LocalNotifyPageState extends State<LocalNotifyPage> {
   TextEditingController _controller = new TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
-
   void _send() async {
     if (_controller.text.isNotEmpty) {
       MobPushLocalNotification localNotification = new MobPushLocalNotification(
-          0,
-          "本地通知",
-          "测试本地通知内容",
-          null,
-          null,
-          new DateTime.now().millisecondsSinceEpoch,
-          0,
-          0,
-          null,
-          true,
-          true,
-          null,
-          true);
+          0,//notificationId
+          "本地通知",//本地通知标题
+          _controller.text,//本地通知内容
+          null,//消息id
+          null,//收件箱样式的内容
+          new DateTime.now().millisecondsSinceEpoch,//本地通知时间戳
+          0,//通知样式
+          0,//消息通道
+          null,//附加数据
+          true,//声音
+          true,//真的
+          null,//大段文本和大图模式的样式内容
+          true);//呼吸灯
       await Mobpush.addLocalNotification(localNotification);
     }
   }

@@ -1,6 +1,12 @@
 import 'mobpush_notify_message.dart';
 
+/**
+ * MobPush本地通知实体
+ */
 class MobPushLocalNotification extends MobPushNotifyMessage {
+  /**
+   * 本地通知id
+   */
   int notificationId;
 
   MobPushLocalNotification(
@@ -20,8 +26,7 @@ class MobPushLocalNotification extends MobPushNotifyMessage {
       : super(title, content, messageId, timestamp, style, channel, voice,
             shake, extrasMap, inboxStyleContent, styleContent, light);
 
-  Map<String, dynamic> toJson() =>
-      {
+  Map<String, dynamic> toJson() => {
         'notificationId': notificationId,
         'title': title,
         'content': content,

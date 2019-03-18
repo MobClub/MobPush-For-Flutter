@@ -13,11 +13,6 @@ class _OtherApiPageState extends State<OtherApiPage> {
   bool hiddenNotify = false;
   bool launchMain = true;
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
   void _restartPush() async {
     await Mobpush.restartPush();
   }

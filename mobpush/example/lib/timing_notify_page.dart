@@ -35,20 +35,9 @@ class _TimingNotifyPageState extends State<TimingNotifyPage> {
 
   void _send() async {
     if (_controller.text.isNotEmpty) {
+      //发送消息类型为3的自延迟推送通知消息，推送内容时输入框输入的内容，延迟推送时间为2分钟（2分钟后推送），附加数据为空
       bool result = await Mobpush.send(3, _controller.text, 2, "");
-      showDialog(
-          context: context,
-          child: AlertDialog(
-            content: Text(result ? "发送成功" : "发送失败"),
-            actions: <Widget>[
-              FlatButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("确定"),
-              )
-            ],
-          ));
+      print('延迟推送通知消息${result?"成功":"失败"}');
     }
   }
 

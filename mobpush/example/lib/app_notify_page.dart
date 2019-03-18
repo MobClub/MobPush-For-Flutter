@@ -16,8 +16,9 @@ class _AppNotifyPageState extends State<AppNotifyPage> {
 
   void _send() async {
     if (_controller.text.isNotEmpty) {
+      //发送消息类型为2的自定义透传消息，推送内容时输入框输入的内容，延迟推送时间为0（立即推送），附加数据为空
       bool result = await Mobpush.send(2, _controller.text, 0, "");
-      print('>>>>>>>>>>>>>>>>result:$result');
+      print('推送自定义消息${result?"成功":"失败"}');
     }
   }
 

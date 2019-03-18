@@ -16,7 +16,9 @@ class _NotifyPageState extends State<NotifyPage> {
 
   void _send() async {
     if (_controller.text.isNotEmpty) {
-      await Mobpush.send(1, _controller.text, 0, "");
+      //发送消息类型为1的通知消息，推送内容时输入框输入的内容，延迟推送时间为0（立即推送），附加数据为空
+      bool result = await Mobpush.send(1, _controller.text, 0, "");
+      print('通知消息推送${result?"成功":"失败"}');
     }
   }
 
