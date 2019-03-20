@@ -5,7 +5,7 @@ import 'mobpush_notify_message.dart';
  */
 class MobPushLocalNotification extends MobPushNotifyMessage {
   /**
-   * 本地通知id
+   * 本地通知id，仅 Android 属性
    */
   int notificationId;
 
@@ -22,9 +22,14 @@ class MobPushLocalNotification extends MobPushNotifyMessage {
       voice,
       shake,
       styleContent,
-      light)
+      light,
+      badge,
+      sound,
+      subTitle)
       : super(title, content, messageId, timestamp, style, channel, voice,
-            shake, extrasMap, inboxStyleContent, styleContent, light);
+            shake, extrasMap, inboxStyleContent, styleContent, light, badge, sound, subTitle);
+
+  // MobPushLocalNotification(title, content, timestamp, badge, sound, subTitle);
 
   Map<String, dynamic> toJson() => {
         'notificationId': notificationId,
@@ -40,5 +45,8 @@ class MobPushLocalNotification extends MobPushNotifyMessage {
         'shake': shake,
         'styleContent': styleContent,
         'light': light,
+        'badge': badge,
+        'sound': sound,
+        'subTitle': subTitle
       };
 }

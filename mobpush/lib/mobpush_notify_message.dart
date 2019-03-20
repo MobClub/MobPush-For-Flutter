@@ -2,6 +2,9 @@
  * MobPush通知消息实体
  */
 class MobPushNotifyMessage {
+
+  /**************** 共用属性 *****************/
+
   /**
    * 消息标题
    */
@@ -11,6 +14,29 @@ class MobPushNotifyMessage {
    * 消息内容
    */
   String content;
+
+  /**
+   * 消息时间戳
+   */
+  int timestamp;
+
+  /**************** iOS 特有属性 *****************/
+  /**
+   * 副标题
+   */
+  String subTitle;
+  
+  /**
+   * 消息时间戳
+   */
+  String sound;
+
+  /**
+   * 角标
+   */
+  int badge;
+
+  /**************** Android 特有属性 *****************/
 
   /**
    * 大段文本和大图模式的样式内容
@@ -26,11 +52,6 @@ class MobPushNotifyMessage {
    * 收件箱样式的内容
    */
   List<String> inboxStyleContent;
-
-  /**
-   * 消息时间戳
-   */
-  int timestamp;
 
   /**
    * 通知样式 android:(0：普通样式；1：大段文本；2：大图样式；3：收件箱样式)
@@ -74,7 +95,12 @@ class MobPushNotifyMessage {
       this.extrasMap,
       this.inboxStyleContent,
       this.styleContent,
-      this.light);
+      this.light,
+      this.badge,
+      this.sound,
+      this.subTitle);
+
+  // MobPushNotifyMessage(this.title, this.content, this.timestamp, this.badge, this.sound, this.subTitle);
 
   factory MobPushNotifyMessage.fromJson(Map<String, dynamic> json) {
     return MobPushNotifyMessage(
@@ -89,6 +115,9 @@ class MobPushNotifyMessage {
         json['extrasMap'],
         json['inboxStyleContent'],
         json['styleContent'],
-        json['light']);
+        json['light'],
+        json['badge'],
+        json['sound'],
+        json['subTitle']);
   }
 }

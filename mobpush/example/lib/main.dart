@@ -9,6 +9,7 @@ import 'package:mobpush/mobpush.dart';
 import 'package:mobpush/mobpush_notify_message.dart';
 import 'package:mobpush/mobpush_custom_message.dart';
 import 'dart:convert';
+import 'dart:io';
 
 void main() => runApp(MyApp());
 
@@ -27,6 +28,7 @@ class MainApp extends StatefulWidget {
   _MainAppState createState() {
     // TODO: implement createState
     return _MainAppState();
+
   }
 }
 
@@ -34,6 +36,10 @@ class _MainAppState extends State<MainApp> {
   @override
   void initState() {
     super.initState();
+    if (Platform.isIOS) {
+      Mobpush.setCustomNotification();
+      Mobpush.setAPNsForProduction(false);
+    }
     Mobpush.addPushReceiver(_onEvent, _onError);
   }
 

@@ -182,24 +182,21 @@ class Mobpush {
   }
 
   // iOS API
-
+  
   static Future<void> setCustomNotification() async {
-   await _channel.invokeMethod('setCustomNotification',
-        );
+    await _channel.invokeMethod('setCustomNotification');
   }
 
   static Future<void> setAPNsForProduction(bool isPro) async {
-   await _channel.invokeMethod('setAPNsForProduction',
-        {"isPro":isPro});
+    await _channel.invokeMethod('setAPNsForProduction', {"isPro":isPro});
   }
 
   static Future<void> setBadge(int badge) async {
-   await _channel.invokeMethod('setBadge',
-        {"badge":badge});
+    await _channel.invokeMethod('setBadge', {"badge":badge});
   }
 
   static Future<void> clearBadge() async {
-   await _channel.invokeMethod('clearBadge');
+    await _channel.invokeMethod('clearBadge');
   }
 
 }
