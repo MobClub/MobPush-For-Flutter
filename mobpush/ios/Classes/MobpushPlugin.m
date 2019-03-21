@@ -236,26 +236,51 @@ static NSString *const receiverStr = @"mobpush_receiver";
             message.messageType = MPushMessageTypeLocal;
             MPushNotification *noti = [[MPushNotification alloc] init];
             
-            noti.title = eventParams[@"title"];
-            noti.body = eventParams[@"content"];
+            if (eventParams[@"title"] && ![eventParams[@"title"] isKindOfClass:[NSNull class]])
+            {
+                noti.title = eventParams[@"title"];
+            }
+            
+            if (eventParams[@"content"] && ![eventParams[@"content"] isKindOfClass:[NSNull class]])
+            {
+                noti.body = eventParams[@"content"];
+            }
+            
             if (eventParams[@"sound"] && ![eventParams[@"sound"] isKindOfClass:[NSNull class]])
             {
                 noti.sound = eventParams[@"sound"];
+                
             }
-            noti.badge = [eventParams[@"badge"] integerValue];
-            noti.subTitle = eventParams[@"subTitle"];
             
-            long timeStamp = [eventParams[@"timestamp"] longValue];
-            if (timeStamp == 0)
+            if (eventParams[@"badge"] && ![eventParams[@"badge"] isKindOfClass:[NSNull class]])
             {
-                message.isInstantMessage = YES;
+                noti.badge = [eventParams[@"badge"] integerValue];
+            }
+            
+            if (eventParams[@"subTitle"] && ![eventParams[@"subTitle"] isKindOfClass:[NSNull class]])
+            {
+                noti.subTitle = eventParams[@"subTitle"];
+            }
+            
+            if (eventParams[@"timestamp"] && ![eventParams[@"timestamp"] isKindOfClass:[NSNull class]])
+            {
+                long timeStamp = [eventParams[@"timestamp"] longValue];
+                if (timeStamp == 0)
+                {
+                    message.isInstantMessage = YES;
+                }
+                else
+                {
+                    NSDate *currentDate = [NSDate dateWithTimeIntervalSinceNow:0];
+                    NSTimeInterval nowtime = [currentDate timeIntervalSince1970] * 1000;
+                    message.taskDate = nowtime + (NSTimeInterval)timeStamp;
+                }
             }
             else
             {
-                NSDate *currentDate = [NSDate dateWithTimeIntervalSinceNow:0];
-                NSTimeInterval nowtime = [currentDate timeIntervalSince1970] * 1000;
-                message.taskDate = nowtime + (NSTimeInterval)timeStamp;
+                message.isInstantMessage = YES;
             }
+            
             message.notification = noti;
             
             [MobPush addLocalNotification:message];
@@ -314,7 +339,9 @@ static NSString *const receiverStr = @"mobpush_receiver";
     }
     else if ([@"setBadge" isEqualToString:call.method])
     {
-        [MobPush setBadge:[arguments[@"badge"] integerValue]];
+        NSInteger badge = [arguments[@"badge"] integerValue];
+        UIApplication.sharedApplication.applicationIconBadgeNumber = badge;
+        [MobPush setBadge:badge];
     }
     else if ([@"clearBadge" isEqualToString:call.method])
     {
@@ -323,7 +350,7 @@ static NSString *const receiverStr = @"mobpush_receiver";
     else if ([@"setCustomNotification" isEqualToString:call.method])
     {
         MPushNotificationConfiguration *config = [MPushNotificationConfiguration new];
-        config.types = MPushAuthorizationOptionsBadge | MPushAuthorizationOptionsBadge | MPushAuthorizationOptionsAlert;
+        config.types = MPushAuthorizationOptionsSound | MPushAuthorizationOptionsBadge | MPushAuthorizationOptionsAlert;
         [MobPush setupNotification:config];
     }
     else
@@ -602,7 +629,6 @@ static NSString *const receiverStr = @"mobpush_receiver";
                 
                 [resultDict setObject:@2 forKey:@"action"];
             }
-            
         }
             break;
             

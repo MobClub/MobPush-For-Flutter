@@ -83,7 +83,7 @@ class MobPushNotifyMessage {
    */
   bool light;
 
-  MobPushNotifyMessage(
+  MobPushNotifyMessage({
       this.title,
       this.content,
       this.messageId,
@@ -98,26 +98,26 @@ class MobPushNotifyMessage {
       this.light,
       this.badge,
       this.sound,
-      this.subTitle);
+      this.subTitle});
 
   // MobPushNotifyMessage(this.title, this.content, this.timestamp, this.badge, this.sound, this.subTitle);
 
   factory MobPushNotifyMessage.fromJson(Map<String, dynamic> json) {
     return MobPushNotifyMessage(
-        json['title'],
-        json['content'],
-        json['messageId'],
-        json['timestamp'],
-        json['style'],
-        json['channel'],
-        json['voice'],
-        json['shake'],
-        json['extrasMap'],
-        json['inboxStyleContent'],
-        json['styleContent'],
-        json['light'],
-        json['badge'],
-        json['sound'],
-        json['subTitle']);
+        title: json['title'],
+        content: json['content'],
+        messageId: json['messageId'],
+        timestamp: json['timestamp'],
+        style: json['style'],
+        channel: json['channel'],
+        voice: json['voice'],
+        shake: json['shake'],
+        extrasMap: json['extrasMap'],
+        inboxStyleContent: json['inboxStyleContent'],
+        styleContent: json['styleContent'],
+        light: json['light'],
+        badge: json['badge'],
+        sound: json['sound'],
+        subTitle: json['subTitle']);
   }
 }

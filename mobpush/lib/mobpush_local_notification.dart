@@ -9,7 +9,7 @@ class MobPushLocalNotification extends MobPushNotifyMessage {
    */
   int notificationId;
 
-  MobPushLocalNotification(
+  MobPushLocalNotification({
       this.notificationId,
       title,
       content,
@@ -25,9 +25,9 @@ class MobPushLocalNotification extends MobPushNotifyMessage {
       light,
       badge,
       sound,
-      subTitle)
-      : super(title, content, messageId, timestamp, style, channel, voice,
-            shake, extrasMap, inboxStyleContent, styleContent, light, badge, sound, subTitle);
+      subTitle})
+      : super(title: title, content: content, messageId: messageId, timestamp: timestamp, style: style, channel: channel, voice: voice,
+            shake: shake, extrasMap: extrasMap, inboxStyleContent: inboxStyleContent, styleContent: styleContent, light: light, badge: badge, sound: sound, subTitle: subTitle);
 
   // MobPushLocalNotification(title, content, timestamp, badge, sound, subTitle);
 

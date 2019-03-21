@@ -20,43 +20,34 @@ class _LocalNotifyPageState extends State<LocalNotifyPage> {
   void _send() async {
     if (_controller.text.isNotEmpty) {
       
-      if (Platform.isIOS) {
+      if (Platform.isIOS) {    // iOS
+
         MobPushLocalNotification localNotification = new MobPushLocalNotification(
-          0,//notificationId
-          "本地通知",//本地通知标题
-          _controller.text,//本地通知内容
-          null,//消息id
-          null,//收件箱样式的内容
-          0,//本地通知时间戳, 0马上通知。其余为时间间隔
-          0,//通知样式
-          0,//消息通道
-          null,//附加数据
-          false,//声音
-          false,//真的
-          null,//大段文本和大图模式的样式内容
-          false,//呼吸灯
-          1,  // ios角标
-          'default', // ios声音
-          '副标题');// ios副标题
+          title: "正标题",//本地通知标题
+          content: _controller.text, //本地通知内容
+          timestamp: 0, //本地通知时间戳, 0立刻通知。其余为时间间隔
+          badge: 1, //  ios角标
+          sound: "default", // ios声音
+          subTitle: "副标题" // ios副标题
+          );// ios副标题
         await Mobpush.addLocalNotification(localNotification);
-      } else {
+
+      } else { // Android
         MobPushLocalNotification localNotification = new MobPushLocalNotification(
-          0,//notificationId
-          "本地通知",//本地通知标题
-          _controller.text,//本地通知内容
-          null,//消息id
-          null,//收件箱样式的内容
-          new DateTime.now().millisecondsSinceEpoch,//本地通知时间戳
-          0,//通知样式
-          0,//消息通道
-          null,//附加数据
-          true,//声音
-          true,//真的
-          null,//大段文本和大图模式的样式内容
-          true,//呼吸灯
-          0, // ios角标
-          null, // ios声音
-          null);// ios副标题
+          notificationId: 0,//notificationId
+          title: "本地通知",//本地通知标题
+          content: _controller.text,//本地通知内容
+          messageId: null,//消息id
+          inboxStyleContent: null,//收件箱样式的内容
+          timestamp: new DateTime.now().millisecondsSinceEpoch,//本地通知时间戳
+          style: 0,//通知样式
+          channel: 0,//消息通道
+          extrasMap: null,//附加数据
+          voice: true,//声音
+          shake: true,//真的
+          styleContent: null,//大段文本和大图模式的样式内容
+          light: true,//呼吸灯
+          );
         await Mobpush.addLocalNotification(localNotification);
       }
       

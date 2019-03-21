@@ -183,18 +183,32 @@ class Mobpush {
 
   // iOS API
   
+  /**
+   * 设置远程推送，向用户授权(仅 iOS)
+   */
   static Future<void> setCustomNotification() async {
     await _channel.invokeMethod('setCustomNotification');
   }
-
+  
+  /**
+   * 设置远程推送环境 (仅 iOS)
+   * @param isPro  开发环境 false, 线上环境 true
+   */
   static Future<void> setAPNsForProduction(bool isPro) async {
     await _channel.invokeMethod('setAPNsForProduction', {"isPro":isPro});
   }
 
+  /**
+   * 设置角标 (仅 iOS)
+   * @param badge  角标数量
+   */
   static Future<void> setBadge(int badge) async {
     await _channel.invokeMethod('setBadge', {"badge":badge});
   }
 
+  /**
+   * 清空角标，不清除通知栏消息记录 (仅 iOS)
+   */
   static Future<void> clearBadge() async {
     await _channel.invokeMethod('clearBadge');
   }
