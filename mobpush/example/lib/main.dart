@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mobpush_example/app_notify_page.dart';
-import 'package:mobpush_example/local_notify_page.dart';
-import 'package:mobpush_example/notify_page.dart';
-import 'package:mobpush_example/other_api_page.dart';
-import 'package:mobpush_example/timing_notify_page.dart';
-import 'package:mobpush_example/click_container.dart';
+import './app_notify_page.dart';
+import './local_notify_page.dart';
+import './notify_page.dart';
+import './other_api_page.dart';
+import './timing_notify_page.dart';
+import './click_container.dart';
 import 'package:mobpush/mobpush.dart';
 import 'package:mobpush/mobpush_notify_message.dart';
 import 'package:mobpush/mobpush_custom_message.dart';

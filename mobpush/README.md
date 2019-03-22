@@ -1,6 +1,9 @@
-# mobpush
+# MobPush For Flutter
 
-A new flutter plugin project.
+Push is an essential function of the App, which can effectively improve user retention and activity. It can quickly and efficiently integrate MobPush push service for the App and cope with diversified push scenarios
+
+introduce: http://www.mob.com/product/mobpush
+official document: http://wiki.mob.com/mobpush-for-ios/
 
 ## Getting Started
 
@@ -12,3 +15,5 @@ Android and/or iOS.
 For help getting started with Flutter, view our 
 [online documentation](https://flutter.io/docs), which offers tutorials, 
 samples, guidance on mobile development, and a full API reference.
+
+
