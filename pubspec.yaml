@@ -1,8 +1,9 @@
 name: mobpush
-description: A new flutter plugin project.
+description: Push is an essential function of the App, which can effectively improve user retention and activity. It can quickly and efficiently integrate MobPush push service for the App and cope with diversified push scenarios.
 version: 0.0.1
-author:
-homepage:
+author: LeeJay<mobproducts@163.com>
+homepage: https://www.mob.com/product/mobpush
+
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
