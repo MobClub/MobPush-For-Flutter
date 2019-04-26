@@ -23,7 +23,7 @@ class _OtherApiPageState extends State<OtherApiPage> {
 
   void _isPushStopped() async {
     bool isStop = await Mobpush.isPushStopped();
-    print('>>>>>>>>>>>>>>>>>Push stop state:$isStop');
+    print('>>>>>>>>>>>>>>>>>Push stop state:$isStop'); 
   }
 
   void _setAlias() async {
