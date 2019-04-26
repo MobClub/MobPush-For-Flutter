@@ -170,6 +170,13 @@ class Mobpush {
   }
 
   /**
+   * 设置是否显示角标(仅andorid)
+   */
+  static Future<void> setShowBadge (bool show) async {
+    await _channel.invokeMethod('setShowBadge', {"show" : show});
+  }
+
+  /**
    * 设置通知静音时段（推送选项）(仅andorid)
    * @param startHour   开始时间[0~23] (小时)
    * @param startMinute 开始时间[0~59]（分钟）

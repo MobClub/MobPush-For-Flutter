@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:mobpush/mobpush.dart';
 import 'package:mobpush/mobpush_local_notification.dart';
-import 'package:mobpush/mobpush_notify_message.dart';
 import 'dart:io';
 
 class LocalNotifyPage extends StatefulWidget {

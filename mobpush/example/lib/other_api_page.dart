@@ -209,6 +209,10 @@ class _OtherApiPageState extends State<OtherApiPage> {
     await Mobpush.setClickNotificationToLaunchMainActivity(launchMain);
   }
 
+  void _setShowBadge() async {
+    await Mobpush.setShowBadge(true);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -345,6 +349,16 @@ class _OtherApiPageState extends State<OtherApiPage> {
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: _setSilenceTime,
+                  )),
+                  Expanded(
+                      child: RaisedButton(
+                    padding: EdgeInsets.symmetric(vertical: 12),
+                    color: Color(0xFF29C18B),
+                    child: Text(
+                      'setShowBadge',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: _setShowBadge,
                   )),
                 ],
               ),
