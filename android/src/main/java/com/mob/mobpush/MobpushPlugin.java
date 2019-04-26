@@ -107,7 +107,7 @@ public class MobpushPlugin implements MethodCallHandler {
             MobPush.setAppForegroundHiddenNotification(hidden);
         } else if (call.method.equals("setShowBadge")) {
             boolean show = call.argument("show");
-            System.out.println("setShowBadge:"+show);
+            System.out.println("setShowBadge:"+show); 
             MobPush.setShowBadge(show);
         } else if (call.method.equals("bindPhoneNum")) {
             String phoneNum = call.argument("phoneNum");
