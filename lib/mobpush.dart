@@ -53,7 +53,7 @@ class Mobpush {
    * 是否已停止接收推送
    */
   static Future<bool> isPushStopped() async {
-    return await _channel.invokeMethod('isPushStopped');
+    return await _channel.invokeMethod('isPushStopped'); 
   }
 
   /**
