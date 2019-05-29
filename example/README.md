@@ -222,7 +222,7 @@ setBadge
 Mobpush.setBadge(int badge);
 ```
 
-（25）清空角标，不清除通知栏消息记录 (仅 iOS)
+（24）清空角标，不清除通知栏消息记录 (仅 iOS)
 
 clearBadge
 

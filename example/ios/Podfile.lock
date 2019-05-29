@@ -1,9 +1,9 @@
 PODS:
   - Flutter (1.0.0)
-  - mob_pushsdk (1.7.0):
-    - mob_pushsdk/MobPush (= 1.7.0)
+  - mob_pushsdk (1.7.2):
+    - mob_pushsdk/MobPush (= 1.7.2)
     - MOBFoundation
-  - mob_pushsdk/MobPush (1.7.0):
+  - mob_pushsdk/MobPush (1.7.2):
     - MOBFoundation
   - MOBFoundation (3.2.2)
   - mobpush (0.0.1):
@@ -22,7 +22,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
-  mob_pushsdk: e3a0fe3ed1586f8c7b3549f73ed92b4fd01bd31c
+  mob_pushsdk: 80fdabb1d68ad4a0f6dcd886fb5d725a4de584a4
   MOBFoundation: b5ff4038ddb9a0f06b685b86408f905a10aa147c
   mobpush: 046eb071107498239544ee70f7015e5186f0967b
 
