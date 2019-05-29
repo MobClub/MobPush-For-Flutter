@@ -358,5 +358,3 @@ getRegistrationId
 ```
 String regId = await Mobpush.getRegistrationId();
 ```
-
-
