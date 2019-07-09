@@ -1,5 +1,5 @@
-## 0.0.3
+## 0.0.4
 
-* Add iOS and Android bridge.
+* Add iOS static_framework.
 
 
