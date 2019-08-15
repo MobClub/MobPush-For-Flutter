@@ -1,3 +1,3 @@
 # MobPush-For-Flutter
 
-### Backup for 0.0.4
+### 详见mobpush_plugin 目录
