@@ -6,7 +6,7 @@ PODS:
   - mob_pushsdk/MobPush (1.7.4.1):
     - MOBFoundation
   - MOBFoundation (3.2.4)
-  - mobpush_plugin (1.0.2):
+  - mobpush_plugin (1.0.4):
     - Flutter
     - mob_pushsdk
 
@@ -29,7 +29,7 @@ SPEC CHECKSUMS:
   Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
   mob_pushsdk: 2d5c42cf29a5efcafee7e44e1ba468f82a6700d8
   MOBFoundation: dd8f319dde9331590d515a1676d27baccc0070e5
-  mobpush_plugin: caf0a65a99d119f3fc55f5002458c6c5daac86e2
+  mobpush_plugin: b54ce76f0c9cafae5e0b38663b933b3b3d1e414a
 
 PODFILE CHECKSUM: 7fb83752f59ead6285236625b82473f90b1cb932
 

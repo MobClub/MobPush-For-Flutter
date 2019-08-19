@@ -18,3 +18,8 @@
 
 * 1、完善所有iOS API；
 * 2、提供完整Demo示例；
+
+## 1.0.5
+
+* 1、iOS 新增设置前台通知展示类型（Badge、Sound、Alert）;
+* 2、更新Demo其他API界面为列表展示;

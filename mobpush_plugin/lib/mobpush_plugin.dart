@@ -72,7 +72,7 @@ class MobpushPlugin {
    * 设置别名
    */
   static Future<void> setAlias (String alias) async {
-    await _channel.invokeMethod('setAlias', {"alias":alias});
+    await _channel.invokeMethod('setAlias', {"alias": alias});
   }
 
   /*
@@ -93,7 +93,7 @@ class MobpushPlugin {
    * 添加标签
    */
   static Future<void> addTags (List tags) async {
-    await _channel.invokeMethod('addTags', {"tags":tags});
+    await _channel.invokeMethod('addTags', {"tags": tags});
   }
 
   /*
@@ -107,7 +107,7 @@ class MobpushPlugin {
    * 删除标签
    */
   static Future<void> deleteTags (List tags) async {
-    await _channel.invokeMethod('deleteTags', {"tags":tags});
+    await _channel.invokeMethod('deleteTags', {"tags": tags});
   }
 
   /*
@@ -128,7 +128,7 @@ class MobpushPlugin {
    * 绑定手机号
    */
   static Future<void> bindPhoneNum (String phoneNum) async {
-    await _channel.invokeMethod('bindPhoneNum', {"phoneNum" : phoneNum});
+    await _channel.invokeMethod('bindPhoneNum', {"phoneNum": phoneNum});
   }
 
   /*
@@ -139,7 +139,7 @@ class MobpushPlugin {
    * extras: 附加数据，json字符串
    */
   static Future<void> send(int type, String content, int space, String extras) async {
-   return await _channel.invokeMethod("send", {"type":type, "content":content, "space":space, "extras":extras});
+   return await _channel.invokeMethod("send", {"type": type, "content": content, "space": space, "extras": extras});
   }
 
   // Android API
@@ -147,14 +147,14 @@ class MobpushPlugin {
    * 设置点击通知是否跳转默认页(仅andorid)
    */
   static Future<void> setClickNotificationToLaunchMainActivity (bool enable) async {
-      await _channel.invokeMethod('setClickNotificationToLaunchMainActivity', {"enable":enable});
+      await _channel.invokeMethod('setClickNotificationToLaunchMainActivity', {"enable": enable});
   }
 
   /*
    * 移除本地通知(仅andorid)
    */
   static Future<bool> removeLocalNotification(int notificationId) async {
-    final bool result = await _channel.invokeMethod('removeLocalNotification', {"notificationId":notificationId});
+    final bool result = await _channel.invokeMethod('removeLocalNotification', {"notificationId": notificationId});
     return result;
   }
 
@@ -170,21 +170,21 @@ class MobpushPlugin {
    * 设置通知栏icon，不设置默认取应用icon(仅andorid)
    */
   static Future<void> setNotifyIcon(String resId) async {
-   await _channel.invokeMethod('setNotifyIcon',{"iconRes":resId});
+   await _channel.invokeMethod('setNotifyIcon',{"iconRes": resId});
   }
 
   /*
    * 设置应用在前台时是否隐藏通知不进行显示，不设置默认不隐藏通知(仅andorid)
    */
   static Future<void> setAppForegroundHiddenNotification (bool hidden) async {
-    await _channel.invokeMethod('setAppForegroundHiddenNotification', {"hidden" : hidden});
+    await _channel.invokeMethod('setAppForegroundHiddenNotification', {"hidden": hidden});
   }
 
   /*
    * 设置是否显示角标(仅andorid)
    */
   static Future<void> setShowBadge (bool show) async {
-    await _channel.invokeMethod('setShowBadge', {"show" : show});
+    await _channel.invokeMethod('setShowBadge', {"show": show});
   }
 
   /*
@@ -196,7 +196,7 @@ class MobpushPlugin {
    */
   static Future<void> setSilenceTime(int startHour, int startMinute, int endHour, int endMinute) async {
    await _channel.invokeMethod('setSilenceTime',
-        {"startHour":startHour, "startMinute":startMinute, "endHour":endHour, "endMinute":endMinute});
+        {"startHour": startHour, "startMinute": startMinute, "endHour": endHour, "endMinute": endMinute});
   }
 
   // iOS API
@@ -213,7 +213,7 @@ class MobpushPlugin {
    * @param isPro  开发环境 false, 线上环境 true
    */
   static Future<void> setAPNsForProduction(bool isPro) async {
-    await _channel.invokeMethod('setAPNsForProduction', {"isPro":isPro});
+    await _channel.invokeMethod('setAPNsForProduction', {"isPro": isPro});
   }
 
   /*
@@ -221,7 +221,7 @@ class MobpushPlugin {
    * @param badge  角标数量
    */
   static Future<void> setBadge(int badge) async {
-    await _channel.invokeMethod('setBadge', {"badge":badge});
+    await _channel.invokeMethod('setBadge', {"badge": badge});
   }
 
   /*
@@ -230,4 +230,13 @@ class MobpushPlugin {
   static Future<void> clearBadge() async {
     await _channel.invokeMethod('clearBadge');
   }
+
+  /*
+   * 设置应用在前台有 Badge、Sound、Alert 三种类型,默认3个选项都有,iOS 10以上设置生效.
+   * type: 0->None , 1->仅Badge, 2->仅Sound, 4->仅Alert, 5->Badge+Alert, 6->Sound+Alert, 7->Badge+Sound+Alert
+  */
+  static Future<void> setAPNsShowForegroundType(int type) async {
+    await _channel.invokeMethod('setAPNsShowForegroundType', {'type': type});
+  }
+
 }

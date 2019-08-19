@@ -1,6 +1,6 @@
-# mobpush_example
+# MobpushPlugin_example
 
-Demonstrates how to use the mobpush plugin.
+Demonstrates how to use the MobpushPlugin plugin.
 
 ## Getting Started
 
@@ -12,7 +12,7 @@ setCustomNotification
 
 ```
 if (Platform.isIOS) {
-      Mobpush.setCustomNotification();
+      MobpushPlugin.setCustomNotification();
 }
 ```
 
@@ -23,7 +23,7 @@ setAPNsForProduction
 ```
 if (Platform.isIOS) {
      // 开发环境 false, 线上环境 true
-      Mobpush.setAPNsForProduction(false)
+      MobpushPlugin.setAPNsForProduction(false)
 }
 ```
 （3）添加推送回调监听（接收自定义透传消息回调、接收通知消息回调、接收点击通知消息回调、接收别名或标签操作回调）
@@ -31,7 +31,7 @@ if (Platform.isIOS) {
 addPushReceiver
 
 ```
-Mobpush.addPushReceiver(_onEvent, _onError);
+MobpushPlugin.addPushReceiver(_onEvent, _onError);
 
 void _onEvent(Object event) {
 
@@ -47,7 +47,7 @@ void _onError(Object event) {
 stopPush
 
 ```
-Mobpush.stopPush();
+MobpushPlugin.stopPush();
 ```
 
 （5）重新打开推送服务
@@ -55,14 +55,14 @@ Mobpush.stopPush();
 restartPush
 
 ```
-Mobpush.restartPush();
+MobpushPlugin.restartPush();
 ```
 （6）是否已停止接收推送
 
 isPushStopped
 
 ```
-Mobpush.isPushStopped();
+MobpushPlugin.isPushStopped();
 ```
 
 （7）设置别名
@@ -70,7 +70,7 @@ Mobpush.isPushStopped();
 setAlias
 
 ```
-Mobpush.setAlias("别名");
+MobpushPlugin.setAlias("别名");
 ```
 
 （8）获取别名
@@ -78,7 +78,7 @@ Mobpush.setAlias("别名");
 getAlias
 
 ```
-Mobpush.getAlias();
+MobpushPlugin.getAlias();
 ```
 
 (9）删除别名
@@ -86,7 +86,7 @@ Mobpush.getAlias();
 deleteAlias
 
 ```
-Mobpush.deleteAlias("别名");
+MobpushPlugin.deleteAlias("别名");
 ```
 
 （10）添加标签
@@ -97,7 +97,7 @@ addTags
 List tags = new List();
 tags.add("tag1");
 tags.add("tag2");
-Mobpush.addTags(tags);
+MobpushPlugin.addTags(tags);
 ```
 
 （11）获取标签
@@ -105,7 +105,7 @@ Mobpush.addTags(tags);
 getTags
 
 ```
-Mobpush.getTags();
+MobpushPlugin.getTags();
 ```
 
 （12）删除标签
@@ -116,7 +116,7 @@ deleteTags
 List tags = new List();
 tags.add("tag1");
 tags.add("tag2");
-Mobpush.deleteTags(tags);
+MobpushPlugin.deleteTags(tags);
 ```
 
 （13）清空标签
@@ -124,7 +124,7 @@ Mobpush.deleteTags(tags);
 cleanTags
 
 ```
-Mobpush.cleanTags();
+MobpushPlugin.cleanTags();
 ```
 
 （14）发送本地通知
@@ -132,7 +132,7 @@ Mobpush.cleanTags();
 addLocalNotification
 
 ```
-Mobpush.addLocalNotification();
+MobpushPlugin.addLocalNotification();
 ```
 
 （15）绑定手机号
@@ -140,7 +140,7 @@ Mobpush.addLocalNotification();
 bindPhoneNum
 
 ```
-Mobpush.bindPhoneNum("110");
+MobpushPlugin.bindPhoneNum("110");
 ```
 
 （16）测试模拟推送，用于测试
@@ -155,7 +155,7 @@ send
     * space：仅对定时消息有效，单位分钟，默认1分钟
     * extras: 附加数据，json字符串
     */
-Mobpush.send(int type, String content, int space, String extras);
+MobpushPlugin.send(int type, String content, int space, String extras);
 ```
 
 （17）设置点击通知是否跳转默认页 (仅andorid)
@@ -163,7 +163,7 @@ Mobpush.send(int type, String content, int space, String extras);
 setClickNotificationToLaunchMainActivity
 
 ```
-Mobpush.setClickNotificationToLaunchMainActivity (bool enable);
+MobpushPlugin.setClickNotificationToLaunchMainActivity (bool enable);
 ```
 
 （18）移除本地通知(仅andorid)
@@ -171,7 +171,7 @@ Mobpush.setClickNotificationToLaunchMainActivity (bool enable);
 removeLocalNotification
 
 ```
-Mobpush.removeLocalNotification(int notificationId);
+MobpushPlugin.removeLocalNotification(int notificationId);
 ```
 
 （19）清空本地通知(仅andorid)
@@ -179,7 +179,7 @@ Mobpush.removeLocalNotification(int notificationId);
 clearLocalNotifications
 
 ```
-Mobpush.clearLocalNotifications();
+MobpushPlugin.clearLocalNotifications();
 ```
 
 （20）设置通知栏icon，不设置默认取应用icon(仅andorid)
@@ -187,7 +187,7 @@ Mobpush.clearLocalNotifications();
 setNotifyIcon
 
 ```
-Mobpush.setNotifyIcon(String resId);
+MobpushPlugin.setNotifyIcon(String resId);
 ```
 
 （21）设置应用在前台时是否隐藏通知不进行显示，不设置默认不隐藏通知(仅andorid)
@@ -195,7 +195,7 @@ Mobpush.setNotifyIcon(String resId);
 setAppForegroundHiddenNotification
 
 ```
-Mobpush.setAppForegroundHiddenNotification(bool hidden);
+MobpushPlugin.setAppForegroundHiddenNotification(bool hidden);
 ```
 
 （22）设置通知静音时段（推送选项）(仅andorid)
@@ -210,7 +210,7 @@ setSilenceTime
    * @param endHour     结束时间[0~23]（小时）
    * @param endMinute   结束时间[0~59]（分钟）
    */
-Mobpush.setSilenceTime(int startHour, int startMinute, int endHour, int endMinute)
+MobpushPlugin.setSilenceTime(int startHour, int startMinute, int endHour, int endMinute)
 ```
 
 （23）设置角标 (仅 iOS)
@@ -219,7 +219,7 @@ setBadge
 
 
 ```
-Mobpush.setBadge(int badge);
+MobpushPlugin.setBadge(int badge);
 ```
 
 （24）清空角标，不清除通知栏消息记录 (仅 iOS)
@@ -227,6 +227,16 @@ Mobpush.setBadge(int badge);
 clearBadge
 
 ```
-Mobpush.clearBadge();
+MobpushPlugin.clearBadge();
+```
+
+（25）设置应用在前台展示有 Badge、Sound、Alert 三种类型,默认3个选项都有,iOS 10以上设置生效. (仅 iOS)
+
+> type: 0->None , 1->仅Badge, 2->仅Sound, 4->仅Alert, 5->Badge+Alert, 6->Sound+Alert, 7->Badge+Sound+Alert
+
+setAPNsShowForegroundType
+
+```
+MobpushPlugin.setAPNsShowForegroundType(int type);
 ```
 
