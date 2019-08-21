@@ -232,7 +232,7 @@ class MobpushPlugin {
   }
 
   /*
-   * 设置应用在前台有 Badge、Sound、Alert 三种类型,默认3个选项都有,iOS 10以上设置生效.
+   * 设置应用在前台有 Badge、Sound、Alert 三种类型,默认3个选项都有,iOS 10以上设置生效.(仅 iOS)
    * type: 0->None , 1->仅Badge, 2->仅Sound, 4->仅Alert, 5->Badge+Alert, 6->Sound+Alert, 7->Badge+Sound+Alert
   */
   static Future<void> setAPNsShowForegroundType(int type) async {
