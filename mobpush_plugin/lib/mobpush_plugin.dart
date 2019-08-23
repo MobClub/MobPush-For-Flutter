@@ -28,9 +28,10 @@ class MobpushPlugin {
   /*
    * 获取regId
    */
-  static Future<String> getRegistrationId() async {
-    final String rid = await _channel.invokeMethod('getRegistrationId');
-    return rid;
+  static Future<Map<String, dynamic>> getRegistrationId() async {
+    final Map ridMap = await _channel.invokeMethod('getRegistrationId');
+    Map<String, dynamic> resMap = Map<String, dynamic>.from(ridMap);
+    return resMap;
   }
   
   /*
@@ -71,50 +72,64 @@ class MobpushPlugin {
   /*
    * 设置别名
    */
-  static Future<void> setAlias (String alias) async {
-    await _channel.invokeMethod('setAlias', {"alias": alias});
+  static Future<Map<String, dynamic>> setAlias (String alias) async {
+    final Map aliasMap = await _channel.invokeMethod('setAlias', {"alias": alias});
+    Map<String, dynamic> resMap = Map<String, dynamic>.from(aliasMap);
+    return resMap;
   }
 
   /*
    * 获取别名
    */
-  static Future<void> getAlias() async {
-    await _channel.invokeMethod('getAlias');
+  static Future<Map<String, dynamic>> getAlias() async {
+    final Map aliasMap = await _channel.invokeMethod('getAlias');
+    Map<String, dynamic> resMap = Map<String, dynamic>.from(aliasMap);
+    return resMap;
   }
 
   /*
    * 删除别名
    */
-  static Future<void> deleteAlias() async {
-    await _channel.invokeMethod('deleteAlias');
+  static Future<Map<String, dynamic>> deleteAlias() async {
+    final Map aliasMap = await _channel.invokeMethod('deleteAlias');
+    Map<String, dynamic> resMap = Map<String, dynamic>.from(aliasMap);
+    return resMap;
   }
 
   /*
    * 添加标签
    */
-  static Future<void> addTags (List tags) async {
-    await _channel.invokeMethod('addTags', {"tags": tags});
+  static Future<Map<String, dynamic>> addTags (List<String> tags) async {
+    final Map tagsMap = await _channel.invokeMethod('addTags', {"tags": tags});
+    Map<String, dynamic> resMap = Map<String, dynamic>.from(tagsMap);
+    return resMap;
   }
 
   /*
    * 获取标签
    */
-  static Future<void> getTags() async {
-    await _channel.invokeMethod('getTags');
+  static Future<Map<String, dynamic>> getTags() async {
+    final Map tagsMap = await _channel.invokeMethod('getTags');
+    Map<String, dynamic> resMap = Map<String, dynamic>.from(tagsMap);
+    return resMap;
   }
 
   /*
    * 删除标签
    */
-  static Future<void> deleteTags (List tags) async {
-    await _channel.invokeMethod('deleteTags', {"tags": tags});
+  static Future<Map<String, dynamic>> deleteTags (List<String> tags) async {
+    final Map tagsMap = await _channel.invokeMethod('deleteTags', {"tags": tags});
+    Map<String, dynamic> resMap = Map<String, dynamic>.from(tagsMap);
+    return resMap;
   }
 
   /*
    * 清空标签
    */
-  static Future<void> cleanTags() async {
-    await _channel.invokeMethod('cleanTags');
+  static Future<Map<String, dynamic>> cleanTags() async {
+    final Map tagsMap = await _channel.invokeMethod('cleanTags');
+    Map<String, dynamic> resMap = Map<String, dynamic>.from(tagsMap);
+    return resMap;
   }
 
   /*
@@ -127,8 +142,10 @@ class MobpushPlugin {
   /*
    * 绑定手机号
    */
-  static Future<void> bindPhoneNum (String phoneNum) async {
-    await _channel.invokeMethod('bindPhoneNum', {"phoneNum": phoneNum});
+  static Future<Map<String, dynamic>> bindPhoneNum (String phoneNum) async {
+    final Map phoneMap = await _channel.invokeMethod('bindPhoneNum', {"phoneNum": phoneNum});
+    Map<String, dynamic> resMap = Map<String, dynamic>.from(phoneMap);
+    return resMap;
   }
 
   /*
@@ -138,8 +155,10 @@ class MobpushPlugin {
    * space：仅对定时消息有效，单位分钟，默认1分钟
    * extras: 附加数据，json字符串
    */
-  static Future<void> send(int type, String content, int space, String extras) async {
-   return await _channel.invokeMethod("send", {"type": type, "content": content, "space": space, "extras": extras});
+  static Future<Map<String, dynamic>> send(int type, String content, int space, String extras) async {
+    final Map sendMap = await _channel.invokeMethod("send", {"type": type, "content": content, "space": space, "extras": extras});
+    Map<String, dynamic> resMap = Map<String, dynamic>.from(sendMap);
+    return resMap;
   }
 
   // Android API

@@ -39,16 +39,8 @@ static NSString *const receiverStr = @"mobpush_receiver";
     }
     else if ([@"getRegistrationId" isEqualToString:call.method]) {
         [MobPush getRegistrationID:^(NSString *registrationID, NSError *error) {
-            if (error) {
-                result(nil);
-            }
-            else
-            {
-                if (result)
-                {
-                    result(registrationID);
-                }
-            }
+            NSString *errorStr = error ? error.localizedDescription : @"";
+            result(@{@"res": registrationID, @"error": errorStr});
         }];
     }
     else if ([@"stopPush" isEqualToString:call.method])
@@ -61,91 +53,35 @@ static NSString *const receiverStr = @"mobpush_receiver";
     }
     else if ([@"isPushStopped" isEqualToString:call.method])
     {
-        if (result)
-        {
-            result(@([MobPush isPushStopped]));
-        }
+        result(@([MobPush isPushStopped]));
     }
     else if ([@"setAlias" isEqualToString:call.method])
     {
         NSDictionary *arguments = (NSDictionary *)call.arguments;
-        if (arguments && arguments[@"alias"])
+        if (arguments && arguments[@"alias"] && [arguments[@"alias"] isKindOfClass:[NSString class]])
         {
             [MobPush setAlias:arguments[@"alias"] result:^(NSError *error) {
-                NSMutableDictionary *resultDict = [NSMutableDictionary dictionaryWithCapacity:4];
-                [resultDict setObject:@(4) forKey:@"action"]; // action = 4 ，操作 alias
-                [resultDict setObject:@(1) forKey:@"operation"]; // operation = 1 设置
-                if (error)
-                {
-                    [resultDict setObject:@(error.code) forKey:@"errorCode"];
-                    [resultDict setObject:error.description forKey:@"errorDesc"];
-                }
-                else
-                {
-                    [resultDict setObject:@(0) forKey:@"errorCode"];
-                    [resultDict setObject:@"success" forKey:@"errorDesc"];
-                }
-                if (self.callBack)
-                {
-                    self.callBack(resultDict);
-                }
+                NSString *errorStr = error ? error.localizedDescription : @"";
+                result(@{@"res": error ? @"failed": @"success", @"error": errorStr});
             }];
         }
         else
         {
-            NSMutableDictionary *resultDict = [NSMutableDictionary dictionaryWithCapacity:4];
-            [resultDict setObject:@(4) forKey:@"action"]; // action = 4 ，操作 alias
-            [resultDict setObject:@(1) forKey:@"operation"]; // operation = 1 设置
-            [resultDict setObject:@(9999) forKey:@"errorCode"];
-            [resultDict setObject:@"Arguments Invaild." forKey:@"errorDesc"];
-            if (self.callBack)
-            {
-                self.callBack(resultDict);
-            }
+            result(@{@"res": @"failed", @"error": @"Arguments Invaild."});
         }
     }
     else if ([@"getAlias" isEqualToString:call.method])
     {
         [MobPush getAliasWithResult:^(NSString *alias, NSError *error) {
-            NSMutableDictionary *resultDict = [NSMutableDictionary dictionaryWithCapacity:5];
-            [resultDict setObject:@(4) forKey:@"action"]; // action = 4 ，操作 alias
-            [resultDict setObject:@(0) forKey:@"operation"]; // operation = 0 获取
-            if (error)
-            {
-                [resultDict setObject:@(error.code) forKey:@"errorCode"];
-                [resultDict setObject:error.description forKey:@"errorDesc"];
-            } else
-            {
-                [resultDict setObject:alias.length > 0 ? alias : @"" forKey:@"alias"];
-                [resultDict setObject:@(0) forKey:@"errorCode"];
-                [resultDict setObject:@"success" forKey:@"errorDesc"];
-            }
-            if (self.callBack)
-            {
-                self.callBack(resultDict);
-            }
+            NSString *errorStr = error ? error.localizedDescription : @"";
+            result(@{@"res": alias, @"error": errorStr});
         }];
     }
     else if ([@"deleteAlias" isEqualToString:call.method])
     {
         [MobPush deleteAlias:^(NSError *error) {
-            NSMutableDictionary *resultDict = [NSMutableDictionary dictionaryWithCapacity:4];
-            [resultDict setObject:@(4) forKey:@"action"]; // action = 4 ，操作 alias
-            [resultDict setObject:@(2) forKey:@"operation"]; // operation = 2 删除
-            if (error)
-            {
-                [resultDict setObject:@(error.code) forKey:@"errorCode"];
-                [resultDict setObject:error.description forKey:@"errorDesc"];
-            }
-            else
-            {
-                [resultDict setObject:@(0) forKey:@"errorCode"];
-                [resultDict setObject:@"success" forKey:@"errorDesc"];
-            }
-            if (self.callBack)
-            {
-                self.callBack(resultDict);
-            }
+            NSString *errorStr = error ? error.localizedDescription : @"";
+            result(@{@"res": error ? @"failed": @"success", @"error": errorStr});
         }];
     }
     else if ([@"addTags" isEqualToString:call.method])
@@ -153,68 +89,21 @@ static NSString *const receiverStr = @"mobpush_receiver";
         NSDictionary *arguments = (NSDictionary *)call.arguments;
         if (arguments && arguments[@"tags"]) {
             [MobPush addTags:arguments[@"tags"] result:^(NSError *error) {
-                NSMutableDictionary *resultDict = [NSMutableDictionary dictionaryWithCapacity:4];
-                [resultDict setObject:@(3) forKey:@"action"]; // action = 3 ，操作 tag
-                [resultDict setObject:@(1) forKey:@"operation"]; // operation = 1 设置
-                if (error)
-                {
-                    [resultDict setObject:@(error.code) forKey:@"errorCode"];
-                    [resultDict setObject:error.description forKey:@"errorDesc"];
-                }
-                else
-                {
-                    [resultDict setObject:@(0) forKey:@"errorCode"];
-                    [resultDict setObject:@"success" forKey:@"errorDesc"];
-                }
-                if (self.callBack)
-                {
-                    self.callBack(resultDict);
-                }
+                NSString *errorStr = error ? error.localizedDescription : @"";
+                result(@{@"res": error ? @"failed": @"success", @"error": errorStr});
             }];
         }
         else
         {
-            NSMutableDictionary *resultDict = [NSMutableDictionary dictionaryWithCapacity:4];
-            [resultDict setObject:@(3) forKey:@"action"]; // action = 3 ，操作 tag
-            [resultDict setObject:@(1) forKey:@"operation"]; // operation = 1 设置
-            [resultDict setObject:@(9999) forKey:@"errorCode"];
-            [resultDict setObject:@"Arguments Invaild." forKey:@"errorDesc"];
-            if (self.callBack)
-            {
-                self.callBack(resultDict);
-            }
+            result(@{@"res": @"failed", @"error": @"Arguments Invaild."});
         }
         
     }
     else if ([@"getTags" isEqualToString:call.method])
     {
         [MobPush getTagsWithResult:^(NSArray *tags, NSError *error) {
-            NSMutableDictionary *resultDict = [NSMutableDictionary dictionaryWithCapacity:5];
-            [resultDict setObject:@(3) forKey:@"action"]; // action = 3 ，操作 tag
-            [resultDict setObject:@(0) forKey:@"operation"]; // operation = 0 获取
-            if (error)
-            {
-                [resultDict setObject:@(error.code) forKey:@"errorCode"];
-                [resultDict setObject:error.description forKey:@"errorDesc"];
-            }
-            else
-            {
-                if (tags.count > 0)
-                {
-                    NSString *tagStr = [tags componentsJoinedByString:@","];
-                    [resultDict setObject:tagStr forKey:@"tags"];
-                }
-                else
-                {
-                    [resultDict setObject:@"" forKey:@"tags"];
-                }
-                [resultDict setObject:@(0) forKey:@"errorCode"];
-                [resultDict setObject:@"success" forKey:@"errorDesc"];
-            }
-            if (self.callBack)
-            {
-                self.callBack(resultDict);
-            }
+            NSString *errorStr = error ? error.localizedDescription : @"";
+            result(@{@"res": tags, @"error": errorStr});
         }];
     }
     else if ([@"deleteTags" isEqualToString:call.method])
@@ -222,59 +111,20 @@ static NSString *const receiverStr = @"mobpush_receiver";
         NSDictionary *arguments = (NSDictionary *)call.arguments;
         if (arguments && arguments[@"tags"]) {
             [MobPush deleteTags:arguments[@"tags"] result:^(NSError *error) {
-                NSMutableDictionary *resultDict = [NSMutableDictionary dictionaryWithCapacity:4];
-                [resultDict setObject:@(3) forKey:@"action"]; // action = 3 ，操作 tag
-                [resultDict setObject:@(2) forKey:@"operation"]; // operation = 2 删除
-                if (error)
-                {
-                    [resultDict setObject:@(error.code) forKey:@"errorCode"];
-                    [resultDict setObject:error.description forKey:@"errorDesc"];
-                }
-                else
-                {
-                    [resultDict setObject:@(0) forKey:@"errorCode"];
-                    [resultDict setObject:@"success" forKey:@"errorDesc"];
-                }
-                
-                if (self.callBack)
-                {
-                    self.callBack(resultDict);
-                }
+                NSString *errorStr = error ? error.localizedDescription : @"";
+                result(@{@"res": error ? @"failed": @"success", @"error": errorStr});
             }];
         }
         else
         {
-            NSMutableDictionary *resultDict = [NSMutableDictionary dictionaryWithCapacity:4];
-            [resultDict setObject:@(3) forKey:@"action"]; // action = 3 ，操作 tag
-            [resultDict setObject:@(2) forKey:@"operation"]; // operation = 2 删除
-            [resultDict setObject:@(9999) forKey:@"errorCode"];
-            [resultDict setObject:@"Arguments Invaild." forKey:@"errorDesc"];
-            if (self.callBack)
-            {
-                self.callBack(resultDict);
-            }
+            result(@{@"res": @"failed", @"error": @"Arguments Invaild."});
         }
     }
     else if ([@"cleanTags" isEqualToString:call.method])
     {
         [MobPush cleanAllTags:^(NSError *error) {
-            NSMutableDictionary *resultDict = [NSMutableDictionary dictionaryWithCapacity:4];
-            [resultDict setObject:@(3) forKey:@"action"]; // action = 3 ，操作 tag
-            [resultDict setObject:@(3) forKey:@"operation"]; // operation = 3 清空
-            if (error)
-            {
-                [resultDict setObject:@(error.code) forKey:@"errorCode"];
-                [resultDict setObject:error.description forKey:@"errorDesc"];
-            }
-            else
-            {
-                [resultDict setObject:@(0) forKey:@"errorCode"];
-                [resultDict setObject:@"success" forKey:@"errorDesc"];
-            }
-            if (self.callBack)
-            {
-                self.callBack(resultDict);
-            }
+            NSString *errorStr = error ? error.localizedDescription : @"";
+            result(@{@"res": error ? @"failed": @"success", @"error": errorStr});
         }];
     }
     else if ([@"addLocalNotification" isEqualToString:call.method])
@@ -336,34 +186,13 @@ static NSString *const receiverStr = @"mobpush_receiver";
         if (arguments && arguments[@"phoneNum"])
         {
             [MobPush bindPhoneNum:arguments[@"phoneNum"] result:^(NSError *error) {
-                NSMutableDictionary *resultDict = [NSMutableDictionary dictionaryWithCapacity:3];
-                [resultDict setObject:@(5) forKey:@"action"];
-                if (error)
-                {
-                    [resultDict setObject:@(error.code) forKey:@"errorCode"];
-                    [resultDict setObject:error.description forKey:@"errorDesc"];
-                }
-                else
-                {
-                    [resultDict setObject:@(0) forKey:@"errorCode"];
-                    [resultDict setObject:@"success" forKey:@"errorDesc"];
-                }
-                if (self.callBack)
-                {
-                    self.callBack(resultDict);
-                }
+                NSString *errorStr = error ? error.localizedDescription : @"";
+                result(@{@"res": error ? @"failed": @"success", @"error": errorStr});
             }];
         }
         else
         {
-            NSMutableDictionary *resultDict = [NSMutableDictionary dictionaryWithCapacity:3];
-            [resultDict setObject:@(5) forKey:@"action"];
-            [resultDict setObject:@(9999) forKey:@"errorCode"];
-            [resultDict setObject:@"Arguments Invaild." forKey:@"errorDesc"];
-            if (self.callBack)
-            {
-                self.callBack(resultDict);
-            }
+            result(@{@"res": @"failed", @"error": @"Arguments Invaild."});
         }
     }
     else if ([@"send" isEqualToString:call.method])
@@ -382,34 +211,13 @@ static NSString *const receiverStr = @"mobpush_receiver";
                                      linkScheme:nil
                                        linkData:nil
                                          result:^(NSError *error) {
-                                             NSMutableDictionary *resultDict = [NSMutableDictionary dictionaryWithCapacity:3];
-                                             [resultDict setObject:@(6) forKey:@"action"];
-                                             if (error)
-                                             {
-                                                 [resultDict setObject:@(error.code) forKey:@"errorCode"];
-                                                 [resultDict setObject:error.description forKey:@"errorDesc"];
-                                             }
-                                             else
-                                             {
-                                                 [resultDict setObject:@(0) forKey:@"errorCode"];
-                                                 [resultDict setObject:@"success" forKey:@"errorDesc"];
-                                             }
-                                             if (self.callBack)
-                                             {
-                                                 self.callBack(resultDict);
-                                             }
+                                             NSString *errorStr = error ? error.localizedDescription : @"";
+                                             result(@{@"res": error ? @"failed": @"success", @"error": errorStr});
                                          }];
         }
         else
         {
-            NSMutableDictionary *resultDict = [NSMutableDictionary dictionaryWithCapacity:3];
-            [resultDict setObject:@(6) forKey:@"action"];
-            [resultDict setObject:@(9999) forKey:@"errorCode"];
-            [resultDict setObject:@"Arguments Invaild." forKey:@"errorDesc"];
-            if (self.callBack)
-            {
-                self.callBack(resultDict);
-            }
+            result(@{@"res": @"failed", @"error": @"Arguments Invaild."});
         }
     }
     else if ([@"setAPNsForProduction" isEqualToString:call.method])

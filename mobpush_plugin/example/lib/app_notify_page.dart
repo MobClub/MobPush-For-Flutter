@@ -14,7 +14,11 @@ class _AppNotifyPageState extends State<AppNotifyPage> {
   void _send() async {
     if (_controller.text.isNotEmpty) {
       //发送消息类型为2的自定义透传消息，推送内容时输入框输入的内容，延迟推送时间为0（立即推送），附加数据为空
-      await MobpushPlugin.send(2, _controller.text, 0, '');
+      MobpushPlugin.send(2, _controller.text, 0, '').then((Map<String, dynamic> sendMap){
+        String res = sendMap['res'];
+        String error = sendMap['error'];
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>> send -> res: $res error: $error");
+      });
     }
   }
 

@@ -32,7 +32,11 @@ class _TimingNotifyPageState extends State<TimingNotifyPage> {
   void _send() async {
     if (_controller.text.isNotEmpty) {
       //发送消息类型为3的自延迟推送通知消息，推送内容时输入框输入的内容，延迟推送时间为1分钟（1分钟后推送），附加数据为空
-      MobpushPlugin.send(3, _controller.text, 1, "");
+      MobpushPlugin.send(3, _controller.text, 1, "").then((Map<String, dynamic> sendMap){
+        String res = sendMap['res'];
+        String error = sendMap['error'];
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>> send -> res: $res error: $error");
+      });
     }
   }
 

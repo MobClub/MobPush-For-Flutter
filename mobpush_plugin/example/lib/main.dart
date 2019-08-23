@@ -41,7 +41,9 @@ class _MainAppState extends State<MainApp> {
   @override
   void initState() {
     super.initState();
+
     initPlatformState();
+
     if (Platform.isIOS) {
       MobpushPlugin.setCustomNotification();
       MobpushPlugin.setAPNsForProduction(false);
@@ -54,8 +56,7 @@ class _MainAppState extends State<MainApp> {
     setState(() {
       Map<String, dynamic> eventMap = json.decode(json.encode(event));
       /*
-       action: 0:自定义消息 1:APNs&本地通知消息 2:点击消息或其他消息 3:操作标签(operation:0-获取 1-设置 2-删除 3-清空) 
-               4:操作别名(operation:0-获取 1-设置 2-删除) 5:绑定手机号 6:客户端发起推送
+       action: 0:自定义消息 1:APNs&本地通知消息 2:点击消息或其他消息
       */
       int action = eventMap['action'];
       print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent action: ' + action.toString());
@@ -133,70 +134,6 @@ class _MainAppState extends State<MainApp> {
           );
         }
         break;
-        case 3:
-        int operation = eventMap['operation'];
-        print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent 3:' + 'operation:' + operation.toString());
-        int errorCode = eventMap['errorCode'];
-        if (errorCode != 0) {
-          String errorDesc = eventMap['errorDesc'];
-          print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent 3:' + 'operation:' + operation.toString() + 'errorCode:' + errorCode.toString() + 'errorDesc:' + errorDesc);
-        } else {
-          if (operation == 0) {
-            // 获取tags
-            if (eventMap.containsKey('tags')) {
-              String tagsStr = eventMap['tags'];
-              List<String> tagsList = [];
-              if (tagsStr.length > 0) {
-                tagsList = tagsStr.split(',');
-              }
-              print(">>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent 3:getTags Success -> Tags: $tagsStr tagsList: $tagsList");
-            }
-          } else if(operation == 1) {
-            print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent 3: setTags Success!');
-          } else if (operation == 2) {
-            print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent 3: deleteTags Success!');
-          } else if (operation ==3) {
-            print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent 3: cleanTags Success!');
-          }
-        }
-        break;
-        case 4:
-        int operation = eventMap['operation'];
-        print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent 4:' + 'operation:' + operation.toString());
-        int errorCode = eventMap['errorCode'];
-        if (errorCode != 0) {
-          String errorDesc = eventMap['errorDesc'];
-          print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent 4:' + 'operation:' + operation.toString() + 'errorCode:' + errorCode.toString() + 'errorDesc:' + errorDesc);
-        } else {
-          if (operation == 0) {
-            // 获取alias
-            String alias = eventMap['alias'];
-            print(">>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent 4:getAlias Success -> Alias: $alias");
-          } else if(operation == 1) {
-            print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent 4: setAlias Success!');
-          } else if (operation == 2) {
-            print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent 4: deleteAlias Success!');
-          }
-        }
-        break;
-        case 5:
-        int errorCode = eventMap['errorCode'];
-        if (errorCode != 0) {
-          String errorDesc = eventMap['errorDesc'];
-          print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent 5:' + 'errorCode:' + errorCode.toString() + 'errorDesc:' + errorDesc);
-        } else {
-          print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent 5: bindPhoneNum Success!');
-        }
-        break;
-        case 6:
-        int errorCode = eventMap['errorCode'];
-        if (errorCode != 0) {
-          String errorDesc = eventMap['errorDesc'];
-          print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent 6:' + 'errorCode:' + errorCode.toString() + 'errorDesc:' + errorDesc);
-        } else {
-          print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent 6: sendMessage Success!');
-        }
-        break;
         default:
         print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent: Unknown Action - $action');
         break;
@@ -254,21 +191,25 @@ class _MainAppState extends State<MainApp> {
     });
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
+  
   Future<void> initPlatformState() async {
     String sdkVersion;
-    String registrationId;
-    // Platform messages may fail, so we use a try/catch PlatformException.
+    
     try {
       sdkVersion = await MobpushPlugin.getSDKVersion();
     } on PlatformException {
       sdkVersion = 'Failed to get platform version.';
     }
     try {
-      registrationId = await MobpushPlugin.getRegistrationId();
-      print('------>#### registrationId: ' + registrationId);
+      MobpushPlugin.getRegistrationId().then((Map<String, dynamic> ridMap) {
+        print(ridMap);
+        setState(() {
+          _registrationId = ridMap['res'].toString();
+          print('------>#### registrationId: ' + _registrationId);
+        });
+      });
     } on PlatformException {
-      registrationId = 'Failed to get registrationId.';
+      _registrationId = 'Failed to get registrationId.';
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -278,7 +219,6 @@ class _MainAppState extends State<MainApp> {
 
     setState(() {
       _sdkVersion = sdkVersion;
-      _registrationId = registrationId;
     });
   }
 
@@ -404,6 +344,7 @@ class _MainAppState extends State<MainApp> {
               margin: EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0),
               height: 60,
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
                     'SDK Version: $_sdkVersion\nRegistrationId: $_registrationId',
@@ -411,7 +352,6 @@ class _MainAppState extends State<MainApp> {
                   ),
                   RaisedButton(
                     child: Text('复制'),
-                    
                     onPressed: _onCopyButtonClicked,
                   ),
                 ],

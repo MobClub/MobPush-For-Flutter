@@ -58,7 +58,11 @@ class _OtherApiPageState extends State<OtherApiPage> {
             new FlatButton(
               child: new Text("OK"),
               onPressed: () {
-                MobpushPlugin.setAlias(_controller.text);
+                MobpushPlugin.setAlias(_controller.text).then((Map<String, dynamic> aliasMap){
+                  String res = aliasMap['res'];
+                  String error = aliasMap['error'];
+                  print(">>>>>>>>>>>>>>>>>>>>>>>>>>> getAlias -> res: $res error: $error");
+                });
                 Navigator.pop(context);
               },
             )
@@ -80,7 +84,7 @@ class _OtherApiPageState extends State<OtherApiPage> {
             child: TextField(
               maxLines: 1,
               decoration: InputDecoration(
-                hintText: "Please input tag...",
+                hintText: "Please input tags(split by ',')...",
                 contentPadding: EdgeInsets.all(10),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -104,10 +108,12 @@ class _OtherApiPageState extends State<OtherApiPage> {
             new FlatButton(
               child: new Text("OK"),
               onPressed: () {
-                List tags = new List();
-                tags.add(_controller.text);
-                tags.add(_controller.text + "1");
-                MobpushPlugin.addTags(tags);
+                List tags = _controller.text.split(',');
+                MobpushPlugin.addTags(tags).then((Map<String, dynamic> tagsMap){
+                  String res = tagsMap['res'];
+                  String error = tagsMap['error'];
+                  print(">>>>>>>>>>>>>>>>>>>>>>>>>>> addTags -> res: $res error: $error");
+                });
                 Navigator.pop(context);
               },
             )
@@ -129,7 +135,7 @@ class _OtherApiPageState extends State<OtherApiPage> {
             child: TextField(
               maxLines: 1,
               decoration: InputDecoration(
-                hintText: "Please input tag to delete...",
+                hintText: "Please input tags to delete(split by ',')...",
                 contentPadding: EdgeInsets.all(10),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -153,9 +159,12 @@ class _OtherApiPageState extends State<OtherApiPage> {
             new FlatButton(
               child: new Text("OK"),
               onPressed: () {
-                List tags = new List();
-                tags.add(_controller.text);
-                MobpushPlugin.deleteTags(tags);
+                List tags = _controller.text.split(',');
+                MobpushPlugin.deleteTags(tags).then((Map<String, dynamic> tagsMap){
+                  String res = tagsMap['res'];
+                  String error = tagsMap['error'];
+                  print(">>>>>>>>>>>>>>>>>>>>>>>>>>> deleteTags -> res: $res error: $error");
+                });
                 Navigator.pop(context);
               },
             )
@@ -201,7 +210,11 @@ class _OtherApiPageState extends State<OtherApiPage> {
             new FlatButton(
               child: new Text("OK"),
               onPressed: () {
-                MobpushPlugin.bindPhoneNum(_controller.text);
+                MobpushPlugin.bindPhoneNum(_controller.text).then((Map<String, dynamic> phoneMap){
+                  String res = phoneMap['res'];
+                  String error = phoneMap['error'];
+                  print(">>>>>>>>>>>>>>>>>>>>>>>>>>> bindPhoneNum -> res: $res error: $error");
+                });
                 Navigator.pop(context);
               },
             )
@@ -391,22 +404,38 @@ class _OtherApiPageState extends State<OtherApiPage> {
         _setAlias();
         break;
       case 4:
-        await MobpushPlugin.getAlias();
+        MobpushPlugin.getAlias().then((Map<String, dynamic> aliasMap){
+          String res = aliasMap['res'];
+          String error = aliasMap['error'];
+          print(">>>>>>>>>>>>>>>>>>>>>>>>>>> getAlias -> res: $res error: $error");
+        });
         break;
       case 5:
-        await MobpushPlugin.deleteAlias();
+        MobpushPlugin.deleteAlias().then((Map<String, dynamic> aliasMap){
+          String res = aliasMap['res'];
+          String error = aliasMap['error'];
+          print(">>>>>>>>>>>>>>>>>>>>>>>>>>> deleteAlias -> res: $res error: $error");
+        });
         break;
       case 6:
         _addTags();
         break;
       case 7:
-        await MobpushPlugin.getTags();
+        MobpushPlugin.getTags().then((Map<String, dynamic> tagsMap){
+          List<String> resList =  List<String>.from(tagsMap['res']);
+          String error = tagsMap['error'];
+          print(">>>>>>>>>>>>>>>>>>>>>>>>>>> getTags -> res: $resList error: $error");
+        });
         break;
       case 8:
         _deleteTags();
         break;
       case 9:
-        await MobpushPlugin.cleanTags();
+        MobpushPlugin.cleanTags().then((Map<String, dynamic> tagsMap){
+          String res = tagsMap['res'];
+          String error = tagsMap['error'];
+          print(">>>>>>>>>>>>>>>>>>>>>>>>>>> cleanTags -> res: $res error: $error");
+        });
         break;
       case 10:
         _bindPhoneNum();
@@ -477,6 +506,10 @@ class _OtherApiPageState extends State<OtherApiPage> {
         MobpushPlugin.clearBadge();
         break;
       case 20:
+        if (!Platform.isIOS) {
+          _showWarningDialog(false);
+          return;
+        }
         _setAPNsShowForegroundType();
         break;
       default:
