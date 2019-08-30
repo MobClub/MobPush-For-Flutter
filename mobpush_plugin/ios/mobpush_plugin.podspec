@@ -3,7 +3,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'mobpush_plugin'
-  s.version          = '1.0.5'
+  s.version          = '1.0.7'
   s.summary          = 'A new flutter plugin project.'
   s.description      = <<-DESC
 A new flutter plugin project.

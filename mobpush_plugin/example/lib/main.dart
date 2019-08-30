@@ -96,7 +96,7 @@ class _MainAppState extends State<MainApp> {
             builder: (BuildContext context) {
               return AlertDialog(
                 // title: Text('通知'),
-                content: Text(message.content),
+                content: Text(message.content.length > 0 ? message.content : 'content'),
                 actions: <Widget>[
                   FlatButton(
                     child: Text('OK'),
@@ -111,16 +111,17 @@ class _MainAppState extends State<MainApp> {
         }
         break;
         case 2:
-        String result = eventMap['result'];
-        print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent 2:' + result);
-        if (result.length > 0) {
-          MobPushNotifyMessage message = new MobPushNotifyMessage.fromJson(json.decode(result));
+        Object result = eventMap['result'];
+        String resultStr = json.encode(result);
+        print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent 2:' + resultStr);
+        if (resultStr.length > 0) {
+          MobPushNotifyMessage message = new MobPushNotifyMessage.fromJson(json.decode(resultStr));
           showDialog(
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: Text(message.title),
-                content: Text(message.content),
+                title: Text(message.title.length > 0 ? message.title : 'title'),
+                content: Text(message.content.length > 0 ? message.content : 'content'),
                 actions: <Widget>[
                   FlatButton(
                     child: Text('OK'),

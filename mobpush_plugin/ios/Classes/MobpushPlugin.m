@@ -39,8 +39,11 @@ static NSString *const receiverStr = @"mobpush_receiver";
     }
     else if ([@"getRegistrationId" isEqualToString:call.method]) {
         [MobPush getRegistrationID:^(NSString *registrationID, NSError *error) {
-            NSString *errorStr = error ? error.localizedDescription : @"";
-            result(@{@"res": registrationID, @"error": errorStr});
+            if (error) {
+                result(@{@"res": @"", @"error": error.localizedDescription});
+            } else {
+                result(@{@"res": registrationID, @"error": @""});
+            }
         }];
     }
     else if ([@"stopPush" isEqualToString:call.method])
@@ -73,8 +76,11 @@ static NSString *const receiverStr = @"mobpush_receiver";
     else if ([@"getAlias" isEqualToString:call.method])
     {
         [MobPush getAliasWithResult:^(NSString *alias, NSError *error) {
-            NSString *errorStr = error ? error.localizedDescription : @"";
-            result(@{@"res": alias, @"error": errorStr});
+            if (error) {
+                result(@{@"res": @"", @"error": error.localizedDescription});
+            } else {
+                result(@{@"res": alias, @"error": @""});
+            }
         }];
     }
     else if ([@"deleteAlias" isEqualToString:call.method])
@@ -102,8 +108,11 @@ static NSString *const receiverStr = @"mobpush_receiver";
     else if ([@"getTags" isEqualToString:call.method])
     {
         [MobPush getTagsWithResult:^(NSArray *tags, NSError *error) {
-            NSString *errorStr = error ? error.localizedDescription : @"";
-            result(@{@"res": tags, @"error": errorStr});
+            if (error) {
+                result(@{@"res": @"", @"error": error.localizedDescription});
+            } else {
+                result(@{@"res": tags, @"error": @""});
+            }
         }];
     }
     else if ([@"deleteTags" isEqualToString:call.method])
@@ -450,6 +459,54 @@ static NSString *const receiverStr = @"mobpush_receiver";
                         if (badge)
                         {
                             [reslut setObject:@(badge) forKey:@"badge"];
+                        }
+                    }
+                    else
+                    {
+                        NSString *title = message.notification.title;
+                        NSString *subtitle = message.notification.subTitle;
+                        NSString *body = message.notification.body;
+                        NSInteger badge = message.notification.badge;
+                        NSString *sound = message.notification.sound;
+                        if (title && title.length > 0)
+                        {
+                            [reslut setObject:title forKey:@"title"];
+                        }
+                        else
+                        {
+                            [reslut setObject:@"" forKey:@"title"];
+                        }
+                        if (subtitle && subtitle.length > 0)
+                        {
+                            [reslut setObject:subtitle forKey:@"subtitle"];
+                        }
+                        else
+                        {
+                            [reslut setObject:@"" forKey:@"subtitle"];
+                        }
+                        if (body && body.length > 0)
+                        {
+                            [reslut setObject:body forKey:@"content"];
+                        }
+                        else
+                        {
+                            [reslut setObject:@"" forKey:@"content"];
+                        }
+                        if (badge)
+                        {
+                            [reslut setObject:@(badge) forKey:@"badge"];
+                        }
+                        else
+                        {
+                            [reslut setObject:@(0) forKey:@"badge"];
+                        }
+                        if (sound)
+                        {
+                            [reslut setObject:sound forKey:@"sound"];
+                        }
+                        else
+                        {
+                            [reslut setObject:@"default" forKey:@"sound"];
                         }
                     }
                     
