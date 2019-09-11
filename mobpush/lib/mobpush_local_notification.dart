@@ -1,10 +1,10 @@
 import 'mobpush_notify_message.dart';
 
-/*
+/**
  * MobPush本地通知实体
  */
 class MobPushLocalNotification extends MobPushNotifyMessage {
-  /*
+  /**
    * 本地通知id，仅 Android 属性
    */
   int notificationId;

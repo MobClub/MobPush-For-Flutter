@@ -3,23 +3,31 @@ version '1.0-SNAPSHOT'
 
 buildscript {
     repositories {
+        maven {
+            url "http://mvn.mob.com/android"
+        }
         google()
         jcenter()
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.mob.sdk:MobSDK:+'
     }
 }
 
 rootProject.allprojects {
     repositories {
+        maven {
+            url "http://mvn.mob.com/android"
+        }
         google()
         jcenter()
     }
 }
 
 apply plugin: 'com.android.library'
+apply plugin: 'com.mob.sdk'
 
 android {
     compileSdkVersion 28
@@ -31,4 +39,9 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
+}
+
+MobSDK{
+    autoConfig  false
+    MobPush{}
 }

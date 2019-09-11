@@ -18,8 +18,8 @@ static NSString *const receiverStr = @"mobpush_receiver";
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar
 {
     FlutterMethodChannel* channel = [FlutterMethodChannel
-                                     methodChannelWithName:@"mob.com/mobpush"
-                                     binaryMessenger:[registrar messenger]];
+      methodChannelWithName:@"mob.com/mobpush"
+            binaryMessenger:[registrar messenger]];
     MobpushPlugin* instance = [[MobpushPlugin alloc] init];
     [registrar addMethodCallDelegate:instance channel:channel];
     
@@ -330,7 +330,7 @@ static NSString *const receiverStr = @"mobpush_receiver";
                                          {
                                              self.callBack(resultDict);
                                          }
-                                     }];
+                                 }];
     }
     else if ([@"setAPNsForProduction" isEqualToString:call.method])
     {
@@ -346,12 +346,6 @@ static NSString *const receiverStr = @"mobpush_receiver";
     else if ([@"clearBadge" isEqualToString:call.method])
     {
         [MobPush clearBadge];
-    }
-    else if ([@"setAPNsShowForegroundType" isEqualToString:call.method])
-    {
-        NSDictionary *arguments = (NSDictionary *)call.arguments;
-        NSInteger type = [arguments[@"type"] integerValue];
-        [MobPush setAPNsShowForegroundType:type];
     }
     else if ([@"setCustomNotification" isEqualToString:call.method])
     {

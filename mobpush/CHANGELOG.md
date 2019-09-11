@@ -1,7 +1,5 @@
-## 1.0.1
+## 0.0.3
 
-Support MobPush v1.7.4 SDK.
+* Add iOS and Android bridge.
 
-## 1.0.2
 
-Add setAPNsShowForegroundType for iOS.
