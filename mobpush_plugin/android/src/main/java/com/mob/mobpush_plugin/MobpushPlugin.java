@@ -150,7 +150,10 @@ public class MobpushPlugin implements MethodCallHandler {
             SimulateRequest.sendPush(type, content, space, extras, new MobPushCallback<Boolean>() {
                 @Override
                 public void onCallback(Boolean aBoolean) {
-                    result.success(aBoolean);
+                    HashMap<String, Object> map = new HashMap<String, Object>();
+                    map.put("res", aBoolean.booleanValue() ? "success":"failed");
+                    map.put("error", "");
+                    result.success(map);
                 }
             });
         } else {
