@@ -46,7 +46,7 @@ public class MobpushReceiverPlugin implements EventChannel.StreamHandler {
             public void onCustomMessageReceive(Context context, MobPushCustomMessage mobPushCustomMessage) {
                 HashMap<String, Object> map = new HashMap<String, Object>();
                 map.put("action", 0);
-                map.put("result", hashon.fromObject(mobPushCustomMessage));
+                map.put("result", hashon.fromJson(hashon.fromObject(mobPushCustomMessage)));
                 event.success(hashon.fromHashMap(map));
             }
 
@@ -54,7 +54,7 @@ public class MobpushReceiverPlugin implements EventChannel.StreamHandler {
             public void onNotifyMessageReceive(Context context, MobPushNotifyMessage mobPushNotifyMessage) {
                 HashMap<String, Object> map = new HashMap<String, Object>();
                 map.put("action", 1);
-                map.put("result", hashon.fromObject(mobPushNotifyMessage));
+                map.put("result", hashon.fromJson(hashon.fromObject(mobPushNotifyMessage)));
                 event.success(hashon.fromHashMap(map));
             }
 
@@ -62,7 +62,7 @@ public class MobpushReceiverPlugin implements EventChannel.StreamHandler {
             public void onNotifyMessageOpenedReceive(Context context, MobPushNotifyMessage mobPushNotifyMessage) {
                 HashMap<String, Object> map = new HashMap<String, Object>();
                 map.put("action", 2);
-                map.put("result", hashon.fromObject(mobPushNotifyMessage));
+                map.put("result", hashon.fromJson(hashon.fromObject(mobPushNotifyMessage)));
                 event.success(hashon.fromHashMap(map));
             }
 
