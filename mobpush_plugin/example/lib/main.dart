@@ -55,13 +55,13 @@ class _MainAppState extends State<MainApp> {
     print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent:' + event.toString());
     setState(() {
       Map<String, dynamic> eventMap = json.decode(event);
-      String result = eventMap['result'];
+      Map<String, dynamic> result = eventMap['result'];
       int action = eventMap['action'];
 
       switch (action) {
         case 0:
           MobPushCustomMessage message =
-          new MobPushCustomMessage.fromJson(json.decode(result));
+          new MobPushCustomMessage.fromJson(result);
           showDialog(
               context: context,
               child: AlertDialog(
@@ -78,11 +78,11 @@ class _MainAppState extends State<MainApp> {
           break;
         case 1:
           MobPushNotifyMessage message =
-          new MobPushNotifyMessage.fromJson(json.decode(result));
+          new MobPushNotifyMessage.fromJson(result);
           break;
         case 2:
           MobPushNotifyMessage message =
-          new MobPushNotifyMessage.fromJson(json.decode(result));
+          new MobPushNotifyMessage.fromJson(result);
           break;
       }
     });

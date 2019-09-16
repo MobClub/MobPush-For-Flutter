@@ -17,7 +17,7 @@
 static NSString *const receiverStr = @"mobpush_receiver";
 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-    FlutterMethodChannel* channel = [FlutterMethodChannel methodChannelWithName:@"mobpush_plugin" binaryMessenger:[registrar messenger]];
+    FlutterMethodChannel* channel = [FlutterMethodChannel methodChannelWithName:@"mob.com/mobpush_plugin" binaryMessenger:[registrar messenger]];
     MobpushPlugin* instance = [[MobpushPlugin alloc] init];
     [registrar addMethodCallDelegate:instance channel:channel];
     
@@ -570,7 +570,8 @@ static NSString *const receiverStr = @"mobpush_receiver";
             [resultDict setObject:reslut forKey:@"result"];
         }
         // 回调结果
-        self.callBack(resultDict);
+        NSString *resultDictStr = [MOBFJson jsonStringFromObject:resultDict];
+        self.callBack(resultDictStr);
     }
 }
 
