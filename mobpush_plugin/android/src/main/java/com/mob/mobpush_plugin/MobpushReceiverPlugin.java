@@ -68,22 +68,11 @@ public class MobpushReceiverPlugin implements EventChannel.StreamHandler {
 
             @Override
             public void onTagsCallback(Context context, String[] tags, int operation, int errorCode) {
-//                HashMap<String, Object> map = new HashMap<String, Object>();
-//                map.put("action", 3);
-//                map.put("tags", tags);
-//                map.put("operation", operation);
-//                map.put("errorCode", errorCode);
-//                event.success(hashon.fromHashMap(map));
+
             }
 
             @Override
             public void onAliasCallback(Context context, String alias, int operation, int errorCode) {
-//                HashMap<String, Object> map = new HashMap<String, Object>();
-//                map.put("action", 4);
-//                map.put("alias", alias);
-//                map.put("operation", operation);
-//                map.put("errorCode", errorCode);
-//                event.success(hashon.fromHashMap(map));
 
             }
         };
