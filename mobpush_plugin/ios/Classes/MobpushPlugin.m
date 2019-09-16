@@ -34,8 +34,7 @@ static NSString *const receiverStr = @"mobpush_receiver";
     else if ([@"getSDKVersion" isEqualToString:call.method])
     {
         //TODO: SDK 添加获取版本号接口
-//        [MobPush sdkVersion];
-        result(@"v1.7.4");
+        result([MobPush sdkVersion]);
     }
     else if ([@"getRegistrationId" isEqualToString:call.method]) {
         [MobPush getRegistrationID:^(NSString *registrationID, NSError *error) {
