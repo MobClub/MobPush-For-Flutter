@@ -1,4 +1,4 @@
-package com.mob.mobpush_plugin_example;
+package com.mob.mobpush_example;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

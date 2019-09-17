@@ -7,7 +7,7 @@ import 'mobpush_local_notification.dart';
 typedef void EventHandler(Object event);
 
 class MobpushPlugin {
-  static const MethodChannel _channel = const MethodChannel('mobpush_plugin');
+  static const MethodChannel _channel = const MethodChannel('mob.com/mobpush_plugin');
   static EventChannel _channelReciever = const EventChannel('mobpush_receiver');
 
   static Future<String> get platformVersion async {

@@ -8,12 +8,12 @@ import 'package:flutter/services.dart';
 import 'package:mobpush_plugin/mobpush_plugin.dart';
 import 'package:mobpush_plugin/mobpush_custom_message.dart';
 import 'package:mobpush_plugin/mobpush_notify_message.dart';
-import 'package:mobpush_plugin_example/app_notify_page.dart';
-import 'package:mobpush_plugin_example/click_container.dart';
-import 'package:mobpush_plugin_example/local_notify_page.dart';
-import 'package:mobpush_plugin_example/notify_page.dart';
-import 'package:mobpush_plugin_example/other_api_page.dart';
-import 'package:mobpush_plugin_example/timing_notify_page.dart';
+import 'app_notify_page.dart';
+import 'click_container.dart';
+import 'local_notify_page.dart';
+import 'notify_page.dart';
+import 'other_api_page.dart';
+import 'timing_notify_page.dart';
 
 
 void main() => runApp(MyApp());
@@ -52,92 +52,38 @@ class _MainAppState extends State<MainApp> {
   }
 
   void _onEvent(Object event) {
-    print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent:' + json.encode(event));
+    print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent:' + event.toString());
     setState(() {
-      Map<String, dynamic> eventMap = json.decode(json.encode(event));
-      /*
-       action: 0:自定义消息 1:APNs&本地通知消息 2:点击消息或其他消息
-      */
+      Map<String, dynamic> eventMap = json.decode(event);
+      Map<String, dynamic> result = eventMap['result'];
       int action = eventMap['action'];
-      print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent action: ' + action.toString());
+
       switch (action) {
         case 0:
-        Object result = eventMap['result'];
-        String resultStr = json.encode(result);
-        print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent 0:' + resultStr);
-        if (resultStr.length > 0) {
-          MobPushCustomMessage message = new MobPushCustomMessage.fromJson(json.decode(json.encode(result)));
+          MobPushCustomMessage message =
+          new MobPushCustomMessage.fromJson(result);
           showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
+              context: context,
+              child: AlertDialog(
                 content: Text(message.content),
                 actions: <Widget>[
                   FlatButton(
-                    child: Text('OK'),
                     onPressed: () {
                       Navigator.pop(context);
                     },
+                    child: Text("确定"),
                   )
                 ],
-              );
-            }
-          );
-        }
-        break;
+              ));
+          break;
         case 1:
-        Object result = eventMap['result'];
-        String resultStr = json.encode(result);
-        print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent 1:' + resultStr);
-        if (resultStr.length > 0) {
-          MobPushNotifyMessage message = new MobPushNotifyMessage.fromJson(json.decode(resultStr));
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                // title: Text('通知'),
-                content: Text(message.content.length > 0 ? message.content : 'content'),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text('OK'),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  )
-                ],
-              );
-            }
-          );
-        }
-        break;
+          MobPushNotifyMessage message =
+          new MobPushNotifyMessage.fromJson(result);
+          break;
         case 2:
-        Object result = eventMap['result'];
-        String resultStr = json.encode(result);
-        print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent 2:' + resultStr);
-        if (resultStr.length > 0) {
-          MobPushNotifyMessage message = new MobPushNotifyMessage.fromJson(json.decode(resultStr));
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text(message.title.length > 0 ? message.title : 'title'),
-                content: Text(message.content.length > 0 ? message.content : 'content'),
-                actions: <Widget>[
-                  FlatButton(
-                    child: Text('OK'),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  )
-                ],
-              );
-            }
-          );
-        }
-        break;
-        default:
-        print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent: Unknown Action - $action');
-        break;
+          MobPushNotifyMessage message =
+          new MobPushNotifyMessage.fromJson(result);
+          break;
       }
     });
   }

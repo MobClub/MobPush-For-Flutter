@@ -23,6 +23,7 @@ if (flutterVersionName == null) {
 
 apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+apply plugin: 'com.mob.sdk'
 
 android {
     compileSdkVersion 28
@@ -33,7 +34,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.mob.mobpush_plugin_example"
+        applicationId "com.mob.mobpush_example"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
@@ -58,4 +59,40 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+MobSDK {
+    appKey "moba6b6c6d6"
+    appSecret "b89d2427a3bc7ad1aea1e1e8c1d36bf3"
+
+    MobPush {
+        devInfo {
+            XIAOMI {
+                appId "2882303761517721670"
+                appKey "5671772162670"
+            }
+
+            HUAWEI {
+                appId "100215127"
+            }
+
+            MEIZU {
+                appId "112481"
+                appKey "03dd70b9be434446a7255c8586e1725a"
+            }
+
+//            FCM {
+//                //设置默认推送通知显示图标
+//                iconRes "@mipmap/default_ic_launcher"
+//            }
+//              OPPO {
+//                appKey "b61Da76NM74gsG0o8C484g8GO"
+//                appSecret "659C583033aE8Ffe45a0e867c70746Af"
+//            }
+            VIVO {
+                appId "11154"
+                appKey "0afbe1b7-b850-4d45-8cee-c57cceff652e"
+            }
+        }
+    }
 }

@@ -17,7 +17,7 @@
 static NSString *const receiverStr = @"mobpush_receiver";
 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-    FlutterMethodChannel* channel = [FlutterMethodChannel methodChannelWithName:@"mobpush_plugin" binaryMessenger:[registrar messenger]];
+    FlutterMethodChannel* channel = [FlutterMethodChannel methodChannelWithName:@"mob.com/mobpush_plugin" binaryMessenger:[registrar messenger]];
     MobpushPlugin* instance = [[MobpushPlugin alloc] init];
     [registrar addMethodCallDelegate:instance channel:channel];
     
@@ -34,8 +34,7 @@ static NSString *const receiverStr = @"mobpush_receiver";
     else if ([@"getSDKVersion" isEqualToString:call.method])
     {
         //TODO: SDK 添加获取版本号接口
-//        [MobPush sdkVersion];
-        result(@"v1.7.4");
+        result([MobPush sdkVersion]);
     }
     else if ([@"getRegistrationId" isEqualToString:call.method]) {
         [MobPush getRegistrationID:^(NSString *registrationID, NSError *error) {
@@ -571,7 +570,8 @@ static NSString *const receiverStr = @"mobpush_receiver";
             [resultDict setObject:reslut forKey:@"result"];
         }
         // 回调结果
-        self.callBack(resultDict);
+        NSString *resultDictStr = [MOBFJson jsonStringFromObject:resultDict];
+        self.callBack(resultDictStr);
     }
 }
 

@@ -61,6 +61,7 @@ class _OtherApiPageState extends State<OtherApiPage> {
                 MobpushPlugin.setAlias(_controller.text).then((Map<String, dynamic> aliasMap){
                   String res = aliasMap['res'];
                   String error = aliasMap['error'];
+                  String errorCode = aliasMap['errorCode'];
                   print(">>>>>>>>>>>>>>>>>>>>>>>>>>> getAlias -> res: $res error: $error");
                 });
                 Navigator.pop(context);

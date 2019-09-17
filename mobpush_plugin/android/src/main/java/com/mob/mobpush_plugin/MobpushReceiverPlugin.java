@@ -1,8 +1,8 @@
-package com.mob.mobpush;
+package com.mob.mobpush_plugin;
 
 import android.content.Context;
 
-import com.mob.mobpush.req.SimulateRequest;
+import com.mob.mobpush_plugin.req.SimulateRequest;
 import com.mob.pushsdk.MobPush;
 import com.mob.pushsdk.MobPushCallback;
 import com.mob.pushsdk.MobPushCustomMessage;
@@ -46,7 +46,7 @@ public class MobpushReceiverPlugin implements EventChannel.StreamHandler {
             public void onCustomMessageReceive(Context context, MobPushCustomMessage mobPushCustomMessage) {
                 HashMap<String, Object> map = new HashMap<String, Object>();
                 map.put("action", 0);
-                map.put("result", hashon.fromObject(mobPushCustomMessage));
+                map.put("result", hashon.fromJson(hashon.fromObject(mobPushCustomMessage)));
                 event.success(hashon.fromHashMap(map));
             }
 
@@ -54,7 +54,7 @@ public class MobpushReceiverPlugin implements EventChannel.StreamHandler {
             public void onNotifyMessageReceive(Context context, MobPushNotifyMessage mobPushNotifyMessage) {
                 HashMap<String, Object> map = new HashMap<String, Object>();
                 map.put("action", 1);
-                map.put("result", hashon.fromObject(mobPushNotifyMessage));
+                map.put("result", hashon.fromJson(hashon.fromObject(mobPushNotifyMessage)));
                 event.success(hashon.fromHashMap(map));
             }
 
@@ -62,28 +62,18 @@ public class MobpushReceiverPlugin implements EventChannel.StreamHandler {
             public void onNotifyMessageOpenedReceive(Context context, MobPushNotifyMessage mobPushNotifyMessage) {
                 HashMap<String, Object> map = new HashMap<String, Object>();
                 map.put("action", 2);
-                map.put("result", hashon.fromObject(mobPushNotifyMessage));
+                map.put("result", hashon.fromJson(hashon.fromObject(mobPushNotifyMessage)));
                 event.success(hashon.fromHashMap(map));
             }
 
             @Override
             public void onTagsCallback(Context context, String[] tags, int operation, int errorCode) {
-                HashMap<String, Object> map = new HashMap<String, Object>();
-                map.put("action", 3);
-                map.put("tags", tags);
-                map.put("operation", operation);
-                map.put("errorCode", errorCode);
-                event.success(hashon.fromHashMap(map));
+
             }
 
             @Override
             public void onAliasCallback(Context context, String alias, int operation, int errorCode) {
-                HashMap<String, Object> map = new HashMap<String, Object>();
-                map.put("action", 4);
-                map.put("alias", alias);
-                map.put("operation", operation);
-                map.put("errorCode", errorCode);
-                event.success(hashon.fromHashMap(map));
+
             }
         };
         return mobPushReceiver;
