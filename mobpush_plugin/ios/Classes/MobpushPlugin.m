@@ -210,7 +210,7 @@ static NSString *const receiverStr = @"mobpush_receiver";
             NSInteger type = [arguments[@"type"] integerValue];
             NSString *content = arguments[@"content"];
             NSNumber *space = arguments[@"space"];
-            NSDictionary *extras = (NSDictionary *)arguments[@"extras"];
+            NSDictionary *extras = (NSDictionary *)arguments[@"extrasMap"];
             [MobPush sendMessageWithMessageType:type
                                         content:content
                                           space:space
@@ -297,7 +297,7 @@ static NSString *const receiverStr = @"mobpush_receiver";
                 [resultDict setObject:@(0) forKey:@"action"];
                 if (message.extraInfomation)
                 {
-                    [reslut setObject:message.extraInfomation forKey:@"extra"];
+                    [reslut setObject:message.extraInfomation forKey:@"extrasMap"];
                 }
                 if (message.content)
                 {
@@ -385,7 +385,7 @@ static NSString *const receiverStr = @"mobpush_receiver";
                 
                 if (extra.count)
                 {
-                    [reslut setObject:extra forKey:@"extra"];
+                    [reslut setObject:extra forKey:@"extrasMap"];
                 }
                 
                 [resultDict setObject:@(1) forKey:@"action"];
@@ -524,7 +524,7 @@ static NSString *const receiverStr = @"mobpush_receiver";
                     
                     if (extra.count)
                     {
-                        [reslut setObject:extra forKey:@"extra"];
+                        [reslut setObject:extra forKey:@"extrasMap"];
                     }
                     
                     [resultDict setObject:@(2) forKey:@"action"];

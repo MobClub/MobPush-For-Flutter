@@ -156,7 +156,7 @@ class MobpushPlugin {
    * extras: 附加数据，json字符串
    */
   static Future<Map<String, dynamic>> send(int type, String content, int space, String extras) async {
-    final Map sendMap = await _channel.invokeMethod("send", {"type": type, "content": content, "space": space, "extras": extras});
+    final Map sendMap = await _channel.invokeMethod("send", {"type": type, "content": content, "space": space, "extrasMap": extras});
     Map<String, dynamic> resMap = Map<String, dynamic>.from(sendMap);
     return resMap;
   }
