@@ -166,6 +166,15 @@ static NSString *const receiverStr = @"mobpush_receiver";
             {
                 noti.subTitle = eventParams[@"subTitle"];
             }
+            if (eventParams[@"extrasMap"] && ![eventParams[@"extrasMap"] isKindOfClass:[NSNull class]])
+            {
+                message.extraInfomation = eventParams[@"extrasMap"];
+            }
+            if (eventParams[@"messageId"] && ![eventParams[@"messageId"] isKindOfClass:[NSNull class]])
+            {
+                message.identifier = eventParams[@"messageId"];
+            }
+            
             if (eventParams[@"timestamp"] && ![eventParams[@"timestamp"] isKindOfClass:[NSNull class]])
             {
                 long timeStamp = [eventParams[@"timestamp"] longValue];
@@ -219,9 +228,9 @@ static NSString *const receiverStr = @"mobpush_receiver";
                                      linkScheme:nil
                                        linkData:nil
                                          result:^(NSError *error) {
-                                             NSString *errorStr = error ? error.localizedDescription : @"";
-                                             result(@{@"res": error ? @"failed": @"success", @"error": errorStr});
-                                         }];
+                NSString *errorStr = error ? error.localizedDescription : @"";
+                result(@{@"res": error ? @"failed": @"success", @"error": errorStr});
+            }];
         }
         else
         {
@@ -398,6 +407,9 @@ static NSString *const receiverStr = @"mobpush_receiver";
                 NSString *subtitle = message.notification.subTitle;
                 NSInteger badge = message.notification.badge;
                 NSString *sound = message.notification.sound;
+                NSString *identifier = message.identifier;
+                NSDictionary *extras = message.msgInfo;
+                
                 if (body)
                 {
                     [reslut setObject:body forKey:@"content"];
@@ -417,6 +429,14 @@ static NSString *const receiverStr = @"mobpush_receiver";
                 if (sound)
                 {
                     [reslut setObject:sound forKey:@"sound"];
+                }
+                if (identifier)
+                {
+                    [reslut setObject:identifier forKey:@"messageId"];
+                }
+                if (extras)
+                {
+                    [reslut setObject:extras forKey:@"extrasMap"];
                 }
                 
                 [resultDict setObject:@(1) forKey:@"action"];

@@ -22,7 +22,8 @@ class _LocalNotifyPageState extends State<LocalNotifyPage> {
           timestamp: 0, //本地通知时间戳, 0立刻通知。其余为时间间隔
           badge: 1, //  ios角标
           sound: "default", // ios声音
-          subTitle: "副标题" // ios副标题
+          subTitle: "副标题",
+          extrasMap: {"extra":"testExtra"} // ios副标题
           );// ios副标题
         await MobpushPlugin.addLocalNotification(localNotification);
       } else { // Android

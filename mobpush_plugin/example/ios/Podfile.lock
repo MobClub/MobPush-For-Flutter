@@ -1,11 +1,11 @@
 PODS:
   - Flutter (1.0.0)
-  - mob_pushsdk (2.2.0.1):
-    - mob_pushsdk/MobPush (= 2.2.0.1)
+  - mob_pushsdk (2.3.0):
+    - mob_pushsdk/MobPush (= 2.3.0)
     - MOBFoundation
-  - mob_pushsdk/MobPush (2.2.0.1):
+  - mob_pushsdk/MobPush (2.3.0):
     - MOBFoundation
-  - MOBFoundation (3.2.6)
+  - MOBFoundation (3.2.8)
   - mobpush_plugin (1.0.7):
     - Flutter
     - mob_pushsdk
@@ -15,7 +15,7 @@ DEPENDENCIES:
   - mobpush_plugin (from `.symlinks/plugins/mobpush_plugin/ios`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - mob_pushsdk
     - MOBFoundation
 
@@ -26,11 +26,11 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/mobpush_plugin/ios"
 
 SPEC CHECKSUMS:
-  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
-  mob_pushsdk: 1776b0ad51cdfc85067e875420a85557f88a836d
-  MOBFoundation: 08c456357888e4c984fba23bbf04cfd2f4fc1e02
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  mob_pushsdk: 2d65a637f702860481e7cda06023c10968aef766
+  MOBFoundation: 2dc0a63371eccccabef13b1df3fe57564003bc85
   mobpush_plugin: 7b5a56692c538bc06e0386916cf7b21f77c1eb09
 
 PODFILE CHECKSUM: 7fb83752f59ead6285236625b82473f90b1cb932
 
-COCOAPODS: 1.7.2
+COCOAPODS: 1.8.3
