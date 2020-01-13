@@ -22,6 +22,15 @@
 	<string>20190812</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MOBAppKey</key>
+	<string>moba6b6c6d6</string>
+	<key>MOBAppSecret</key>
+	<string>b89d2427a3bc7ad1aea1e1e8c1d36bf3</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -39,16 +48,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>MOBAppKey</key>
-	<string>moba6b6c6d6</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
-	<key>MOBAppSecret</key>
-	<string>b89d2427a3bc7ad1aea1e1e8c1d36bf3</string>
 </dict>
 </plist>

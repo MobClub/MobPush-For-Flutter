@@ -15,7 +15,7 @@ DEPENDENCIES:
   - mobpush (from `.symlinks/plugins/mobpush/ios`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - mob_pushsdk
     - MOBFoundation
 
@@ -26,11 +26,11 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/mobpush/ios"
 
 SPEC CHECKSUMS:
-  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   mob_pushsdk: 2d5c42cf29a5efcafee7e44e1ba468f82a6700d8
   MOBFoundation: dd8f319dde9331590d515a1676d27baccc0070e5
   mobpush: 452cb71f1cfdf431be9070f390d921b9d7a304b9
 
 PODFILE CHECKSUM: 81d9101721a74b9b88ddd9e9dfe15eec968bc82e
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.3
