@@ -1,20 +1,20 @@
-/**
+/*
  * MobPush自定义透传消息实体
  */
 class MobPushCustomMessage {
-  /**
+  /*
    * 消息内容
    */
   String content;
-  /**
+  /*
    * 消息Id
    */
   String messageId;
-  /**
+  /*
    * 消息时间戳
    */
   int timestamp;
-  /**
+  /*
    * 消息附加数据
    */
   Map<String, dynamic> extrasMap;

@@ -166,6 +166,15 @@ static NSString *const receiverStr = @"mobpush_receiver";
             {
                 noti.subTitle = eventParams[@"subTitle"];
             }
+            if (eventParams[@"extrasMap"] && ![eventParams[@"extrasMap"] isKindOfClass:[NSNull class]])
+            {
+                message.extraInfomation = eventParams[@"extrasMap"];
+            }
+            if (eventParams[@"messageId"] && ![eventParams[@"messageId"] isKindOfClass:[NSNull class]])
+            {
+                message.identifier = eventParams[@"messageId"];
+            }
+            
             if (eventParams[@"timestamp"] && ![eventParams[@"timestamp"] isKindOfClass:[NSNull class]])
             {
                 long timeStamp = [eventParams[@"timestamp"] longValue];
@@ -210,7 +219,7 @@ static NSString *const receiverStr = @"mobpush_receiver";
             NSInteger type = [arguments[@"type"] integerValue];
             NSString *content = arguments[@"content"];
             NSNumber *space = arguments[@"space"];
-            NSDictionary *extras = (NSDictionary *)arguments[@"extras"];
+            NSDictionary *extras = (NSDictionary *)arguments[@"extrasMap"];
             [MobPush sendMessageWithMessageType:type
                                         content:content
                                           space:space
@@ -219,9 +228,9 @@ static NSString *const receiverStr = @"mobpush_receiver";
                                      linkScheme:nil
                                        linkData:nil
                                          result:^(NSError *error) {
-                                             NSString *errorStr = error ? error.localizedDescription : @"";
-                                             result(@{@"res": error ? @"failed": @"success", @"error": errorStr});
-                                         }];
+                NSString *errorStr = error ? error.localizedDescription : @"";
+                result(@{@"res": error ? @"failed": @"success", @"error": errorStr});
+            }];
         }
         else
         {
@@ -297,7 +306,7 @@ static NSString *const receiverStr = @"mobpush_receiver";
                 [resultDict setObject:@(0) forKey:@"action"];
                 if (message.extraInfomation)
                 {
-                    [reslut setObject:message.extraInfomation forKey:@"extra"];
+                    [reslut setObject:message.extraInfomation forKey:@"extrasMap"];
                 }
                 if (message.content)
                 {
@@ -385,7 +394,7 @@ static NSString *const receiverStr = @"mobpush_receiver";
                 
                 if (extra.count)
                 {
-                    [reslut setObject:extra forKey:@"extra"];
+                    [reslut setObject:extra forKey:@"extrasMap"];
                 }
                 
                 [resultDict setObject:@(1) forKey:@"action"];
@@ -398,6 +407,9 @@ static NSString *const receiverStr = @"mobpush_receiver";
                 NSString *subtitle = message.notification.subTitle;
                 NSInteger badge = message.notification.badge;
                 NSString *sound = message.notification.sound;
+                NSString *identifier = message.identifier;
+                NSDictionary *extras = message.msgInfo;
+                
                 if (body)
                 {
                     [reslut setObject:body forKey:@"content"];
@@ -417,6 +429,14 @@ static NSString *const receiverStr = @"mobpush_receiver";
                 if (sound)
                 {
                     [reslut setObject:sound forKey:@"sound"];
+                }
+                if (identifier)
+                {
+                    [reslut setObject:identifier forKey:@"messageId"];
+                }
+                if (extras)
+                {
+                    [reslut setObject:extras forKey:@"extrasMap"];
                 }
                 
                 [resultDict setObject:@(1) forKey:@"action"];
@@ -524,7 +544,7 @@ static NSString *const receiverStr = @"mobpush_receiver";
                     
                     if (extra.count)
                     {
-                        [reslut setObject:extra forKey:@"extra"];
+                        [reslut setObject:extra forKey:@"extrasMap"];
                     }
                     
                     [resultDict setObject:@(2) forKey:@"action"];

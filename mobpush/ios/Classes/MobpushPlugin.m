@@ -18,8 +18,8 @@ static NSString *const receiverStr = @"mobpush_receiver";
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar
 {
     FlutterMethodChannel* channel = [FlutterMethodChannel
-      methodChannelWithName:@"mob.com/mobpush"
-            binaryMessenger:[registrar messenger]];
+                                     methodChannelWithName:@"mob.com/mobpush"
+                                     binaryMessenger:[registrar messenger]];
     MobpushPlugin* instance = [[MobpushPlugin alloc] init];
     [registrar addMethodCallDelegate:instance channel:channel];
     
@@ -249,7 +249,6 @@ static NSString *const receiverStr = @"mobpush_receiver";
             if (eventParams[@"sound"] && ![eventParams[@"sound"] isKindOfClass:[NSNull class]])
             {
                 noti.sound = eventParams[@"sound"];
-                
             }
             
             if (eventParams[@"badge"] && ![eventParams[@"badge"] isKindOfClass:[NSNull class]])
@@ -260,6 +259,11 @@ static NSString *const receiverStr = @"mobpush_receiver";
             if (eventParams[@"subTitle"] && ![eventParams[@"subTitle"] isKindOfClass:[NSNull class]])
             {
                 noti.subTitle = eventParams[@"subTitle"];
+            }
+            
+            if (eventParams[@"extrasMap"] && ![eventParams[@"extrasMap"] isKindOfClass:[NSNull class]])
+            {
+                message.extraInfomation = eventParams[@"extrasMap"];
             }
             
             if (eventParams[@"timestamp"] && ![eventParams[@"timestamp"] isKindOfClass:[NSNull class]])
@@ -330,7 +334,7 @@ static NSString *const receiverStr = @"mobpush_receiver";
                                          {
                                              self.callBack(resultDict);
                                          }
-                                 }];
+                                     }];
     }
     else if ([@"setAPNsForProduction" isEqualToString:call.method])
     {
@@ -346,6 +350,12 @@ static NSString *const receiverStr = @"mobpush_receiver";
     else if ([@"clearBadge" isEqualToString:call.method])
     {
         [MobPush clearBadge];
+    }
+    else if ([@"setAPNsShowForegroundType" isEqualToString:call.method])
+    {
+        NSDictionary *arguments = (NSDictionary *)call.arguments;
+        NSInteger type = [arguments[@"type"] integerValue];
+        [MobPush setAPNsShowForegroundType:type];
     }
     else if ([@"setCustomNotification" isEqualToString:call.method])
     {
@@ -498,6 +508,8 @@ static NSString *const receiverStr = @"mobpush_receiver";
             NSString *subtitle = message.notification.subTitle;
             NSInteger badge = message.notification.badge;
             NSString *sound = message.notification.sound;
+            NSDictionary *extras = message.extraInfomation;
+            
             if (body)
             {
                 [reslut setObject:body forKey:@"content"];
@@ -523,6 +535,9 @@ static NSString *const receiverStr = @"mobpush_receiver";
                 [reslut setObject:sound forKey:@"sound"];
             }
             
+            if (extras) {
+                [reslut setValue:extras forKey:@"extrasMap"];
+            }
             
             [resultDict setObject:@1 forKey:@"action"];
             

@@ -24,6 +24,6 @@ class MobPushCustomMessage {
 
   factory MobPushCustomMessage.fromJson(Map<String, dynamic> json) {
     return MobPushCustomMessage(json['content'], json['messageId'],
-        json['timeStamp'], json['extra']);
+        json['timeStamp'], json['extrasMap']);
   }
 }

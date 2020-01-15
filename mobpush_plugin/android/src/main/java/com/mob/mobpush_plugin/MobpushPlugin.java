@@ -146,7 +146,7 @@ public class MobpushPlugin implements MethodCallHandler {
             int type = call.argument("type");
             int space = call.argument("space");
             String content = call.argument("content");
-            String extras = call.argument("extras");
+            String extras = call.argument("extrasMap");
             SimulateRequest.sendPush(type, content, space, extras, new MobPushCallback<Boolean>() {
                 @Override
                 public void onCallback(Boolean aBoolean) {

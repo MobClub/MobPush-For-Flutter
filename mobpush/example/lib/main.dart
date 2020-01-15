@@ -16,7 +16,6 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return new MaterialApp(
       home: MainApp(),
     );
@@ -26,7 +25,6 @@ class MyApp extends StatelessWidget {
 class MainApp extends StatefulWidget {
   @override
   _MainAppState createState() {
-    // TODO: implement createState
     return _MainAppState();
 
   }
