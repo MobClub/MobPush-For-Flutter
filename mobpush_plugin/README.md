@@ -129,7 +129,15 @@ public class CustomApplication extends FlutterApplication {
  
 **接口方法说明**
 
-（1）设置远程推送环境，向用户授权（仅 iOS）：
+（1）设置隐私协议授权状态 ：
+updatePrivacyPermissionStatus
+
+```
+MobpushPlugin.updatePrivacyPermissionStatus(true);
+```
+
+
+（2）设置远程推送环境，向用户授权（仅 iOS）：
 
 setCustomNotification
 
@@ -139,7 +147,7 @@ if (Platform.isIOS) {
 }
 ```
 
-（2）设置远程推送环境  (仅 iOS)：
+（3）设置远程推送环境  (仅 iOS)：
 
 setAPNsForProduction
 
@@ -149,7 +157,7 @@ if (Platform.isIOS) {
       MobpushPlugin.setAPNsForProduction(false)
 }
 ```
-（3）添加推送回调监听（接收自定义透传消息回调、接收通知消息回调、接收点击通知消息回调）
+（4）添加推送回调监听（接收自定义透传消息回调、接收通知消息回调、接收点击通知消息回调）
 
 addPushReceiver
 
@@ -165,7 +173,7 @@ void _onError(Object event) {
 }
 ```
 
-（4）停止推送
+（5）停止推送
 
 stopPush
 
@@ -173,14 +181,14 @@ stopPush
 MobpushPlugin.stopPush();
 ```
 
-（5）重新打开推送服务
+（6）重新打开推送服务
 
 restartPush
 
 ```
 MobpushPlugin.restartPush();
 ```
-（6）是否已停止接收推送
+（7）是否已停止接收推送
 
 isPushStopped
 
@@ -188,7 +196,7 @@ isPushStopped
 MobpushPlugin.isPushStopped();
 ```
 
-（7）设置别名
+（8）设置别名
 
 setAlias
 
@@ -201,7 +209,7 @@ MobpushPlugin.setAlias("别名").then((Map<String, dynamic> aliasMap){
 });
 ```
 
-（8）获取别名
+（9）获取别名
 
 getAlias
 
@@ -213,7 +221,7 @@ MobpushPlugin.getAlias().then((Map<String, dynamic> aliasMap){
 });
 ```
 
-(9）删除别名
+(10）删除别名
 
 deleteAlias
 
@@ -225,7 +233,7 @@ MobpushPlugin.deleteAlias("别名").then((Map<String, dynamic> aliasMap){
 });
 ```
 
-（10）添加标签
+（11）添加标签
 
 addTags
 
@@ -240,7 +248,7 @@ MobpushPlugin.addTags(tags).then((Map<String, dynamic> tagsMap){
 });
 ```
 
-（11）获取标签
+（12）获取标签
 
 getTags
 
@@ -252,7 +260,7 @@ MobpushPlugin.getTags().then((Map<String, dynamic> tagsMap){
 });;
 ```
 
-（12）删除标签
+（13）删除标签
 
 deleteTags
 
@@ -267,7 +275,7 @@ MobpushPlugin.deleteTags(tags).then((Map<String, dynamic> tagsMap){
 });
 ```
 
-（13）清空标签
+（14）清空标签
 
 cleanTags
 
@@ -279,7 +287,7 @@ MobpushPlugin.cleanTags().then((Map<String, dynamic> tagsMap){
 });
 ```
 
-（14）发送本地通知
+（15）发送本地通知
 
 addLocalNotification
 
@@ -287,7 +295,7 @@ addLocalNotification
 MobpushPlugin.addLocalNotification();
 ```
 
-（15）绑定手机号
+（16）绑定手机号
 
 bindPhoneNum
 
@@ -295,7 +303,7 @@ bindPhoneNum
 MobpushPlugin.bindPhoneNum("110");
 ```
 
-（16）测试模拟推送，用于测试
+（17）测试模拟推送，用于测试
 
 send
 
@@ -314,7 +322,7 @@ MobpushPlugin.send(int type, String content, int space, String extras).then((Map
 });
 ```
 
-（17）设置点击通知是否跳转默认页 (仅andorid)
+（18）设置点击通知是否跳转默认页 (仅andorid)
 
 setClickNotificationToLaunchMainActivity
 
@@ -322,7 +330,7 @@ setClickNotificationToLaunchMainActivity
 MobpushPlugin.setClickNotificationToLaunchMainActivity (bool enable);
 ```
 
-（18）移除本地通知(仅andorid)
+（19）移除本地通知(仅andorid)
 
 removeLocalNotification
 
@@ -330,7 +338,7 @@ removeLocalNotification
 MobpushPlugin.removeLocalNotification(int notificationId);
 ```
 
-（19）清空本地通知(仅andorid)
+（20）清空本地通知(仅andorid)
 
 clearLocalNotifications
 
@@ -338,7 +346,7 @@ clearLocalNotifications
 MobpushPlugin.clearLocalNotifications();
 ```
 
-（20）设置通知栏icon，不设置默认取应用icon(仅andorid)
+（21）设置通知栏icon，不设置默认取应用icon(仅andorid)
 
 setNotifyIcon
 
@@ -346,7 +354,7 @@ setNotifyIcon
 MobpushPlugin.setNotifyIcon(String resId);
 ```
 
-（21）设置应用在前台时是否隐藏通知不进行显示，不设置默认不隐藏通知(仅andorid)
+（22）设置应用在前台时是否隐藏通知不进行显示，不设置默认不隐藏通知(仅andorid)
 
 setAppForegroundHiddenNotification
 
@@ -354,7 +362,7 @@ setAppForegroundHiddenNotification
 MobpushPlugin.setAppForegroundHiddenNotification(bool hidden);
 ```
 
-（22）设置通知静音时段（推送选项）(仅andorid)
+（23）设置通知静音时段（推送选项）(仅andorid)
 
 setSilenceTime
 
@@ -369,7 +377,7 @@ setSilenceTime
 MobpushPlugin.setSilenceTime(int startHour, int startMinute, int endHour, int endMinute)
 ```
 
-（23）设置角标 (仅 iOS)
+（24）设置角标 (仅 iOS)
 
 setBadge
 
