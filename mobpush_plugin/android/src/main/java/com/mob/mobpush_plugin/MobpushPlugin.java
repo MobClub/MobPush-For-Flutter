@@ -3,6 +3,7 @@ package com.mob.mobpush_plugin;
 import android.content.Context;
 
 import com.mob.MobSDK;
+import com.mob.OperationCallback;
 import com.mob.mobpush_plugin.req.SimulateRequest;
 import com.mob.pushsdk.MobPush;
 import com.mob.pushsdk.MobPushCallback;
@@ -137,7 +138,7 @@ public class MobpushPlugin implements MethodCallHandler {
                 @Override
                 public void onCallback(Boolean data) {
                     HashMap<String, Object> map = new HashMap<String, Object>();
-                    map.put("res", data.booleanValue() ? "success":"failed");
+                    map.put("res", data.booleanValue() ? "success" : "failed");
                     map.put("error", "");
                     result.success(map);
                 }
@@ -151,9 +152,22 @@ public class MobpushPlugin implements MethodCallHandler {
                 @Override
                 public void onCallback(Boolean aBoolean) {
                     HashMap<String, Object> map = new HashMap<String, Object>();
-                    map.put("res", aBoolean.booleanValue() ? "success":"failed");
+                    map.put("res", aBoolean.booleanValue() ? "success" : "failed");
                     map.put("error", "");
                     result.success(map);
+                }
+            });
+        } else if (call.method.equals("updatePrivacyPermissionStatus")) {
+            boolean status = call.argument("status");
+            MobSDK.submitPolicyGrantResult(status, new OperationCallback<Void>() {
+                @Override
+                public void onComplete(Void aVoid) {
+                    System.out.println("updatePrivacyPermissionStatus onComplete");
+                }
+
+                @Override
+                public void onFailure(Throwable throwable) {
+                    System.out.println("updatePrivacyPermissionStatus onFailure:" + throwable.getMessage());
                 }
             });
         } else {
@@ -186,7 +200,7 @@ public class MobpushPlugin implements MethodCallHandler {
                 switch (operation) {
                     case 0:
                         result = getTagsCallback.remove(0);
-                        map.put("res", tags == null?new ArrayList<String>():Arrays.asList(tags));
+                        map.put("res", tags == null ? new ArrayList<String>() : Arrays.asList(tags));
                         map.put("error", "");
                         map.put("errorCode", String.valueOf(errorCode));
                         break;
