@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/services.dart';
 import 'mobpush_local_notification.dart';
 
@@ -16,6 +15,13 @@ class MobpushPlugin {
   }
 
   // 公共 API
+
+  /*
+   * 上传隐私协议许可
+   */
+  static Future<bool> updatePrivacyPermissionStatus(bool agree) async {
+    return await _channel.invokeMethod("updatePrivacyPermissionStatus",{"status":agree});
+  }
 
   /*
    * 获取 SDK 版本号

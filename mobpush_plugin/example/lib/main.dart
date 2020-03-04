@@ -49,6 +49,9 @@ class _MainAppState extends State<MainApp> {
       MobpushPlugin.setAPNsForProduction(false);
     }
     MobpushPlugin.addPushReceiver(_onEvent, _onError);
+    
+    //上传隐私协议许可
+    MobpushPlugin.updatePrivacyPermissionStatus(true);
   }
 
   void _onEvent(Object event) {
