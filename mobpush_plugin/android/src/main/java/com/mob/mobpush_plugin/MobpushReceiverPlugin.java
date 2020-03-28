@@ -174,6 +174,10 @@ public class MobpushReceiverPlugin implements EventChannel.StreamHandler {
 
 
     void onDestroy() {
+        if(mobPushReceiver!=null){
+            MobPush.removePushReceiver(mobPushReceiver);
+            mobPushReceiver = null;
+        }
         MobPush.removePushReceiver(baseMobPushReceiver);
         baseMobPushReceiver = null;
         eventChannel.setStreamHandler(null);
