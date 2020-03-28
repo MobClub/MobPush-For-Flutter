@@ -1,6 +1,7 @@
 package com.mob.mobpush_plugin;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import com.mob.pushsdk.MobPush;
@@ -174,10 +175,7 @@ public class MobpushReceiverPlugin implements EventChannel.StreamHandler {
 
 
     void onDestroy() {
-        if(mobPushReceiver!=null){
-            MobPush.removePushReceiver(mobPushReceiver);
-            mobPushReceiver = null;
-        }
+        if (mobPushReceiver != null) onCancel(null);
         MobPush.removePushReceiver(baseMobPushReceiver);
         baseMobPushReceiver = null;
         eventChannel.setStreamHandler(null);
