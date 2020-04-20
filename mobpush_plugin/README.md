@@ -100,21 +100,15 @@ MobSDK {
     }
 }
 ```
-3.  平台相关集成 在项目的/android/app中自定义Application继承自FlutterApplication并进行MobSDK初始化:
+3.  在MainActivity的onCreate中添加以下代码：
 
 
 ```
-import com.mob.MobSDK;
-import io.flutter.app.FlutterApplication;
-
-public class CustomApplication extends FlutterApplication {
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        //初始化MobSDK
-        MobSDK.init(this);
-    }
-}
+ @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    GeneratedPluginRegistrant.registerWith(this);
+  }
 ```
 在项目的/android/app的AndroidManifest.xml文件中添加：
 
