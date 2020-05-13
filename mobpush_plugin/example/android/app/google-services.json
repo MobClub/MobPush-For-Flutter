@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "250330963074",
+    "firebase_url": "https://mobpushdemo.firebaseio.com",
+    "project_id": "mobpushdemo",
+    "storage_bucket": "mobpushdemo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:250330963074:android:c5f0a867c065fb8a2ee89b",
+        "android_client_info": {
+          "package_name": "com.mob.mobpush.demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "250330963074-9fcivp990cnldrjf0ll5lrremlf3mmt1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdPCNyFWJTuc5Ozyk68339Eis-N0ffMjA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "250330963074-9fcivp990cnldrjf0ll5lrremlf3mmt1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

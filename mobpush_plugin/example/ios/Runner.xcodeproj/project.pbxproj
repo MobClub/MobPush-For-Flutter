@@ -405,7 +405,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mob.MobPush;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = al;
+				PROVISIONING_PROFILE_SPECIFIER = MobPushDev;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Profile;
@@ -538,7 +538,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mob.MobPush;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = al;
+				PROVISIONING_PROFILE_SPECIFIER = MobPushDev;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
