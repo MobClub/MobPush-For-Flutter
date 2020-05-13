@@ -301,7 +301,6 @@ static NSString *const receiverStr = @"mobpush_receiver";
 - (void)addObserver
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMessage:) name:MobPushDidReceiveMessageNotification object:nil];
-    [MobPush setupNotification:MPushNotificationConfiguration.new];
 }
 
 - (void)didReceiveMessage:(NSNotification *)notification
