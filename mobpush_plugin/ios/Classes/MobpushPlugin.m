@@ -11,6 +11,8 @@
 // 事件回调
 @property (nonatomic, copy) void (^callBack) (id _Nullable event);
 
+@property (nonatomic, strong) NSMutableArray *tmps;
+
 @end
 
 @implementation MobpushPlugin
@@ -600,9 +602,38 @@ static NSString *const receiverStr = @"mobpush_receiver";
         }
         // 回调结果
         NSString *resultDictStr = [MOBFJson jsonStringFromObject:resultDict];
-        self.callBack(resultDictStr);
+
+        if (self.callBack)
+        {
+            self.callBack(resultDictStr);
+        }
+        else
+        {
+            if(_tmps)
+            {
+                [_tmps addObject:resultDictStr];
+            }
+            else
+            {
+                _tmps = @[resultDictStr].mutableCopy;
+            }
+        }
+        
     }
 }
+
+- (void)setCallBack:(void (^)(id _Nullable))callBack
+{
+    _callBack = callBack;
+    
+    if (_callBack && _tmps.count)
+    {
+        for (NSString *obj in _tmps) {
+            _callBack(obj);
+        }
+    }
+}
+
 
 - (void)dealloc
 {

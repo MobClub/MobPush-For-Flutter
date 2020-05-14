@@ -8,8 +8,9 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:3.4.1'
         classpath 'com.mob.sdk:MobSDK:+'
+        classpath 'com.google.gms:google-services:4.3.3' // google-services plugin
     }
 }
 

@@ -424,7 +424,7 @@ class _OtherApiPageState extends State<OtherApiPage> {
       case 7:
         MobpushPlugin.getTags().then((Map<String, dynamic> tagsMap){
 
-           List<String> resList;
+           List<dynamic> resList;
           if (tagsMap['res'] == null) {
             resList = [];
           } else {
