@@ -267,6 +267,7 @@ static NSString *const receiverStr = @"mobpush_receiver";
     {
         MPushNotificationConfiguration *config = [[MPushNotificationConfiguration alloc] init];
         config.types = MPushAuthorizationOptionsSound | MPushAuthorizationOptionsBadge | MPushAuthorizationOptionsAlert;
+        [[MOBFDataService sharedInstance] setCacheData:config forKey:@"MPushNotificationConfiguration" domain:@"MOBPUSH_FLUTTER_PLUGIN"];
         [MobPush setupNotification:config];
     }
     else if ([@"updatePrivacyPermissionStatus" isEqualToString:call.method])
@@ -301,11 +302,17 @@ static NSString *const receiverStr = @"mobpush_receiver";
 - (void)addObserver
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMessage:) name:MobPushDidReceiveMessageNotification object:nil];
+    MPushNotificationConfiguration *config = [[MOBFDataService sharedInstance] cacheDataForKey:@"MPushNotificationConfiguration" domain:@"MOBPUSH_FLUTTER_PLUGIN"];
+    if (config && [config isKindOfClass:MPushNotificationConfiguration.class])
+    {
+         [MobPush setupNotification:config];
+    }
 }
 
 - (void)didReceiveMessage:(NSNotification *)notification
 {
-    if (self.callBack && [notification.object isKindOfClass:[MPushMessage class]])
+//    NSLog(@"flutter: ================ didReceiveMessage =========================");
+    if ([notification.object isKindOfClass:[MPushMessage class]])
     {
         MPushMessage *message = (MPushMessage *)notification.object;
         NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
