@@ -140,10 +140,12 @@ public class MobpushMethodCallPlugin implements MethodChannel.MethodCallHandler 
                 MobPush.bindPhoneNum(phoneNum, new MobPushCallback<Boolean>() {
                     @Override
                     public void onCallback(Boolean data) {
-                        HashMap<String, Object> map = new HashMap<String, Object>();
-                        map.put("res", data.booleanValue() ? "success" : "failed");
-                        map.put("error", "");
-                        result.success(map);
+                        if (data != null) {
+                            HashMap<String, Object> map = new HashMap<String, Object>();
+                            map.put("res", data.booleanValue() ? "success" : "failed");
+                            map.put("error", "");
+                            result.success(map);
+                        }
                     }
                 });
                 break;
@@ -155,10 +157,12 @@ public class MobpushMethodCallPlugin implements MethodChannel.MethodCallHandler 
                 SimulateRequest.sendPush(type, content, space, extras, new MobPushCallback<Boolean>() {
                     @Override
                     public void onCallback(Boolean aBoolean) {
-                        HashMap<String, Object> map = new HashMap<String, Object>();
-                        map.put("res", aBoolean.booleanValue() ? "success" : "failed");
-                        map.put("error", "");
-                        result.success(map);
+                        if (aBoolean != null) {
+                            HashMap<String, Object> map = new HashMap<String, Object>();
+                            map.put("res", aBoolean.booleanValue() ? "success" : "failed");
+                            map.put("error", "");
+                            result.success(map);
+                        }
                     }
                 });
                 break;
