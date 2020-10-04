@@ -81,7 +81,11 @@ static NSString *const receiverStr = @"mobpush_receiver";
             if (error) {
                 result(@{@"res": @"", @"error": error.localizedDescription});
             } else {
-                result(@{@"res": alias, @"error": @""});
+                NSString *rstAlias = alias;
+                if (!alias) {
+                    rstAlias = @"";
+                }
+                result(@{@"res": rstAlias, @"error": @""});
             }
         }];
     }
