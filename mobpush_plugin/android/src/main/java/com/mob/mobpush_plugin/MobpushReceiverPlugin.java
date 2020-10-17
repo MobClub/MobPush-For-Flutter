@@ -2,45 +2,128 @@ package com.mob.mobpush_plugin;
 
 import android.content.Context;
 
-import com.mob.mobpush_plugin.req.SimulateRequest;
+import androidx.annotation.NonNull;
+
 import com.mob.pushsdk.MobPush;
-import com.mob.pushsdk.MobPushCallback;
 import com.mob.pushsdk.MobPushCustomMessage;
 import com.mob.pushsdk.MobPushNotifyMessage;
 import com.mob.pushsdk.MobPushReceiver;
 import com.mob.tools.utils.Hashon;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.EventChannel;
-import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
-import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
-import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
 
-/**
- * MobpushPlugin
- */
 public class MobpushReceiverPlugin implements EventChannel.StreamHandler {
-    private static MobPushReceiver mobPushReceiver;
+    private MobpushPlugin mobpushPlugin;
+
+    private MobPushReceiver baseMobPushReceiver;
+    MobPushReceiver mobPushReceiver;
+
+    private EventChannel eventChannel;
 
     private Hashon hashon = new Hashon();
 
-    public static MobPushReceiver getMobPushReceiver(){
-        return mobPushReceiver;
+    MobpushReceiverPlugin(MobpushPlugin mobpushPlugin, @NonNull BinaryMessenger messenger) {
+        this.mobpushPlugin = mobpushPlugin;
+        eventChannel = new EventChannel(messenger, "mobpush_receiver");
+        eventChannel.setStreamHandler(this);
+        createBaseMobPushReceiver();
+        MobPush.addPushReceiver(baseMobPushReceiver);
     }
 
-    /**
-     * Plugin registration.
-     */
-    public static void registerWith(Registrar registrar) {
-        final EventChannel channel = new EventChannel(registrar.messenger(), "mobpush_receiver");
-        channel.setStreamHandler(new MobpushReceiverPlugin());
+
+    private void createBaseMobPushReceiver() {
+        baseMobPushReceiver = new MobPushReceiver() {
+            @Override
+            public void onCustomMessageReceive(Context context, MobPushCustomMessage mobPushCustomMessage) {
+
+            }
+
+            @Override
+            public void onNotifyMessageReceive(Context context, MobPushNotifyMessage mobPushNotifyMessage) {
+
+            }
+
+            @Override
+            public void onNotifyMessageOpenedReceive(Context context, MobPushNotifyMessage mobPushNotifyMessage) {
+
+            }
+
+            @Override
+            public void onTagsCallback(Context context, String[] tags, int operation, int errorCode) {
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                MethodChannel.Result result = null;
+                // 0 获取， 1 设置， 2 删除，3 清空
+                switch (operation) {
+                    case 0:
+                        result = mobpushPlugin.getTagsCallback.remove(0);
+                        map.put("res", tags == null ? new ArrayList<String>() : Arrays.asList(tags));
+                        map.put("error", "");
+                        map.put("errorCode", String.valueOf(errorCode));
+                        break;
+                    case 1:
+                        result = mobpushPlugin.addTagsCallback.remove(0);
+                        map.put("res", errorCode == 0 ? "success" : "failed");
+                        map.put("error", "");
+                        map.put("errorCode", String.valueOf(errorCode));
+                        break;
+                    case 2:
+                        result = mobpushPlugin.deleteTagsCallback.remove(0);
+                        map.put("res", errorCode == 0 ? "success" : "failed");
+                        map.put("error", "");
+                        map.put("errorCode", String.valueOf(errorCode));
+                        break;
+                    case 3:
+                        result = mobpushPlugin.cleanTagsCallback.remove(0);
+                        map.put("res", errorCode == 0 ? "success" : "failed");
+                        map.put("error", "");
+                        map.put("errorCode", String.valueOf(errorCode));
+                        break;
+                }
+                if (result != null) {
+                    result.success(map);
+                }
+            }
+
+            @Override
+            public void onAliasCallback(Context context, String alias, int operation, int errorCode) {
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                MethodChannel.Result result = null;
+                // 0 获取， 1 设置， 2 删除
+                switch (operation) {
+                    case 0:
+                        result = mobpushPlugin.getAliasCallback.remove(0);
+                        map.put("res", alias);
+                        map.put("error", "");
+                        map.put("errorCode", String.valueOf(errorCode));
+                        break;
+                    case 1:
+                        result = mobpushPlugin.setAliasCallback.remove(0);
+                        map.put("res", errorCode == 0 ? "success" : "failed");
+                        map.put("error", "");
+                        map.put("errorCode", String.valueOf(errorCode));
+                        break;
+                    case 2:
+                        result = mobpushPlugin.deleteAliasCallback.remove(0);
+                        map.put("res", errorCode == 0 ? "success" : "failed");
+                        map.put("error", "");
+                        map.put("errorCode", String.valueOf(errorCode));
+                        break;
+                }
+                if (result != null) {
+                    result.success(map);
+                }
+            }
+        };
     }
 
-    private MobPushReceiver createMobPushReceiver(final EventChannel.EventSink event) {
+
+    private void createMobPushReceiver(final EventChannel.EventSink event) {
         mobPushReceiver = new MobPushReceiver() {
             @Override
             public void onCustomMessageReceive(Context context, MobPushCustomMessage mobPushCustomMessage) {
@@ -76,17 +159,26 @@ public class MobpushReceiverPlugin implements EventChannel.StreamHandler {
 
             }
         };
-        return mobPushReceiver;
     }
 
     @Override
     public void onListen(Object o, EventChannel.EventSink eventSink) {
-        mobPushReceiver = createMobPushReceiver(eventSink);
+        createMobPushReceiver(eventSink);
         MobPush.addPushReceiver(mobPushReceiver);
     }
 
     @Override
     public void onCancel(Object o) {
+        MobPush.removePushReceiver(mobPushReceiver);
+        mobPushReceiver = null;
+    }
 
+
+    void onDestroy() {
+        if (mobPushReceiver != null) onCancel(null);
+        MobPush.removePushReceiver(baseMobPushReceiver);
+        baseMobPushReceiver = null;
+        eventChannel.setStreamHandler(null);
+        eventChannel = null;
     }
 }
