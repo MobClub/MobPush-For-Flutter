@@ -53,7 +53,7 @@ class _LocalNotifyPageState extends State<LocalNotifyPage> {
       appBar: AppBar(
         title: Text('本地通知提醒测试'),
         iconTheme: IconThemeData(color: Colors.black),
-        textTheme: TextTheme(title: TextStyle(color: Colors.black)),
+        textTheme: TextTheme(headline6: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
         centerTitle: true,
       ),
@@ -89,15 +89,22 @@ class _LocalNotifyPageState extends State<LocalNotifyPage> {
             Row(
               children: <Widget>[
                 new Expanded(
-                  child: new RaisedButton(
-                    padding: EdgeInsets.symmetric(vertical: 12),
-                    color: Color(0xFFFF7D00),
+                  child: new ElevatedButton(
                     child: Text(
                       '点击测试',
                       style: new TextStyle(color: Colors.white),
                     ),
                     onPressed: _send,
-                  )
+                  ),
+                  // child: new RaisedButton(
+                  //   padding: EdgeInsets.symmetric(vertical: 12),
+                  //   color: Color(0xFFFF7D00),
+                  //   child: Text(
+                  //     '点击测试',
+                  //     style: new TextStyle(color: Colors.white),
+                  //   ),
+                  //   onPressed: _send,
+                  // )
                 ),
               ],
             ),
