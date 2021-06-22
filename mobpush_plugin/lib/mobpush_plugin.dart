@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'mobpush_local_notification.dart';
 
-typedef void EventHandler(Object event);
+typedef void EventHandler(dynamic event);
 
 class MobpushPlugin {
   static const MethodChannel _channel = const MethodChannel('mob.com/mobpush_plugin');

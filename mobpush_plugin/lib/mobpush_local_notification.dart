@@ -7,7 +7,7 @@ class MobPushLocalNotification extends MobPushNotifyMessage {
   /*
    * 本地通知id，仅 Android 属性
    */
-  int notificationId;
+  int? notificationId;
 
   MobPushLocalNotification({
       this.notificationId,

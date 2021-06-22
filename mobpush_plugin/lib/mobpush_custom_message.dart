@@ -9,15 +9,15 @@ class MobPushCustomMessage {
   /*
    * 消息Id
    */
-  String messageId;
+  String? messageId;
   /*
    * 消息时间戳
    */
-  int timestamp;
+  int? timestamp;
   /*
    * 消息附加数据
    */
-  Map<String, dynamic> extrasMap;
+  Map<String, dynamic>? extrasMap;
 
   MobPushCustomMessage(
       this.content, this.messageId, this.timestamp, this.extrasMap);
