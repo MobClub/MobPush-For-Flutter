@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -40,6 +41,12 @@ class _MainAppState extends State<MainApp> {
   @override
   void initState() {
     super.initState();
+
+    if (Platform.isIOS) {
+      //设置地区：regionId 默认0（国内），1:海外
+      MobpushPlugin.setRegionId(1);
+      MobpushPlugin.registerApp("3276d3e413040", "4280a3a6df667cfce37528dec03fd9c3");
+    }
 
     initPlatformState();
 
@@ -138,7 +145,6 @@ class _MainAppState extends State<MainApp> {
 
   Future<void> initPlatformState() async {
     String sdkVersion;
-
     try {
       sdkVersion = await MobpushPlugin.getSDKVersion();
     } on PlatformException {
@@ -293,7 +299,7 @@ class _MainAppState extends State<MainApp> {
                   ElevatedButton(
                     child: Text('复制'),
                     onPressed: _onCopyButtonClicked,
-                  ),
+                  )
                   // RaisedButton(
                   //   child: Text('复制'),
                   //   onPressed: _onCopyButtonClicked,
