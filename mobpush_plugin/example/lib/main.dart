@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -41,11 +42,17 @@ class _MainAppState extends State<MainApp> {
   void initState() {
     super.initState();
 
+    if (Platform.isIOS) {
+      //设置地区：regionId 默认0（国内），1:海外
+      MobpushPlugin.setRegionId(1);
+      MobpushPlugin.registerApp("3276d3e413040", "4280a3a6df667cfce37528dec03fd9c3");
+    }
+
     initPlatformState();
 
     if (Platform.isIOS) {
       MobpushPlugin.setCustomNotification();
-      MobpushPlugin.setAPNsForProduction(false);
+      MobpushPlugin.setAPNsForProduction(true);
     }
     MobpushPlugin.addPushReceiver(_onEvent, _onError);
 
@@ -56,10 +63,10 @@ class _MainAppState extends State<MainApp> {
     });
   }
 
-  void _onEvent(Object event) {
+  void _onEvent(dynamic event) {
     print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onEvent:' + event.toString());
     setState(() {
-      Map<String, dynamic> eventMap = json.decode(event);
+      Map<String, dynamic> eventMap = json.decode(event as String);
       Map<String, dynamic> result = eventMap['result'];
       int action = eventMap['action'];
 
@@ -69,17 +76,19 @@ class _MainAppState extends State<MainApp> {
               new MobPushCustomMessage.fromJson(result);
           showDialog(
               context: context,
-              child: AlertDialog(
-                content: Text(message.content),
-                actions: <Widget>[
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text("确定"),
-                  )
-                ],
-              ));
+              builder: (context) {
+                return AlertDialog(
+                  content: Text(message.content),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text("确定")
+                    )
+                  ],
+                );
+          });
           break;
         case 1:
           MobPushNotifyMessage message =
@@ -93,7 +102,7 @@ class _MainAppState extends State<MainApp> {
     });
   }
 
-  void _onError(Object event) {
+  void _onError(dynamic event) {
     setState(() {
       print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onError:' + event.toString());
     });
@@ -136,7 +145,6 @@ class _MainAppState extends State<MainApp> {
 
   Future<void> initPlatformState() async {
     String sdkVersion;
-
     try {
       sdkVersion = await MobpushPlugin.getSDKVersion();
     } on PlatformException {
@@ -170,28 +178,28 @@ class _MainAppState extends State<MainApp> {
     Clipboard.setData(ClipboardData(text: _registrationId));
     // 验证是否写入成功
     Clipboard.getData(Clipboard.kTextPlain).then((data) {
-      String text = data.text;
-      print('------>#### copyed registrationId: $text');
-      if (text == _registrationId) {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: Text("恭喜🎉"),
-                content: Container(
-                  margin: EdgeInsets.only(top: 10, bottom: 30),
-                  child: Text('复制成功！'),
-                ),
-                actions: <Widget>[
-                  new FlatButton(
-                    child: new Text("OK"),
-                    onPressed: () {
+      if (data != null) {
+        String? text = data.text;
+        print('------>#### copyed registrationId: $text');
+        if (text == _registrationId) {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text("恭喜🎉"),
+                  content: Container(
+                    margin: EdgeInsets.only(top: 10, bottom: 30),
+                    child: Text('复制成功！'),
+                  ),
+                  actions: <Widget>[
+                    new TextButton(onPressed: () {
                       Navigator.pop(context);
-                    },
-                  )
-                ],
-              );
-            });
+                    }, child: Text("OK"))
+                  ],
+                );
+              }
+          );
+        }
       }
     });
   }
@@ -288,10 +296,14 @@ class _MainAppState extends State<MainApp> {
                     'SDK Version: $_sdkVersion\nRegistrationId: $_registrationId',
                     style: TextStyle(fontSize: 12),
                   ),
-                  RaisedButton(
+                  ElevatedButton(
                     child: Text('复制'),
                     onPressed: _onCopyButtonClicked,
-                  ),
+                  )
+                  // RaisedButton(
+                  //   child: Text('复制'),
+                  //   onPressed: _onCopyButtonClicked,
+                  // ),
                 ],
               ),
             ),
