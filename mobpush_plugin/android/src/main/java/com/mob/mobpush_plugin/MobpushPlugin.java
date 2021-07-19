@@ -20,8 +20,8 @@ import java.util.HashMap;
 
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
-import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
+import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /**
@@ -167,11 +167,13 @@ public class MobpushPlugin implements MethodCallHandler {
                 @Override
                 public void onComplete(Void aVoid) {
                     System.out.println("updatePrivacyPermissionStatus onComplete");
+                    result.success(true);
                 }
 
                 @Override
                 public void onFailure(Throwable throwable) {
                     System.out.println("updatePrivacyPermissionStatus onFailure:" + throwable.getMessage());
+                    result.success(false);
                 }
             });
         } else {
