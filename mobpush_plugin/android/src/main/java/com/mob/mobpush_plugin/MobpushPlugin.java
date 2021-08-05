@@ -17,11 +17,12 @@ import com.mob.tools.utils.ResHelper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
-import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
+import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /**
@@ -54,16 +55,16 @@ public class MobpushPlugin implements MethodCallHandler {
     @Override
     public void onMethodCall(MethodCall call, final MethodChannel.Result result) {
         if (call.method.equals("getPlatformVersion")) {
-            result.success("Android " + android.os.Build.VERSION.RELEASE);
+            sendMsg(result, "Android " + android.os.Build.VERSION.RELEASE);
         } else if (call.method.equals("getSDKVersion")) {
-            result.success(MobPush.SDK_VERSION_NAME);
+            sendMsg(result, MobPush.SDK_VERSION_NAME);
         } else if (call.method.equals("getRegistrationId")) {
             MobPush.getRegistrationId(new MobPushCallback<String>() {
                 @Override
                 public void onCallback(String data) {
                     HashMap<String, Object> map = new HashMap<String, Object>();
                     map.put("res", data);
-                    result.success(map);
+                    sendMsg(result, map);
                 }
             });
         } else if (call.method.equals("removePushReceiver")) {
@@ -78,7 +79,7 @@ public class MobpushPlugin implements MethodCallHandler {
         } else if (call.method.equals("restartPush")) {
             MobPush.restartPush();
         } else if (call.method.equals("isPushStopped")) {
-            result.success(MobPush.isPushStopped());
+            sendMsg(result, MobPush.isPushStopped());
         } else if (call.method.equals("setAlias")) {
             String alias = call.argument("alias");
             setAliasCallback.add(result);
@@ -113,13 +114,13 @@ public class MobpushPlugin implements MethodCallHandler {
 
         } else if (call.method.equals("removeLocalNotification")) {
             int notificationId = call.argument("notificationId");
-            result.success(MobPush.removeLocalNotification(notificationId));
+            sendMsg(result, MobPush.removeLocalNotification(notificationId));
         } else if (call.method.equals("addLocalNotification")) {
             String json = call.argument("localNotification");
             MobPushLocalNotification notification = hashon.fromJson(json, MobPushLocalNotification.class);
-            result.success(MobPush.addLocalNotification(notification));
+            sendMsg(result, MobPush.addLocalNotification(notification));
         } else if (call.method.equals("clearLocalNotifications")) {
-            result.success(MobPush.clearLocalNotifications());
+            sendMsg(result, MobPush.clearLocalNotifications());
         } else if (call.method.equals("setNotifyIcon")) {
             String iconRes = call.argument("iconRes");
             int iconResId = ResHelper.getBitmapRes(MobSDK.getContext(), iconRes);
@@ -141,7 +142,7 @@ public class MobpushPlugin implements MethodCallHandler {
                         HashMap<String, Object> map = new HashMap<String, Object>();
                         map.put("res", data.booleanValue() ? "success" : "failed");
                         map.put("error", "");
-                        result.success(map);
+                        sendMsg(result, map);
                     }
                 }
             });
@@ -157,7 +158,7 @@ public class MobpushPlugin implements MethodCallHandler {
                         HashMap<String, Object> map = new HashMap<String, Object>();
                         map.put("res", aBoolean.booleanValue() ? "success" : "failed");
                         map.put("error", "");
-                        result.success(map);
+                        sendMsg(result, map);
                     }
                 }
             });
@@ -228,7 +229,7 @@ public class MobpushPlugin implements MethodCallHandler {
                         break;
                 }
                 if (result != null) {
-                    result.success(map);
+                    sendMsg(result, map);
                 }
             }
 
@@ -258,9 +259,24 @@ public class MobpushPlugin implements MethodCallHandler {
                         break;
                 }
                 if (result != null) {
-                    result.success(map);
+                    sendMsg(result, map);
                 }
             }
         };
+    }
+
+    /**
+     * 向flutter层发送消息,需要保证在主线程发送
+     *
+     * @param result
+     * @param map
+     */
+    public static void sendMsg(final Result result, final Object map) {
+        ThreadUtils.runUIThread(new Runnable() {
+            @Override
+            public void run() {
+                result.success(map);
+            }
+        });
     }
 }
