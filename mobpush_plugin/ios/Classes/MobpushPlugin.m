@@ -4,6 +4,7 @@
 #import <MobPush/MPushNotificationConfiguration.h>
 #import <MOBFoundation/MOBFoundation.h>
 #import <MOBFoundation/MobSDK+Privacy.h>
+#import <MOBFoundation/MobSDK.h>
 
 @interface MobpushPlugin()<FlutterStreamHandler>
 // 是否是生产环境
@@ -308,6 +309,17 @@ static NSString *const receiverStr = @"mobpush_receiver";
         [MobSDK uploadPrivacyPermissionStatus:status onResult:^(BOOL success) {
             result(@(success));
         }];
+    }
+    else if ([@"setRegionId" isEqualToString:call.method]) {
+        NSDictionary *arguments = (NSDictionary *)call.arguments;
+        int regionId = [arguments[@"regionId"] intValue];
+        [MobPush setRegionID:regionId];
+    }
+    else if ([@"registerApp" isEqualToString:call.method]) {
+        NSDictionary *arguments = (NSDictionary *)call.arguments;
+        NSString *appKey = arguments[@"appKey"];
+        NSString *appSecret = arguments[@"appSecret"];
+        [MobSDK registerAppKey:appKey appSecret:appSecret];
     }
     else
     {

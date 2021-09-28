@@ -12,13 +12,13 @@ class ClickContainer extends StatefulWidget {
 
   ClickContainer(
     {
-      this.content, 
-      this.res, 
-      this.left, 
-      this.top, 
-      this.right, 
-      this.bottom, 
-      this.onTap
+      required this.content,
+      required this.res,
+      required this.left,
+      required this.top,
+      required this.right,
+      required this.bottom,
+      required this.onTap
     }
   );
 

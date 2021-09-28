@@ -28,7 +28,7 @@ class _AppNotifyPageState extends State<AppNotifyPage> {
       appBar: AppBar(
         title: Text('App内推送测试'),
         iconTheme: IconThemeData(color: Colors.black),
-        textTheme: TextTheme(title: TextStyle(color: Colors.black)),
+        textTheme: TextTheme(headline6: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
         centerTitle: true,
       ),
@@ -64,15 +64,22 @@ class _AppNotifyPageState extends State<AppNotifyPage> {
             Row(
               children: <Widget>[
                 new Expanded(
-                  child: new RaisedButton(
-                    padding: EdgeInsets.symmetric(vertical: 12),
-                    color: Color(0xFF7B91FF),
+                  child: new ElevatedButton(
                     child: Text(
                       '点击测试',
                       style: new TextStyle(color: Colors.white),
                     ),
                     onPressed: _send,
                   ),
+                  // child: new RaisedButton(
+                  //   padding: EdgeInsets.symmetric(vertical: 12),
+                  //   color: Color(0xFF7B91FF),
+                  //   child: Text(
+                  //     '点击测试',
+                  //     style: new TextStyle(color: Colors.white),
+                  //   ),
+                  //   onPressed: _send,
+                  // ),
                 )
               ],
             )

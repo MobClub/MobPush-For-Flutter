@@ -166,11 +166,13 @@ public class MobpushPlugin implements MethodCallHandler {
             MobSDK.submitPolicyGrantResult(status, new OperationCallback<Void>() {
                 @Override
                 public void onComplete(Void aVoid) {
+                    result.success(true);
                     System.out.println("updatePrivacyPermissionStatus onComplete");
                 }
 
                 @Override
                 public void onFailure(Throwable throwable) {
+                    result.error(throwable.toString(),null,null);
                     System.out.println("updatePrivacyPermissionStatus onFailure:" + throwable.getMessage());
                 }
             });

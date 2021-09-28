@@ -1,0 +1,115 @@
+<resources>
+    <string name="app_name">MobPush</string>
+    <string name="main_title">选择你想测试的推送类型</string>
+    <string name="item_app_notify">App内推送</string>
+    <string name="app_notify_title">App内推送测试</string>
+    <string name="item_notify">通知</string>
+    <string name="notify_title">通知测试</string>
+    <string name="item_timing">定时通知</string>
+    <string name="timing_title">定时通知测试</string>
+    <string name="item_local">本地通知</string>
+    <string name="item_media">通过推送打开指定链接页面</string>
+    <string name="item_setting">设置</string>
+    <string name="item_create_channel">创建NotificationChannel</string>
+    <string name="item_local_title">本地通知提醒测试</string>
+    <string name="inner_tip">点击测试按钮后，你将立即收到一条app内推送</string>
+    <string name="inner_input_hint">填写推送内容（不超过35个字）</string>
+    <string name="btn_test">点击测试</string>
+    <string name="open_url_jump">跳转URL</string>
+    <string name="open_url_hint">请填写URL地址，为空则跳转至mob官网</string>
+    <string name="open_url_content">系统推送通知内容</string>
+    <string name="notify_tip">点击测试按钮后，请在前台关闭App，5s后你将收到一条测试通知</string>
+    <string name="timing_tip">点击测试按钮后，请在前台关闭App，在你设定的时间到了时你将收到一条测试通知</string>
+    <string name="open_url_tip">编辑完成后，点击测试按钮，你将立即收到一条推送消息，点击后可跳转至指定页面。</string>
+    <string name="local_tip">设置时间后点击测试按钮，请在前台关闭App，在你设定的时间到了时你将收到本地通知提醒</string>
+    <string name="local_tip_2">此时间只为方便测试功能，后台使用时不可设定1小时内的定时推送</string>
+    <string name="timing_choose_zero">立即</string>
+    <string name="timing_choose_one">1分钟后</string>
+    <string name="timing_choose_two">2分钟后</string>
+    <string name="timing_choose_three">3分钟后</string>
+    <string name="timing_choose_four">4分钟后</string>
+    <string name="timing_choose_five">5分钟后</string>
+    <string name="toast_input_not_allowed_null">推送内容不能为空</string>
+    <string name="toast_send_success">发送成功</string>
+    <string name="toast_send_failed">发送失败，请检查网络重试</string>
+    <string name="push_pop_title">收到推送</string>
+    <string name="btn_i_known">我知道了</string>
+    <string name="mob_push_explain">此推送服务由MobPush提供</string>
+    <string name="toast_notify">推送发送成功！请在前台关闭app，5S后你将收到一条测试通知</string>
+    <string name="toast_timing">推送发送成功！请在前台关闭app，%s后你将收到一条测试通知</string>
+    <string name="toast_app_notify">推送发送成功！请在前台关闭app，5S后你将收到一条打开链接的消息</string>
+
+    <string name="error_ukonw">程序抢修中，请稍后重试~</string>
+    <string name="error_network">网络不给力，请检查网络后再试~</string>
+    <string name="default_notification_channel_id">mobPush</string>
+
+    <!-- 1.4.0 -->
+    <string name="item_open_act">推送打开应用内指定页面</string>
+    <string name="open_act_title">打开应用内指定页面测试</string>
+    <string name="open_act_tips_txt">编辑完成后，点击测试按钮后，你将立即收到一条推送消息，点击后可跳转至指定的应用内页面</string>
+    <string name="open_act_input_txt">填写推送内容（字数不超过35个字）</string>
+    <string name="link_home">推送打开首页</string>
+    <string name="link_one">推送打开指定界面1</string>
+    <string name="link_two">推送打开指定界面2</string>
+    <string name="notify">通知测试页面</string>
+    <string name="toast_notify_open_act">推送发送成功！你将收到一条能跳转至应用内指定页面的通知</string>
+    <string name="link_one_title">Link打开指定界面1</string>
+    <string name="link_two_title">Link打开指定界面2</string>
+    <string name="link_ok">Link Activity Success.</string>
+    <string name="notification_show_close">通知权限已关闭</string>
+
+    <string name="setting_title">设置</string>
+    <string name="set_policy">隐私协议开关</string>
+    <string name="get_rid">获取rid</string>
+    <string name="get_device_token">获取厂商token</string>
+    <string name="set_large_icon">设置大图标</string>
+    <string name="remove_large_icon">去除大图标</string>
+    <string name="set_diy_notification">设置自定义通知</string>
+    <string name="remove_diy_notification">移除自定义通知</string>
+    <string name="set_forground_hidden_notification">设置前台时不显示推送</string>
+    <string name="set_forground_show_notification">设置前台时显示推送</string>
+    <string name="bind_mobile">绑定手机号</string>
+    <string name="get_mobile">获取手机号</string>
+    <string name="please_input_content">请输入内容</string>
+    <string name="input_cancel">取消</string>
+    <string name="input_ok">确定</string>
+    <string name="bind_phone_success">设置手机号成功</string>
+    <string name="bind_phone_fail">设置手机号失败</string>
+    <string name="tips_input_correct_mobile">请输入正确的手机号</string>
+    <string name="set_alias">设置别名</string>
+    <string name="delete_alias">删除别名</string>
+    <string name="get_alias">获取别名</string>
+    <string name="add_tags">添加标签</string>
+    <string name="delete_tags">删除标签</string>
+    <string name="get_tags">获取标签</string>
+    <string name="clear_tags">清空标签</string>
+
+    <string name="show_badge">显示角标</string>
+    <string name="not_show_badge">不显示角标</string>
+    <string name="get_show_badge">获取是否显示角标</string>
+    <string name="set_badge">设置角标数</string>
+    <string name="hint_set_badge">请输入角标数</string>
+
+    <string name="send_local">推送本地通知</string>
+    <string name="remove_local">移除本地通知</string>
+    <string name="clear_local">清除本地通知</string>
+    <string name="clear_all">清除所有通知(包括MobPush通道和厂商通道通知，其中华为、小米、魅族厂商通道有效，其他厂商通道无效)</string>
+    <string name="clear_badge">清除角标</string>
+
+    <string name="restart_push">启用Push</string>
+    <string name="stop_push">停用Push</string>
+
+    <string name="notification_channel_id">通知通道ID</string>
+    <string name="notification_channel_name">通知通道Name</string>
+    <string name="notification_channel_importance">通知通道重要性</string>
+    <string name="create_notification_channel">创建通知通道</string>
+    <string name="check_tcp_status">tcp状态检测</string>
+    <string name="start_monitor">开启通知栏权限监控</string>
+    <string name="stop_monitor">关闭通知栏权限监控</string>
+    <string name="startTest">startTest</string>
+    <string name="max_notification_count">显示最大通知个数</string>
+    <string name="hint_max_notification_count">请输入最大通知个数</string>
+    <string name="hint_notification_group">是否设置notification group属性</string>
+    <string name="hint_notification_event">请输入通知事件1~9，以英文,隔开</string>
+    <string name="set_notification_event">设置刷新触发事件</string>
+</resources>
