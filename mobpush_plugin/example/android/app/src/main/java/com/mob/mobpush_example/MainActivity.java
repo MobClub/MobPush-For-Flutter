@@ -3,18 +3,21 @@ package com.mob.mobpush_example;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+
 import com.mob.mobpush_example.utils.PlayloadDelegate;
 import com.mob.pushsdk.MobPush;
 import com.mob.pushsdk.MobPushUtils;
 
-import io.flutter.app.FlutterActivity;
+import io.flutter.embedding.android.FlutterActivity;
+import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.plugins.GeneratedPluginRegistrant;
 
 public class MainActivity extends FlutterActivity {
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    GeneratedPluginRegistrant.registerWith(this);
+  public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
+    super.configureFlutterEngine(flutterEngine);
+    GeneratedPluginRegistrant.registerWith(flutterEngine);
   }
 
   @Override
