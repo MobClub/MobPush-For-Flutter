@@ -62,7 +62,6 @@
 
 * 1.优化别名获取
 
-## 1.2.0
-* Android：android demo层，新增scheme跳转测试界面，以及打开链接测试逻辑
-* iOS：1、升级flutter sdk，支持空安全；2、添加海外版推送支持
-* TODO: Describe initial release.
+## 1.2.1
+
+* 1.upgrade Android embedding from v1 to v2
