@@ -61,3 +61,7 @@
 ## 1.1.6
 
 * 1.优化别名获取
+
+## 1.2.1
+
+* 1.upgrade Android embedding from v1 to v2
