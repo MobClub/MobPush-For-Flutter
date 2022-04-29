@@ -2,6 +2,9 @@ package com.mob.mobpush_plugin;
 
 import androidx.annotation.NonNull;
 
+import com.mob.MobSDK;
+import com.mob.commons.MOBPUSH;
+
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodChannel;
@@ -16,6 +19,7 @@ public class MobpushPlugin implements FlutterPlugin {
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
         try {
+	        MobSDK.setChannel(new MOBPUSH(), MobSDK.CHANNEL_FLUTTER);
             methodChannel = new MethodChannel(binding.getBinaryMessenger(), "mob.com/mobpush_plugin");
             MethodCallHandlerImpl methodCallHandlerImpl = new MethodCallHandlerImpl();
             methodCallHandler = methodCallHandlerImpl;
