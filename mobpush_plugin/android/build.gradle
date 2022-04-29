@@ -3,31 +3,23 @@ version '1.0-SNAPSHOT'
 
 buildscript {
     repositories {
-        maven {
-            url "http://mvn.mob.com/android"
-        }
         google()
         jcenter()
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
-        classpath 'com.mob.sdk:MobSDK:+'
     }
 }
 
 rootProject.allprojects {
     repositories {
-        maven {
-            url "http://mvn.mob.com/android"
-        }
         google()
         jcenter()
     }
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'com.mob.sdk'
 
 android {
     compileSdkVersion 28
@@ -40,10 +32,6 @@ android {
         disable 'InvalidPackage'
     }
 }
-
-MobSDK{
-    autoConfig  false
-    MobPush{
-        debugLevel 4
-    }
+dependencies {
+     compileOnly fileTree(include: ['*.jar','*.aar'], dir: 'libs',excludes: [])
 }
