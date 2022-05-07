@@ -16,6 +16,7 @@ import com.mob.pushsdk.MobPushReceiver;
 import com.mob.tools.utils.Hashon;
 import com.mob.tools.utils.ResHelper;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -47,7 +48,7 @@ public class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
             if (call.method.equals("getPlatformVersion")) {
                 result.success("Android " + android.os.Build.VERSION.RELEASE);
             } else if (call.method.equals("getSDKVersion")) {
-                result.success(MobPush.SDK_VERSION_NAME);
+                result.success(getMobPushSdkVersion());
             } else if (call.method.equals("getRegistrationId")) {
                 MobPush.getRegistrationId(new MobPushCallback<String>() {
                     @Override
@@ -270,4 +271,18 @@ public class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
     public void setRemoveReceiverListener(OnRemoveReceiverListener removeReceiverListener) {
         this.removeReceiverListener = removeReceiverListener;
     }
+
+	private String getMobPushSdkVersion() {
+		try {
+			Class<?> mobpushClass = MobPush.class;
+			Field versionField = mobpushClass.getDeclaredField("SDK_VERSION_NAME");
+			if (!versionField.isAccessible()) {
+				versionField.setAccessible(true);
+			}
+			return (String) versionField.get(mobpushClass);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return MobPush.SDK_VERSION_NAME;
+	}
 }
