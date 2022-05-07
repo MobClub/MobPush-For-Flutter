@@ -219,7 +219,7 @@ class MobpushPlugin {
 	 *移除本地通知(仅andorid).
 	 */
 	static Future<bool> removeLocalNotification(int notificationId) async {
-		return await _channel.invokeMethod('removeLocalNotification');
+		return await _channel.invokeMethod('removeLocalNotification', {"notificationId": notificationId});
 	}
 
 	/*
