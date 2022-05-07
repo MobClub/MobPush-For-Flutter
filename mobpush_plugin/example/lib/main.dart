@@ -41,7 +41,11 @@ class _MainAppState extends State<MainApp> {
   @override
   void initState() {
     super.initState();
-
+    //上传隐私协议许可
+    MobpushPlugin.updatePrivacyPermissionStatus(true).then((value) {
+      print(">>>>>>>>>>>>>>>>>>>updatePrivacyPermissionStatus:" +
+          value.toString());
+    });
     if (Platform.isIOS) {
       //设置地区：regionId 默认0（国内），1:海外
       MobpushPlugin.setRegionId(1);
@@ -56,11 +60,6 @@ class _MainAppState extends State<MainApp> {
     }
     MobpushPlugin.addPushReceiver(_onEvent, _onError);
 
-    //上传隐私协议许可
-    MobpushPlugin.updatePrivacyPermissionStatus(true).then((value) {
-      print(">>>>>>>>>>>>>>>>>>>updatePrivacyPermissionStatus:" +
-          value.toString());
-    });
   }
 
   void _onEvent(dynamic event) {
@@ -151,13 +150,16 @@ class _MainAppState extends State<MainApp> {
       sdkVersion = 'Failed to get platform version.';
     }
     try {
-      MobpushPlugin.getRegistrationId().then((Map<String, dynamic> ridMap) {
-        print(ridMap);
-        setState(() {
-          _registrationId = ridMap['res'].toString();
-          print('------>#### registrationId: ' + _registrationId);
+      Future.delayed(Duration(milliseconds: 500),(){
+        MobpushPlugin.getRegistrationId().then((Map<String, dynamic> ridMap) {
+          print(ridMap);
+          setState(() {
+            _registrationId = ridMap['res'].toString();
+            print('------>#### registrationId: ' + _registrationId);
+          });
         });
       });
+
     } on PlatformException {
       _registrationId = 'Failed to get registrationId.';
     }
