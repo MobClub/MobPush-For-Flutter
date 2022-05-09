@@ -1,4 +1,4 @@
-package com.mob.mobpush_plugin.req;
+package com.mob.flutter.mobpush.impl.req;
 
 import android.text.TextUtils;
 import com.mob.MobCommunicator;

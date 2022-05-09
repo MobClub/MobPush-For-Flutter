@@ -28,7 +28,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.mob.mobpush_plugin
+        package: com.mob.flutter.mobpush
         pluginClass: MobpushPlugin
       ios:
         pluginClass: MobpushPlugin

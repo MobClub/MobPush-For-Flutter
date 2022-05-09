@@ -1,4 +1,4 @@
-package com.mob.mobpush_plugin;
+package com.mob.flutter.mobpush.impl;
 
 import android.content.Context;
 

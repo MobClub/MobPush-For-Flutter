@@ -1,9 +1,12 @@
-package com.mob.mobpush_plugin;
+package com.mob.flutter.mobpush;
 
 import androidx.annotation.NonNull;
 
 import com.mob.MobSDK;
 import com.mob.commons.MOBPUSH;
+import com.mob.flutter.mobpush.impl.MethodCallHandlerImpl;
+import com.mob.flutter.mobpush.impl.StreamHandlerImpl;
+
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.EventChannel;

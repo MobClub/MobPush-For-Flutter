@@ -1,4 +1,4 @@
-package com.mob.mobpush_plugin;
+package com.mob.flutter.mobpush.impl;
 
 import android.content.Context;
 
@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.mob.MobSDK;
 import com.mob.OperationCallback;
-import com.mob.mobpush_plugin.req.SimulateRequest;
+import com.mob.flutter.mobpush.impl.req.SimulateRequest;
 import com.mob.pushsdk.MobPush;
 import com.mob.pushsdk.MobPushCallback;
 import com.mob.pushsdk.MobPushCustomMessage;
