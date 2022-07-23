@@ -66,6 +66,6 @@
 
 * 1.upgrade Android embedding from v1 to v2
 
-## 1.2.1
+## 1.2.2
 
 * 1、提升插件稳定性。
