@@ -6,8 +6,9 @@ import 'mobpush_local_notification.dart';
 typedef void EventHandler(dynamic event);
 
 class MobpushPlugin {
-	static const MethodChannel _channel = const MethodChannel('mob.com/mobpush_plugin');
-	static EventChannel _channelReciever = const EventChannel('mobpush_receiver');
+    // 标准: MethodChannel 统一命名：com.mob.项目xx.功能
+	static const MethodChannel _channel = const MethodChannel('com.mob.mobpush.methodChannel');
+	static EventChannel _channelReciever = const EventChannel('com.mob.mobpush.reciever');
 
 	static Future<String> get getPlatformVersion async {
 		return await _channel.invokeMethod('getPlatformVersion');

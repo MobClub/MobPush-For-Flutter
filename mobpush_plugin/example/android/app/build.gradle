@@ -21,6 +21,11 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+// 标准: 必须添加, apply plugin: 'com.android.application'
+//               apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+//               apply plugin: 'com.mob.sdk'
+//       其他根据业务需要添加
+
 apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 apply plugin: 'com.mob.sdk'
@@ -76,6 +81,13 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
+
+// 标准: 必须添加,
+//                MobSDK {
+//                 appKey "替换为mob官方申请的appkey"
+//                 appSecret "替换为mob官方申请的appkey对应的appSecret"
+//                 [各SDK gradle] {}
+//                }
 
 MobSDK {
     appKey "2dbe655e88c80"

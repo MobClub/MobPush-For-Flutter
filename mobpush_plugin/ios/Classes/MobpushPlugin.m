@@ -18,10 +18,11 @@
 
 @implementation MobpushPlugin
 
-static NSString *const receiverStr = @"mobpush_receiver";
+static NSString *const receiverStr = @"com.mob.mobpush.reciever";
 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-    FlutterMethodChannel* channel = [FlutterMethodChannel methodChannelWithName:@"mob.com/mobpush_plugin" binaryMessenger:[registrar messenger]];
+    // 标准: MethodChannel 统一命名：com.mob.项目xx.功能
+    FlutterMethodChannel* channel = [FlutterMethodChannel methodChannelWithName:@"com.mob.mobpush.methodChannel" binaryMessenger:[registrar messenger]];
     MobpushPlugin* instance = [[MobpushPlugin alloc] init];
     [registrar addMethodCallDelegate:instance channel:channel];
     
