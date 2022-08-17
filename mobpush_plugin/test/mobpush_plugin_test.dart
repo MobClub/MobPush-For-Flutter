@@ -16,6 +16,6 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    expect(await MobpushPlugin.platformVersion, '42');
+    expect(await MobpushPlugin.getPlatformVersion, '42');
   });
 }
