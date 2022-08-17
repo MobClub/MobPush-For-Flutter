@@ -103,7 +103,9 @@ public class StreamHandlerImpl implements EventChannel.StreamHandler, OnRemoveRe
                 HashMap<String, Object> map = new HashMap<>();
                 map.put("action", 3);
                 map.put("result", hashon.fromJson(hashon.fromObject(parseMainPluginPushIntent)));
-                eventSink.success(hashon.fromHashMap(map));
+                if(eventSink != null) {
+                    eventSink.success(hashon.fromHashMap(map));
+                }
             }
         }
     }
