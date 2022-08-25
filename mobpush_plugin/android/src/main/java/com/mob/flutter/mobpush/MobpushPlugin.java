@@ -22,7 +22,17 @@ public class MobpushPlugin implements FlutterPlugin {
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
         try {
-	        MobSDK.setChannel(new MOBPUSH(), MobSDK.CHANNEL_FLUTTER);
+            new Thread(){
+                @Override
+                public void run() {
+                    super.run();
+                    try {
+                        MobSDK.setChannel(new MOBPUSH(), MobSDK.CHANNEL_FLUTTER);
+                    } catch (Throwable throwable){
+
+                    }
+                }
+            }.start();
             // 标准: MethodChannel 统一命名：com.mob.项目xx.功能
             methodChannel = new MethodChannel(binding.getBinaryMessenger(), "com.mob.mobpush.methodChannel");
             MethodCallHandlerImpl methodCallHandlerImpl = new MethodCallHandlerImpl();
