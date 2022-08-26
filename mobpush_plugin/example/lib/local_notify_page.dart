@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:mobpush_plugin/mobpush_plugin.dart';
@@ -28,10 +29,10 @@ class _LocalNotifyPageState extends State<LocalNotifyPage> {
         await MobpushPlugin.addLocalNotification(localNotification);
       } else { // Android
         MobPushLocalNotification localNotification = new MobPushLocalNotification(
-          notificationId: 0,//notificationId
+          notificationId: new Random().nextInt(99),//notificationId
           title: "本地通知",//本地通知标题
           content: _controller.text,//本地通知内容
-          messageId: null,//消息id
+          messageId: new Random().nextInt(999).toString(),//消息id
           inboxStyleContent: null,//收件箱样式的内容
           timestamp: new DateTime.now().millisecondsSinceEpoch,//本地通知时间戳
           style: 0,//通知样式

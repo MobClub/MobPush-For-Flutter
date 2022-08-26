@@ -8,6 +8,9 @@ buildscript {
         jcenter()
     }
 
+// 标准: 必须添加 classpath 'com.android.tools.build:gradle:3.2.1'
+//              classpath 'com.mob.sdk:MobSDK:+'
+//       其他根据业务需要添加
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.1'
         classpath 'com.mob.sdk:MobSDK:+'
