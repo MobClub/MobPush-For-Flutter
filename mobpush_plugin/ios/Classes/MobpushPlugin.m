@@ -2,9 +2,8 @@
 #import <MobPush/MobPush.h>
 #import <MobPush/MobPush+Test.h>
 #import <MobPush/MPushNotificationConfiguration.h>
+#import <MOBFoundation/MOBFoundation.h>
 #import <AEINFoundation/AEINFoundation.h>
-#import <AEINFoundation/AeinSDK+Privacy.h>
-#import <AEINFoundation/AeinSDK.h>
 
 @interface MobpushPlugin()<FlutterStreamHandler>
 // 是否是生产环境
@@ -300,14 +299,16 @@ static NSString *const receiverStr = @"com.mob.mobpush.reciever";
     {
         MPushNotificationConfiguration *config = [[MPushNotificationConfiguration alloc] init];
         config.types = MPushAuthorizationOptionsSound | MPushAuthorizationOptionsBadge | MPushAuthorizationOptionsAlert;
-        [[AEINFDataService sharedInstance] setCacheData:config forKey:@"MPushNotificationConfiguration" domain:@"MOBPUSH_FLUTTER_PLUGIN"];
+        [[AEINFDataService sharedInstance] setCacheData:config
+                                                 forKey:@"MPushNotificationConfiguration"
+                                                 domain:@"MOBPUSH_FLUTTER_PLUGIN"];
         [MobPush setupNotification:config];
     }
     else if ([@"updatePrivacyPermissionStatus" isEqualToString:call.method])
     {
         NSDictionary *arguments = (NSDictionary *)call.arguments;
         NSInteger status = [arguments[@"status"] integerValue];
-        [AeinSDK uploadPrivacyPermissionStatus:status onResult:^(BOOL success) {
+        [MobSDK uploadPrivacyPermissionStatus:status onResult:^(BOOL success) {
             result(@(success));
         }];
     }
@@ -320,7 +321,7 @@ static NSString *const receiverStr = @"com.mob.mobpush.reciever";
         NSDictionary *arguments = (NSDictionary *)call.arguments;
         NSString *appKey = arguments[@"appKey"];
         NSString *appSecret = arguments[@"appSecret"];
-        [AeinSDK registerAppKey:appKey appSecret:appSecret];
+        [MobSDK registerAppKey:appKey appSecret:appSecret];
     }
     else
     {
