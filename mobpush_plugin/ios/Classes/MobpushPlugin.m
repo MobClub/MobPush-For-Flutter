@@ -3,8 +3,7 @@
 #import <MobPush/MobPush+Test.h>
 #import <MobPush/MPushNotificationConfiguration.h>
 #import <MOBFoundation/MOBFoundation.h>
-#import <MOBFoundation/MobSDK+Privacy.h>
-#import <MOBFoundation/MobSDK.h>
+#import <AEINFoundation/AEINFoundation.h>
 
 @interface MobpushPlugin()<FlutterStreamHandler>
 // 是否是生产环境
@@ -150,7 +149,7 @@ static NSString *const receiverStr = @"com.mob.mobpush.reciever";
         if (arguments && arguments[@"localNotification"])
         {
             NSString *localStr = arguments[@"localNotification"];
-            NSDictionary *eventParams = [MOBFJson objectFromJSONString:localStr];
+            NSDictionary *eventParams = [AEINFJson objectFromJSONString:localStr];
             
             NSString *identifier = nil;
             
@@ -300,7 +299,9 @@ static NSString *const receiverStr = @"com.mob.mobpush.reciever";
     {
         MPushNotificationConfiguration *config = [[MPushNotificationConfiguration alloc] init];
         config.types = MPushAuthorizationOptionsSound | MPushAuthorizationOptionsBadge | MPushAuthorizationOptionsAlert;
-        [[MOBFDataService sharedInstance] setCacheData:config forKey:@"MPushNotificationConfiguration" domain:@"MOBPUSH_FLUTTER_PLUGIN"];
+        [[AEINFDataService sharedInstance] setCacheData:config
+                                                 forKey:@"MPushNotificationConfiguration"
+                                                 domain:@"MOBPUSH_FLUTTER_PLUGIN"];
         [MobPush setupNotification:config];
     }
     else if ([@"updatePrivacyPermissionStatus" isEqualToString:call.method])
@@ -346,7 +347,7 @@ static NSString *const receiverStr = @"com.mob.mobpush.reciever";
 - (void)addObserver
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMessage:) name:MobPushDidReceiveMessageNotification object:nil];
-    MPushNotificationConfiguration *config = [[MOBFDataService sharedInstance] cacheDataForKey:@"MPushNotificationConfiguration" domain:@"MOBPUSH_FLUTTER_PLUGIN"];
+    MPushNotificationConfiguration *config = [[AEINFDataService sharedInstance] cacheDataForKey:@"MPushNotificationConfiguration" domain:@"MOBPUSH_FLUTTER_PLUGIN"];
     if (config && [config isKindOfClass:MPushNotificationConfiguration.class])
     {
          [MobPush setupNotification:config];
@@ -451,7 +452,7 @@ static NSString *const receiverStr = @"com.mob.mobpush.reciever";
             [resultDict setObject:reslut forKey:@"result"];
         }
         // 回调结果
-        NSString *resultDictStr = [MOBFJson jsonStringFromObject:resultDict];
+        NSString *resultDictStr = [AEINFJson jsonStringFromObject:resultDict];
 
         if (self.callBack)
         {
