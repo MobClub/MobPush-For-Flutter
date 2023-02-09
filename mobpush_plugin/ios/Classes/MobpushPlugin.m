@@ -3,7 +3,7 @@
 #import <MobPush/MobPush+Test.h>
 #import <MobPush/MPushNotificationConfiguration.h>
 #import <MOBFoundation/MOBFoundation.h>
-#import <AEINFoundation/AEINFoundation.h>
+#import <MOBFoundation/MobSDK+Privacy.h>
 
 @interface MobpushPlugin()<FlutterStreamHandler>
 // 是否是生产环境
@@ -149,7 +149,7 @@ static NSString *const receiverStr = @"com.mob.mobpush.reciever";
         if (arguments && arguments[@"localNotification"])
         {
             NSString *localStr = arguments[@"localNotification"];
-            NSDictionary *eventParams = [AEINFJson objectFromJSONString:localStr];
+            NSDictionary *eventParams = [MOBFJson objectFromJSONString:localStr];
             
             NSString *identifier = nil;
             
@@ -299,7 +299,7 @@ static NSString *const receiverStr = @"com.mob.mobpush.reciever";
     {
         MPushNotificationConfiguration *config = [[MPushNotificationConfiguration alloc] init];
         config.types = MPushAuthorizationOptionsSound | MPushAuthorizationOptionsBadge | MPushAuthorizationOptionsAlert;
-        [[AEINFDataService sharedInstance] setCacheData:config
+        [[MOBFDataService sharedInstance] setCacheData:config
                                                  forKey:@"MPushNotificationConfiguration"
                                                  domain:@"MOBPUSH_FLUTTER_PLUGIN"];
         [MobPush setupNotification:config];
@@ -347,7 +347,7 @@ static NSString *const receiverStr = @"com.mob.mobpush.reciever";
 - (void)addObserver
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMessage:) name:MobPushDidReceiveMessageNotification object:nil];
-    MPushNotificationConfiguration *config = [[AEINFDataService sharedInstance] cacheDataForKey:@"MPushNotificationConfiguration" domain:@"MOBPUSH_FLUTTER_PLUGIN"];
+    MPushNotificationConfiguration *config = [[MOBFDataService sharedInstance] cacheDataForKey:@"MPushNotificationConfiguration" domain:@"MOBPUSH_FLUTTER_PLUGIN"];
     if (config && [config isKindOfClass:MPushNotificationConfiguration.class])
     {
          [MobPush setupNotification:config];
@@ -452,7 +452,7 @@ static NSString *const receiverStr = @"com.mob.mobpush.reciever";
             [resultDict setObject:reslut forKey:@"result"];
         }
         // 回调结果
-        NSString *resultDictStr = [AEINFJson jsonStringFromObject:resultDict];
+        NSString *resultDictStr = [MOBFJson jsonStringFromObject:resultDict];
 
         if (self.callBack)
         {
