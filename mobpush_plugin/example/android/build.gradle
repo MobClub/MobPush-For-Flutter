@@ -1,9 +1,9 @@
 buildscript {
     repositories {
         maven {
-            url "http://mvn.mob.com/android"
+            url "https://mvn.mob.com/android"
         }
-        maven { url 'http://developer.huawei.com/repo/' }
+        maven { url 'https://developer.huawei.com/repo/' }
         google()
         jcenter()
     }
@@ -22,9 +22,9 @@ buildscript {
 allprojects {
     repositories {
         maven {
-            url "http://mvn.mob.com/android"
+            url "https://mvn.mob.com/android"
         }
-        maven { url 'http://developer.huawei.com/repo/' }
+        maven { url 'https://developer.huawei.com/repo/' }
         google()
         jcenter()
     }
