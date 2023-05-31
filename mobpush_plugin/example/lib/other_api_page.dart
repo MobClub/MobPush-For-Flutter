@@ -465,7 +465,7 @@ class _OtherApiPageState extends State<OtherApiPage> {
       appBar: AppBar(
         title: Text('PushAPI接口'),
         iconTheme: IconThemeData(color: Colors.black),
-        textTheme: TextTheme(headline6: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        // textTheme: TextTheme(headline6: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         backgroundColor: Colors.white,
         centerTitle: true,
       ),

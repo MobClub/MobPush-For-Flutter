@@ -29,7 +29,7 @@ class _NotifyPageState extends State<NotifyPage> {
       appBar: AppBar(
         title: Text('通知测试'),
         iconTheme: IconThemeData(color: Colors.black),
-        textTheme: TextTheme(headline6: TextStyle(color: Colors.black)),
+        // textTheme: TextTheme(headline6: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
         centerTitle: true,
       ),

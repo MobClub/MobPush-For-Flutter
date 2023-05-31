@@ -54,7 +54,7 @@ class _LocalNotifyPageState extends State<LocalNotifyPage> {
       appBar: AppBar(
         title: Text('本地通知提醒测试'),
         iconTheme: IconThemeData(color: Colors.black),
-        textTheme: TextTheme(headline6: TextStyle(color: Colors.black)),
+        // textTheme: TextTheme(headline6: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
         centerTitle: true,
       ),

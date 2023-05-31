@@ -28,7 +28,7 @@ class _AppNotifyPageState extends State<AppNotifyPage> {
       appBar: AppBar(
         title: Text('App内推送测试'),
         iconTheme: IconThemeData(color: Colors.black),
-        textTheme: TextTheme(headline6: TextStyle(color: Colors.black)),
+        // textTheme: TextTheme(headline6: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
         centerTitle: true,
       ),
