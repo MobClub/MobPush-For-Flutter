@@ -27,7 +27,7 @@ A new flutter plugin project.
   # 标准: 固定为'Flutter'
   s.dependency 'Flutter'
   # 标准: 根据具体需要引入库,如 'mob_pushsdk'
-  s.dependency 'mob_pushsdk_spec2'
+  s.dependency 'mob_pushsdk'
   # 标准: 固定为true
   s.static_framework = true
   
