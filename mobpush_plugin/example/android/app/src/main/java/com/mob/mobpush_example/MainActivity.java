@@ -25,6 +25,7 @@ public class MainActivity extends FlutterActivity {
     super.onNewIntent(intent);
     //需要调用setIntent方法，不然后面获取到的getIntent都试上一次传的数据
     setIntent(intent);
+    MobPush.parseManufacturerMessage(intent);
     dealPushResponse(intent);
   }
   private void dealPushResponse(Intent intent) {
