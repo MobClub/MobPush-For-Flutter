@@ -10,6 +10,7 @@
         android:label="mobpush_example"
         android:icon="@mipmap/ic_launcher">
         <activity
+            android:exported="true"
             android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
@@ -29,6 +30,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:exported="true"
             android:name=".LinkOneActivity"
             android:launchMode="singleTask">
             <intent-filter>
@@ -41,6 +43,7 @@
         </activity>
 
         <activity
+            android:exported="true"
             android:name=".LinkTwoActivity"
             android:launchMode="singleTask">
             <intent-filter>
