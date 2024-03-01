@@ -1,18 +1,18 @@
 buildscript {
     repositories {
         maven {
-            url "http://mvn.mob.com/android"
+            url "https://mvn.mob.com/android"
         }
-        maven { url 'http://developer.huawei.com/repo/' }
+        maven { url 'https://developer.huawei.com/repo/' }
         google()
-        jcenter()
+        mavenCentral()
     }
 
 // 标准: 必须添加 classpath 'com.android.tools.build:gradle:3.2.1'
 //              classpath 'com.mob.sdk:MobSDK:+'
 //       其他根据业务需要添加
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.1'
+        classpath 'com.android.tools.build:gradle:3.6.0'
         classpath 'com.mob.sdk:MobSDK:+'
         classpath 'com.google.gms:google-services:4.3.3' // google-services plugin
         classpath 'com.huawei.agconnect:agcp:1.2.0.300'
@@ -22,11 +22,11 @@ buildscript {
 allprojects {
     repositories {
         maven {
-            url "http://mvn.mob.com/android"
+            url "https://mvn.mob.com/android"
         }
-        maven { url 'http://developer.huawei.com/repo/' }
+        maven { url 'https://developer.huawei.com/repo/' }
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
@@ -38,7 +38,7 @@ subprojects {
     project.evaluationDependsOn(':app')
 }
 
-task clean(type: Delete) {
+tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }
 
