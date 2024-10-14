@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.mob.flutter.mobpush.MobpushPlugin;
 import com.mob.mobpush_example.utils.PlayloadDelegate;
 import com.mob.pushsdk.MobPush;
 import com.mob.pushsdk.MobPushUtils;
@@ -24,7 +25,8 @@ public class MainActivity extends FlutterActivity {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    MobPush.parseManufacturerMessage(getIntent());
+    MobpushPlugin.parseManufacturerMessage(getIntent());
+    dealPushResponse(getIntent());
   }
 
   @Override
@@ -32,7 +34,7 @@ public class MainActivity extends FlutterActivity {
     super.onNewIntent(intent);
     //需要调用setIntent方法，不然后面获取到的getIntent都试上一次传的数据
     setIntent(intent);
-    MobPush.parseManufacturerMessage(intent);
+    MobpushPlugin.parseManufacturerMessage(intent);
     dealPushResponse(intent);
   }
   private void dealPushResponse(Intent intent) {
