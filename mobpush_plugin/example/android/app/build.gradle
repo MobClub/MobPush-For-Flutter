@@ -97,8 +97,8 @@ MobSDK {
         debugLevel 4
         devInfo {
             XIAOMI {
-                appId "2882303761518300242"
-                appKey "5581830029242"
+                appId "2882303761518360245"
+                appKey "5501836067245"
             }
 
             HUAWEI {
