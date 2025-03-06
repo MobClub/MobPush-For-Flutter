@@ -41,7 +41,7 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.mob.mobpush.demo"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -97,8 +97,8 @@ MobSDK {
         debugLevel 4
         devInfo {
             XIAOMI {
-                appId "2882303761518300242"
-                appKey "5581830029242"
+                appId "2882303761518360245"
+                appKey "5501836067245"
             }
 
             HUAWEI {
