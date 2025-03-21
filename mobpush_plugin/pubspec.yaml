@@ -5,7 +5,7 @@ name: mobpush_plugin
 description: 这是一个基于 MobPush 功能的扩展的 Flutter 插件。使用此插件能够帮助您在使用 Flutter 开发应用时，快速地实现推送功能。
 
 # 标准: 每次发布新版本，都需要更新版本号.
-version: 1.2.9
+version: 1.3.0
 
 # 标准: 添加官网对应插件项目的首页.
 homepage: http://www.mob.com/mobService/mobpush

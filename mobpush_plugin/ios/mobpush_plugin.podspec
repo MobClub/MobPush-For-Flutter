@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   # 标准: 名字需要和文件名字保持一致，不带后缀
   s.name             = 'mobpush_plugin' 
   # 标准: ios目录有改动，需要更新版本号
-  s.version          = '1.1.0' 
+  s.version          = '1.3.0' 
   # 标准: 需要添加内容
   s.summary          = 'mobpush 是一款推送SDK.' 
   # 标准: 需要添加内容
@@ -32,6 +32,6 @@ A new flutter plugin project.
   s.static_framework = true
   
   # 标准: 固定为 '8.0'
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
 end
 
