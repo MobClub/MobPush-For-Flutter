@@ -48,7 +48,7 @@ class _MainAppState extends State<MainApp> {
     });
     if (Platform.isIOS) {
       //设置地区：regionId 默认0（国内），1:海外
-      MobpushPlugin.setRegionId(1);
+      MobpushPlugin.setRegionId(0);
       MobpushPlugin.registerApp("3276d3e413040", "4280a3a6df667cfce37528dec03fd9c3");
     }
 

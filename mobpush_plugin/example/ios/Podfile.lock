@@ -1,11 +1,13 @@
 PODS:
   - Flutter (1.0.0)
-  - mob_pushsdk (3.0.3):
-    - mob_pushsdk/MobPush (= 3.0.3)
+  - FlyVerifyCSDK (1.0.4)
+  - mob_pushsdk (4.2.6):
+    - mob_pushsdk/MobPush (= 4.2.6)
     - MOBFoundation
-  - mob_pushsdk/MobPush (3.0.3):
+  - mob_pushsdk/MobPush (4.2.6):
     - MOBFoundation
-  - MOBFoundation (3.2.26)
+  - MOBFoundation (20250221):
+    - FlyVerifyCSDK (>= 0.0.7)
   - mobpush_plugin (1.1.0):
     - Flutter
     - mob_pushsdk
@@ -16,6 +18,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - FlyVerifyCSDK
     - mob_pushsdk
     - MOBFoundation
 
@@ -26,11 +29,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/mobpush_plugin/ios"
 
 SPEC CHECKSUMS:
-  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
-  mob_pushsdk: da91cf00e2bc3ac01b5cbd58a204e0a0d1b4c145
-  MOBFoundation: 2abd23c80c33d1337d30dc4b0018ed914cef8f8e
-  mobpush_plugin: cef79d95989d79c71a340fadeecf18bc566c89e0
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  FlyVerifyCSDK: 6abc7ed81b332f69f72e1e113990cfd88fc335f0
+  mob_pushsdk: 873fb39cd315ca2d342da25c00273a67273ea4b3
+  MOBFoundation: 600c32f816bd0ebf5e2048c8e40357217d22ea9c
+  mobpush_plugin: c7924c87d18b622e0bda192bb841fb3e1a13326a
 
 PODFILE CHECKSUM: 8e679eca47255a8ca8067c4c67aab20e64cb974d
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.16.2
