@@ -52,12 +52,10 @@ static NSString *const receiverStr = @"com.mob.mobpush.reciever";
     else if ([@"stopPush" isEqualToString:call.method])
     {
         [MobPush stopPush];
-        result(nil);
     }
     else if ([@"restartPush" isEqualToString:call.method])
     {
         [MobPush restartPush];
-        result(nil);
     }
     else if ([@"isPushStopped" isEqualToString:call.method])
     {
@@ -280,7 +278,6 @@ static NSString *const receiverStr = @"com.mob.mobpush.reciever";
         NSDictionary *arguments = (NSDictionary *)call.arguments;
         _isPro = [arguments[@"isPro"] boolValue];
         [MobPush setAPNsForProduction:_isPro];
-        result(nil);
     }
     else if ([@"setBadge" isEqualToString:call.method])
     {
@@ -288,19 +285,16 @@ static NSString *const receiverStr = @"com.mob.mobpush.reciever";
         NSInteger badge = [arguments[@"badge"] integerValue];
         UIApplication.sharedApplication.applicationIconBadgeNumber = badge;
         [MobPush setBadge:badge];
-        result(nil);
     }
     else if ([@"clearBadge" isEqualToString:call.method])
     {
         [MobPush clearBadge];
-        result(nil);
     }
     else if ([@"setAPNsShowForegroundType" isEqualToString:call.method])
     {
         NSDictionary *arguments = (NSDictionary *)call.arguments;
         NSInteger type = [arguments[@"type"] integerValue];
         [MobPush setAPNsShowForegroundType:type];
-        result(nil);
     }
     else if ([@"setCustomNotification" isEqualToString:call.method])
     {
@@ -310,7 +304,6 @@ static NSString *const receiverStr = @"com.mob.mobpush.reciever";
                                                  forKey:@"MPushNotificationConfiguration"
                                                  domain:@"MOBPUSH_FLUTTER_PLUGIN"];
         [MobPush setupNotification:config];
-        result(nil);
     }
     else if ([@"updatePrivacyPermissionStatus" isEqualToString:call.method])
     {
@@ -324,14 +317,12 @@ static NSString *const receiverStr = @"com.mob.mobpush.reciever";
         NSDictionary *arguments = (NSDictionary *)call.arguments;
         int regionId = [arguments[@"regionId"] intValue];
         [MobPush setRegionID:regionId];
-        result(nil);
     }
     else if ([@"registerApp" isEqualToString:call.method]) {
         NSDictionary *arguments = (NSDictionary *)call.arguments;
         NSString *appKey = arguments[@"appKey"];
         NSString *appSecret = arguments[@"appSecret"];
         [MobSDK registerAppKey:appKey appSecret:appSecret];
-        result(nil);
     }
     else
     {

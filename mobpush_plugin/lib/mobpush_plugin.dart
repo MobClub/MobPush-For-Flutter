@@ -54,14 +54,14 @@ class MobpushPlugin {
 	 *停止推送.
 	 */
 	static Future<void> stopPush() async {
-		return await _channel.invokeMethod('stopPush');
+		_channel.invokeMethod('stopPush');
 	}
 
 	/*
 	 *重新打开推送服务.
 	 */
 	static Future<void> restartPush() async {
-		return await _channel.invokeMethod('restartPush');
+		_channel.invokeMethod('restartPush');
 	}
 
 	/*
@@ -160,28 +160,28 @@ class MobpushPlugin {
 	 *设置远程推送，向用户授权(仅 iOS).
 	 */
 	static Future<void> setCustomNotification() async {
-		return await _channel.invokeMethod('setCustomNotification');
+		_channel.invokeMethod('setCustomNotification');
 	}
 
 	/*
 	 *设置远程推送环境 (仅 iOS).
 	 */
 	static Future<void> setAPNsForProduction(bool isPro) async {
-		return await _channel.invokeMethod('setAPNsForProduction', {'isPro': isPro});
+		_channel.invokeMethod('setAPNsForProduction', {'isPro': isPro});
 	}
 
 	/*
 	 *设置角标 (仅 iOS).
 	 */
 	static Future<void> setBadge(int badge) async {
-		return await _channel.invokeMethod('setBadge', {'badge': badge});
+		_channel.invokeMethod('setBadge', {'badge': badge});
 	}
 
 	/*
 	 *清空角标，不清除通知栏消息记录 (仅 iOS).
 	 */
 	static Future<void> clearBadge() async {
-		return await _channel.invokeMethod('clearBadge');
+		_channel.invokeMethod('clearBadge');
 	}
 
 	/*
@@ -190,14 +190,14 @@ class MobpushPlugin {
 	 *iOS 10以上设置生效.(仅 iOS).
 	 */
 	static Future<void> setAPNsShowForegroundType(int type) async {
-		return await _channel.invokeMethod('setAPNsShowForegroundType', {'type': type});
+		_channel.invokeMethod('setAPNsShowForegroundType', {'type': type});
 	}
 
 	/*
 	 *设置地区：regionId 默认0（国内），1:海外  (仅 iOS).
 	 */
 	static Future<void> setRegionId(int regionId) async {
-		return await _channel.invokeMethod('setRegionId', {'regionId': regionId});
+		_channel.invokeMethod('setRegionId', {'regionId': regionId});
 	}
 
 	/*
@@ -205,7 +205,7 @@ class MobpushPlugin {
 	 * (仅 iOS).
 	 */
 	static Future<void> registerApp(String appKey, String appSecret) async {
-		return await _channel.invokeMethod('registerApp', {'appKey': appKey, 'appSecret': appSecret});
+		_channel.invokeMethod('registerApp', {'appKey': appKey, 'appSecret': appSecret});
 	}
 
 // Android API
