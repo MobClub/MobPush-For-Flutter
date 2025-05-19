@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobpush_plugin/mobpush_plugin.dart';
 
+typedef ResultCallback<T> = T Function(T result);
+
 class OtherApiPage extends StatefulWidget {
   @override
   _OtherApiPageState createState() {
@@ -15,7 +17,8 @@ class _OtherApiPageState extends State<OtherApiPage> {
   static List<String> otherPublicAPIs = ['stopPush', 'restartPush', 'isPushStoped', 'setAlias', 'getAlias', 'deleteAlias', 'addTags', 'getTags', 'deleteTags', 'cleanTags', 'bindPhoneNum'];
   static List<String> otherAndOnlyAPIs = ['setSilenceTime', 'removeLocalNotification', 'clearLocalNotifications', 'setAppForegroundHiddenNotification', 'setNotifyIcon', 'setClickNotificationToLaunchMainActivity', 'setShowBadge'].map((f)=>f+'\n(仅安卓可用)').toList();
   static List<String> otheriOSOnlyAPIs = ['setBadge', 'clearBadge', 'setAPNsShowForegroundType'].map((f)=>f+'\n(仅iOS可用)').toList();
-  List<String> otherAllAPIs = otherPublicAPIs + otherAndOnlyAPIs + otheriOSOnlyAPIs;
+  static List<String> otherOhosOnlyAPIs = ['setShowBadge','getShowBadge','setBadgeCounts','clearAllNotification','getDeviceToken','setGeofenceStatus','checkTcpStatus','getGeofenceStatus','deleteGeofence','setUserLanguage','addGeofenceReceiver','addInAppMessageReceiver'].map((f)=>f+'\n(仅鸿蒙可用)').toList();
+  List<String> otherAllAPIs = otherPublicAPIs + otherAndOnlyAPIs + otheriOSOnlyAPIs + otherOhosOnlyAPIs;
 
   TextEditingController _controller = new TextEditingController();
   bool hiddenNotify = false;
@@ -427,9 +430,13 @@ class _OtherApiPageState extends State<OtherApiPage> {
     );
   }
 
-  // 工具方法
   void _showWarningDialog(bool isOnlyForAnd) {
-    String noti = isOnlyForAnd ? 'Android' : 'iOS';
+    _showWarningDialogNew(isOnlyForAnd, false);
+  }
+
+  // 工具方法
+  void _showWarningDialogNew(bool isOnlyForAnd, bool isohos) {
+    String noti = isohos?"鸿蒙":isOnlyForAnd ? 'Android' : 'iOS';
     showDialog(
       context: context,
       builder: (context) {
@@ -465,9 +472,8 @@ class _OtherApiPageState extends State<OtherApiPage> {
       appBar: AppBar(
         title: Text('PushAPI接口'),
         iconTheme: IconThemeData(color: Colors.black),
-        textTheme: TextTheme(headline6: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        centerTitle: true, toolbarTextStyle: TextTheme(headline6: TextStyle(color: Colors.black)).bodyText2, titleTextStyle: TextTheme(headline6: TextStyle(color: Colors.black)).headline6,
         backgroundColor: Colors.white,
-        centerTitle: true,
       ),
       body: new ListView.separated (
         padding: const EdgeInsets.all(15.0),
@@ -626,9 +632,154 @@ class _OtherApiPageState extends State<OtherApiPage> {
         }
         _setAPNsShowForegroundType();
         break;
+      case 21:
+        if (!Platform.isOhos) {
+          _showWarningDialogNew(false, true);
+          return;
+        }
+        await MobpushPlugin.setShowBadge(true);
+        break;
+      case 22:
+        if (!Platform.isOhos) {
+          _showWarningDialogNew(false, true);
+          return;
+        }
+        bool isShow = await MobpushPlugin.getShowBadge();
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>> getShowBadge -> $isShow");
+        break;
+      case 23:
+        if (!Platform.isOhos) {
+          _showWarningDialogNew(false, true);
+          return;
+        }
+        MobpushPlugin.setBadgeCounts(66);
+        break;
+      case 24:
+        if (!Platform.isOhos) {
+          _showWarningDialogNew(false, true);
+          return;
+        }
+        MobpushPlugin.clearAllNotification();
+        break;
+      case 25:
+        if (!Platform.isOhos) {
+          _showWarningDialogNew(false, true);
+          return;
+        }
+        String token = await MobpushPlugin.getDeviceToken();
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>> getDeviceToken -> $token");
+        break;
+      case 26:
+        if (!Platform.isOhos) {
+          _showWarningDialogNew(false, true);
+          return;
+        }
+        MobpushPlugin.setGeofenceStatus(true);
+        break;
+      case 27:
+        if (!Platform.isOhos) {
+          _showWarningDialogNew(false, true);
+          return;
+        }
+        bool tcp = await MobpushPlugin.checkTcpStatus();
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>> TcpStatus -> $tcp");
+        break;
+      case 28:
+        if (!Platform.isOhos) {
+          _showWarningDialogNew(false, true);
+          return;
+        }
+        bool tcp = await MobpushPlugin.getGeofenceStatus();
+        print(">>>>>>>>>>>>>>>>>>>>>>>>>>> GeofenceStatus -> $tcp");
+        break;
+      case 29:
+        if (!Platform.isOhos) {
+          _showWarningDialogNew(false, true);
+          return;
+        }
+        _deleteGeofence();
+        break;
+      case 30:
+        if (!Platform.isOhos) {
+          _showWarningDialogNew(false, true);
+          return;
+        }
+        MobpushPlugin.setUserLanguage("en");
+        break;
+      case 31:
+        if (!Platform.isOhos) {
+          _showWarningDialogNew(false, true);
+          return;
+        }
+        MobpushPlugin.addGeofenceReceiver();
+        break;
+      case 32:
+        if (!Platform.isOhos) {
+          _showWarningDialogNew(false, true);
+          return;
+        }
+        MobpushPlugin.addInAppMessageReceiver();
+        break;
       default:
         break;
     }
+  }
+
+  void _deleteGeofence() async {
+    // 先清空输入框内容
+    _controller.text = '';
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("deleteGeofence"),
+            content: Container(
+              child: TextField(
+                maxLines: 1,
+                decoration: InputDecoration(
+                    hintText: "Please input Geofence Id...",
+                    contentPadding: EdgeInsets.all(10),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        borderSide: BorderSide(
+                            color: Color(0xFFe1e1e1),
+                            width: 0.5,
+                            style: BorderStyle.solid
+                        )
+                    )
+                ),
+                controller: _controller,
+              ),
+            ),
+            actions: <Widget>[
+              new TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('Cancel')
+              ),
+              new TextButton(
+                  onPressed: () {
+                    MobpushPlugin.deleteGeofence(_controller.text);
+                    Navigator.pop(context);
+                  },
+                  child: Text('OK')
+              )
+              // new FlatButton(
+              //   child: new Text("OK"),
+              //   onPressed: () {
+              //     MobpushPlugin.bindPhoneNum(_controller.text).then((Map<String, dynamic> phoneMap){
+              //       String res = phoneMap['res'];
+              //       String error = phoneMap['error'];
+              //       print(">>>>>>>>>>>>>>>>>>>>>>>>>>> bindPhoneNum -> res: $res error: $error");
+              //     });
+              //     Navigator.pop(context);
+              //   },
+              // )
+            ],
+          );
+        }
+    );
   }
 
 }

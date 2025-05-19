@@ -29,6 +29,14 @@ class MobpushPlugin {
 	}
 
 	/*
+	 * 初始化SDK  (仅 OHOS).
+	 */
+  static Future<void> init(String appKey, String appSecret) async {
+    Map args = {"appKey": appKey, "appSecret": appSecret};
+    return _channel.invokeMethod("init", args);
+  }
+
+  /*
 	 *获取regId.
 	 */
 	static Future<Map<String, dynamic>> getRegistrationId() async {
@@ -263,4 +271,80 @@ class MobpushPlugin {
         });
 	}
 
+  /*
+	 * 获取是否显示角标(仅ohos).
+	 */
+  static Future<bool> getShowBadge() async {
+    return await _channel.invokeMethod('getShowBadge');
+  }
+
+  /*
+	 * 设置角标数(仅ohos).
+	 */
+  static Future<void> setBadgeCounts(int count) async {
+    _channel.invokeMethod('setBadgeCounts', {'count': count});
+  }
+
+  /*
+	 * 清除全部通知(仅ohos).
+	 */
+  static Future<void> clearAllNotification() async {
+    _channel.invokeMethod('clearAllNotification');
+  }
+
+  /*
+	 * 获取缓存的token(仅ohos).
+	 */
+  static Future<String> getDeviceToken() async {
+    return await _channel.invokeMethod('getDeviceToken');
+  }
+
+  /*
+	 * 获取tcp状态(仅ohos).
+	 */
+  static Future<bool> checkTcpStatus() async {
+    return await _channel.invokeMethod('checkTcpStatus');
+  }
+
+  /*
+	 * 设置地理围栏状态(仅ohos).
+	 */
+  static Future<void> setGeofenceStatus(bool isopen) async {
+    _channel.invokeMethod('setGeofenceStatus', {'status': isopen});
+  }
+
+  /*
+	 * 获取地理围栏状态(仅ohos).
+	 */
+  static Future<bool> getGeofenceStatus() async {
+    return await _channel.invokeMethod('getGeofenceStatus');
+  }
+
+  /*
+	 * 删除指定围栏(仅ohos).
+	 */
+  static Future<void> deleteGeofence(String id) async {
+    _channel.invokeMethod('deleteGeofence', {'geofenceId': id});
+  }
+
+  /*
+	 * 设置通知语言(仅ohos).
+	 */
+  static Future<void> setUserLanguage(String language) async {
+    _channel.invokeMethod('setUserLanguage', {'language': language});
+  }
+
+	/*
+	 * 设置地理围栏监听(仅ohos).
+	 */
+  static Future<void> addGeofenceReceiver() async {
+    _channel.invokeMethod('addGeofenceReceiver');
+  }
+
+  /*
+	 * 设置应用内消息监听(仅ohos).
+	 */
+  static Future<void> addInAppMessageReceiver() async {
+    _channel.invokeMethod('addInAppMessageReceiver');
+  }
 }

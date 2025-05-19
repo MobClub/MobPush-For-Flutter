@@ -41,6 +41,9 @@ class _MainAppState extends State<MainApp> {
   @override
   void initState() {
     super.initState();
+    if(Platform.isOhos){
+      MobpushPlugin.init("2dbe655e88c80","a7b9f1918c596eacbff8a172ba8ed158");
+    }
     //上传隐私协议许可
     MobpushPlugin.updatePrivacyPermissionStatus(true).then((value) {
       print(">>>>>>>>>>>>>>>>>>>updatePrivacyPermissionStatus:" +
@@ -77,7 +80,7 @@ class _MainAppState extends State<MainApp> {
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  content: Text(message.content),
+                  content: Text("透传消息到达\n" + message.content),
                   actions: <Widget>[
                     TextButton(
                       onPressed: () {
@@ -92,10 +95,40 @@ class _MainAppState extends State<MainApp> {
         case 1:
           MobPushNotifyMessage message =
               new MobPushNotifyMessage.fromJson(result);
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  content: Text("通知消息到达\n" +message.content),
+                  actions: <Widget>[
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text("确定")
+                    )
+                  ],
+                );
+              });
           break;
         case 2:
           MobPushNotifyMessage message =
               new MobPushNotifyMessage.fromJson(result);
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  content: Text("通知消息点击\n" + message.content),
+                  actions: <Widget>[
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text("确定")
+                    )
+                  ],
+                );
+              });
           break;
       }
     });
