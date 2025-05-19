@@ -1,0 +1,45 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "material": {
+          "storeFile": "/Users/yanyuhang/Project/FlutterProject/MobPush-Flutter-supportHos/mobpush_plugin/example/ohos/Signing-debug/mob_publish.p12",
+          "storePassword": "00000019E5EAC96F82343EA734E39FDF475B6C7C5B5C4F22F50FCF2FE54A3054927CEA21292E8BD8C3",
+          "keyAlias": "mob",
+          "keyPassword": "0000001964CCF77C58C2D81AF770B532EB8CA6A190EE1824F2D306AEAF64F2ABC70030D581F4727790",
+          "signAlg": "SHA256withECDSA",
+          "profile": "/Users/yanyuhang/Project/FlutterProject/MobPush-Flutter-supportHos/mobpush_plugin/example/ohos/Signing-debug/MobPush-debugDebug.p7b",
+          "certpath": "/Users/yanyuhang/Project/FlutterProject/MobPush-Flutter-supportHos/mobpush_plugin/example/ohos/Signing-debug/MobTech-Debug.cer"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.0(12)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}
