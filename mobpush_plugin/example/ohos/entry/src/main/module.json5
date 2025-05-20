@@ -23,7 +23,8 @@
         "skills": [
           {
             "entities": [
-              "entity.system.home"
+              "entity.system.home",
+              "action.ohos.push.listener"
             ],
             "actions": [
               "action.system.home"
@@ -74,8 +75,35 @@
     ],
     "requestPermissions": [
       {
+        "name": "ohos.permission.GET_NETWORK_INFO"
+      },
+      {
         "name": "ohos.permission.INTERNET"
       },
+      {
+        "name": "ohos.permission.LOCATION",
+        "reason": "$string:demoReqPermission",
+        "usedScene": {
+          "when": "always"
+        }
+      },
+      {
+        "name": "ohos.permission.LOCATION_IN_BACKGROUND",
+        "reason": "$string:demoReqPermission",
+        "usedScene": {
+          "when": "always"
+        }
+      },
+      {
+        "name": "ohos.permission.APPROXIMATELY_LOCATION",
+        "reason": "$string:demoReqPermission",
+        "usedScene": {
+          "when": "always"
+        }
+      },
+      {
+        "name": "ohos.permission.GET_WIFI_INFO"
+      }
     ]
   }
 }

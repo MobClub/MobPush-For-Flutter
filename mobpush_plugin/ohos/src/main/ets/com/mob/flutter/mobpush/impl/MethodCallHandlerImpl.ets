@@ -76,7 +76,7 @@ export class MethodCallHandlerImpl implements MethodCallHandler {
         result.success(map)
       })
     } else if (call.method == "deleteAlias") {
-      mobPush.getAlias().then((data: mobPush.AliasResult) => {
+      mobPush.deleteAlias().then((data: mobPush.AliasResult) => {
         let map = new HashMap<string, Object>()
         map.set("res", data.errorCode == 0 ? "success" : "failed")
         map.set("error", "")
