@@ -1,12 +1,18 @@
 import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
+import MobpushPlugin from 'mobpush_plugin';
 
 const DOMAIN = 0x0000;
 
 export default class EntryAbility1 extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onCreate');
+    MobpushPlugin.notificationClickAck(want)
+  }
+
+  onNewWant(want: Want, launchParams: AbilityConstant.LaunchParam): void {
+    MobpushPlugin.notificationClickAck(want)
   }
 
   onDestroy(): void {
