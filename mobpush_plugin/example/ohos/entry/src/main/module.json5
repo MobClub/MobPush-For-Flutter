@@ -23,11 +23,11 @@
         "skills": [
           {
             "entities": [
-              "entity.system.home",
-              "action.ohos.push.listener"
+              "entity.system.home"
             ],
             "actions": [
-              "action.system.home"
+              "action.system.home",
+              "action.ohos.push.listener"
             ]
           }
         ]

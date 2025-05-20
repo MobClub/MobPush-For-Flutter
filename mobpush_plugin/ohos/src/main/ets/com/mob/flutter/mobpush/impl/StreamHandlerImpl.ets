@@ -18,7 +18,7 @@ export class StreamHandlerImpl implements StreamHandler, mobPush.MobPushReceiver
   onInAppMessageReceive(message: mobPush.MobPushInAppMessage): void {
     let obj: Record<string, Object> = {
       "action": 4,
-      "result": message
+      "result": this.buildInAppRealMessage(message)
     }
     this.messageCallback(JSON.stringify(obj))
   }
@@ -26,7 +26,7 @@ export class StreamHandlerImpl implements StreamHandler, mobPush.MobPushReceiver
   onInAppMessageShow(message: mobPush.MobPushInAppMessage): void {
     let obj: Record<string, Object> = {
       "action": 5,
-      "result": message
+      "result": this.buildInAppRealMessage(message)
     }
     this.messageCallback(JSON.stringify(obj))
   }
@@ -34,7 +34,7 @@ export class StreamHandlerImpl implements StreamHandler, mobPush.MobPushReceiver
   onInAppMessageClick(message: mobPush.MobPushInAppMessage): void {
     let obj: Record<string, Object> = {
       "action": 6,
-      "result": message
+      "result": this.buildInAppRealMessage(message)
     }
     this.messageCallback(JSON.stringify(obj))
   }
@@ -43,14 +43,14 @@ export class StreamHandlerImpl implements StreamHandler, mobPush.MobPushReceiver
   onCustomMessageReceive(message: mobPush.MobPushCustomMessage): void {
     let map: Record<string, ESObject> = {
       "content": message.content,
-      "extrasMap": message.extrasMap,
+      "extrasMap": this.parseMap((message.extrasMap as Map<string, object>)),
       "messageId": message.messageId,
       "timestamp": message.timestamp,
       "offlineFlag": message.offlineFlag,
       "geofenceId": message.geofenceId,
       "expirationTime": message.expirationTime,
-      "locationInfo": message.locationInfo,
-      "serviceTempExtras": message.serviceTempExtras,
+      "locationInfo": this.parseMap((message.locationInfo as Map<string, object>)),
+      "serviceTempExtras": this.parseMap((message.serviceTempExtras as Map<string, object>)),
     }
     let obj: Record<string, Object> = {
       "action": 0,
@@ -116,7 +116,7 @@ export class StreamHandlerImpl implements StreamHandler, mobPush.MobPushReceiver
       "style": message.style,
       "title": message.title,
       "content": message.content,
-      "extrasMap": message.extrasMap,
+      "extrasMap": this.parseMap((message.extrasMap as Map<string, object>)),
       "messageId": message.messageId,
       "channel": message.channel,
       "dropType": message.dropType,
@@ -140,11 +140,76 @@ export class StreamHandlerImpl implements StreamHandler, mobPush.MobPushReceiver
       "isRp": message.isRph,
       "geofenceId": message.geofenceId,
       "expirationTime": message.expirationTime,
-      "locationInfo": message.locationInfo,
+      "locationInfo": this.parseMap((message.locationInfo as Map<string, object>)),
       "showInApp": message.showInApp,
       "showOffTime": message.showOffTime,
-      "serviceTempExtras": message.serviceTempExtras,
+      "serviceTempExtras": this.parseMap((message.serviceTempExtras as Map<string, object>)),
     }
     return map
+  }
+
+
+  buildInAppRealMessage(message: mobPush.MobPushInAppMessage) {
+    let map: Record<string, ESObject> = {
+      "messageId": message.messageId,
+      "timestamp": message.timestamp,
+      "expirationTime": message.expirationTime,
+      "extrasMap": this.parseMap((message.extrasMap as Map<string, object>)),
+      "targetPage": message.targetPage,
+      "style": message.style,
+      "title": message.title,
+      "titleColor": message.titleColor,
+      "titleSize": message.titleSize,
+      "titleAlign": message.titleAlign,
+      "isTitleBold": message.isTitleBold,
+      "content": message.content,
+      "contentColor": message.contentColor,
+      "contentSize": message.contentSize,
+      "contentAlign": message.contentAlign,
+      "isContentBold": message.isContentBold,
+      "leftButtonText": message.leftButtonText,
+      "isLeftButtonTextBold": message.isLeftButtonTextBold,
+      "leftButtonTextColor": message.leftButtonTextColor,
+      "leftButtonBackgroundColor": message.leftButtonBackgroundColor,
+      "leftButtonClickType": message.leftButtonClickType,
+      "leftButtonDeeplink": message.leftButtonDeeplink,
+      "rightButtonText": message.rightButtonText,
+      "isRightButtonTextBold": message.isRightButtonTextBold,
+      "rightButtonTextColor": message.rightButtonTextColor,
+      "rightButtonBackgroundColor": message.rightButtonBackgroundColor,
+      "rightButtonClickType": message.rightButtonClickType,
+      "rightButtonDeeplink": message.rightButtonDeeplink,
+      "image": message.image,
+      "clickType": message.clickType,
+      "deeplinkUrl": message.deeplinkUrl,
+      "bannerPosition": message.bannerPosition,
+      "closeDelay": message.closeDelay,
+      "fullCloseType": message.fullCloseType,
+      "fullCloseText": message.fullCloseText,
+      "isFullCloseTextBold": message.isFullCloseTextBold,
+      "fullCloseTextColor": message.fullCloseTextColor,
+      "fullCloseBackgroundColor": message.fullCloseBackgroundColor,
+      "fullCloseTextSize": message.fullCloseTextSize,
+      "closeButtonPosition": message.closeButtonPosition,
+      "hasMaskLayer": message.hasMaskLayer,
+      "showBannerCloseButton": message.showBannerCloseButton,
+      "fromNotify": message.fromNotify,
+      "serviceTempExtras": this.parseMap((message.serviceTempExtras as Map<string, object>)),
+      "locationInfo":this.parseMap((message.locationInfo as Map<string, object>)),
+      "geofenceId": message.geofenceId,
+    }
+    return map
+  }
+
+  parseMap(map: Map<string, Object>): object {
+    let obj: Record<string, Object> = {};
+    if (map && map.size > 0) {
+      map.forEach((value, key) => {
+        if (key != undefined && value != undefined) {
+          obj[key] = value;
+        }
+      })
+    }
+    return obj
   }
 }
