@@ -11,6 +11,14 @@
     {
       "name": "EntryAbility_label",
       "value": "mobpush_plugin_example"
+    },
+    {
+      "name": "EntryAbility1_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility1_label",
+      "value": "label"
     }
   ]
 }

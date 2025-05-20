@@ -1,4 +1,3 @@
-
 {
   "module": {
     "name": "entry",
@@ -31,10 +30,52 @@
             ]
           }
         ]
+      },
+      {
+        "name": "EntryAbility1",
+        "srcEntry": "./ets/entryability1/EntryAbility1.ets",
+        "description": "$string:EntryAbility1_desc",
+        "icon": "$media:layered_image",
+        "label": "$string:EntryAbility1_label",
+        "startWindowIcon": "$media:startIcon",
+        "startWindowBackground": "$color:start_window_background",
+        "skills": [
+          {
+            "entities": [
+              "entity.open.page.a"
+            ],
+            "actions": [
+              "action.open.page.a"
+            ]
+          },
+          {
+            "actions": [
+              ""
+            ],
+            "entities": [
+              ""
+            ],
+            "uris": [
+              {
+                "scheme": "https",
+                "host": "www.mobpush.com"
+              },
+              {
+                "scheme": "mlink",
+                "host": "com.mob.mobpush.linkone",
+              },
+              {
+                "scheme": "http"
+              }
+            ]
+          }
+        ]
       }
     ],
     "requestPermissions": [
-      {"name" :  "ohos.permission.INTERNET"},
+      {
+        "name": "ohos.permission.INTERNET"
+      },
     ]
   }
 }
