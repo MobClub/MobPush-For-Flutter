@@ -1,10 +1,17 @@
 import { EventSink, StreamHandler, Any } from '@ohos/flutter_ohos';
 import mobPush from "@zztsdk/mobpush";
 import HashMap from "@ohos.util.HashMap";
+import { List } from '@kit.ArkTS';
+import { Want } from '@kit.AbilityKit';
 
 export class StreamHandlerImpl implements StreamHandler, mobPush.MobPushReceiver, mobPush.MobPushInAppMessageReceiver, mobPush.MobPushGeofenceReceiver {
   private sink: EventSink | undefined = undefined
   private cacheMessages: string[] = []
+  private cacheWant: List<Want> = new List()
+
+  constructor(wants: List<Want>) {
+    this.cacheWant = wants
+  }
 
   onGeofenceReceiver(data: mobPush.MobPushGeofence[]): void {
     let obj: Record<string, Object> = {
@@ -97,6 +104,12 @@ export class StreamHandlerImpl implements StreamHandler, mobPush.MobPushReceiver
       }
     }
     this.cacheMessages = []
+    if (this.cacheWant.length > 0) {
+      for (let cacheWantElement of this.cacheWant) {
+        mobPush.notificationClickAck(cacheWantElement)
+      }
+    }
+    this.cacheWant.clear()
   }
 
   onCancel(args: Any): void {
@@ -195,7 +208,7 @@ export class StreamHandlerImpl implements StreamHandler, mobPush.MobPushReceiver
       "showBannerCloseButton": message.showBannerCloseButton,
       "fromNotify": message.fromNotify,
       "serviceTempExtras": this.parseMap((message.serviceTempExtras as Map<string, object>)),
-      "locationInfo":this.parseMap((message.locationInfo as Map<string, object>)),
+      "locationInfo": this.parseMap((message.locationInfo as Map<string, object>)),
       "geofenceId": message.geofenceId,
     }
     return map
