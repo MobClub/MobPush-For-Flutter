@@ -34,6 +34,9 @@ export default class MobpushPlugin implements FlutterPlugin {
     if (this.channel != null) {
       this.channel.setMethodCallHandler(null)
     }
+    if (this.eventChannel != null) {
+      this.eventChannel.setStreamHandler(null)
+    }
   }
 
   static notificationClickAck(want:Want) {
