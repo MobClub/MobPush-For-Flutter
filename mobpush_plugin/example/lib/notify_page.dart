@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:mobpush_plugin/mobpush_plugin.dart';
+import 'package:mobpush_plugin_ohos/mobpush_plugin.dart';
 
 class NotifyPage extends StatefulWidget {
   @override

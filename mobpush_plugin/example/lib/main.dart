@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:mobpush_plugin/mobpush_plugin.dart';
-import 'package:mobpush_plugin/mobpush_custom_message.dart';
-import 'package:mobpush_plugin/mobpush_notify_message.dart';
+import 'package:mobpush_plugin_ohos/mobpush_plugin.dart';
+import 'package:mobpush_plugin_ohos/mobpush_custom_message.dart';
+import 'package:mobpush_plugin_ohos/mobpush_notify_message.dart';
 import 'app_notify_page.dart';
 import 'click_container.dart';
 import 'local_notify_page.dart';

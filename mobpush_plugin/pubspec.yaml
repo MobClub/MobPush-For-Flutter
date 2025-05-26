@@ -1,5 +1,5 @@
 # 标准: 符合插件命名规范 xx_plugin.
-name: mobpush_plugin
+name: mobpush_plugin_ohos
 
 # 标准: 必须添加产品说明信息,需要修改时变更.
 description: 这是一个基于 MobPush 功能的扩展的 Flutter 插件。使用此插件能够帮助您在使用 Flutter 开发应用时，快速地实现推送功能。

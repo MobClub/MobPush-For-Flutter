@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobpush_plugin/mobpush_plugin.dart';
+import 'package:mobpush_plugin_ohos/mobpush_plugin.dart';
 
 class TimingNotifyPage extends StatefulWidget {
   @override
@@ -46,9 +46,8 @@ class _TimingNotifyPageState extends State<TimingNotifyPage> {
       appBar: AppBar(
         title: Text('定时通知测试'),
         iconTheme: IconThemeData(color: Colors.black),
-        textTheme: TextTheme(headline6: TextStyle(color: Colors.black)),
         backgroundColor: Colors.white,
-        centerTitle: true,
+        centerTitle: true, toolbarTextStyle: TextTheme(headline6: TextStyle(color: Colors.black)).bodyText2, titleTextStyle: TextTheme(headline6: TextStyle(color: Colors.black)).headline6,
       ),
       body: Container(
         margin: EdgeInsets.all(15.0),

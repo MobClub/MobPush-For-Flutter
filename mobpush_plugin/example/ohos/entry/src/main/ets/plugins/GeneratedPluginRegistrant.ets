@@ -1,5 +1,5 @@
 import { FlutterEngine, Log } from '@ohos/flutter_ohos';
-import MobpushPlugin from 'mobpush_plugin';
+import MobpushPlugin from 'mobpush_plugin_ohos';
 
 /**
  * Generated file. Do not edit.

@@ -2,8 +2,8 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:mobpush_plugin/mobpush_plugin.dart';
-import 'package:mobpush_plugin/mobpush_local_notification.dart';
+import 'package:mobpush_plugin_ohos/mobpush_plugin.dart';
+import 'package:mobpush_plugin_ohos/mobpush_local_notification.dart';
 
 class LocalNotifyPage extends StatefulWidget {
   @override

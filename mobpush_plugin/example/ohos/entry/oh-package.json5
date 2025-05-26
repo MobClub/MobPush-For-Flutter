@@ -6,7 +6,6 @@
   "author": "",
   "license": "",
   "dependencies": {
-    "mobpush_plugin": "file:../har/mobpush_plugin.har",
-    "@zztsdk/mobpush": "^2.3.1"
+    "mobpush_plugin_ohos": "file:../har/mobpush_plugin_ohos.har"
   }
 }

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mobpush_plugin/mobpush_plugin.dart';
+import 'package:mobpush_plugin_ohos/mobpush_plugin.dart';
 
 typedef ResultCallback<T> = T Function(T result);
 

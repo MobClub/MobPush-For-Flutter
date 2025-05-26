@@ -14,7 +14,7 @@
   },
   "overrides": {
     "@ohos/flutter_ohos": "file:./har/flutter.har",
-    "mobpush_plugin": "file:./har/mobpush_plugin.har",
-    "@ohos/flutter_module": "file:./entry"
+    "@ohos/flutter_module": "file:./entry",
+    "mobpush_plugin_ohos": "file:./har/mobpush_plugin_ohos.har"
   }
 }
