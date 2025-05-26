@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mobpush_plugin/mobpush_plugin.dart';
+import 'package:mobpush_plugin_ohos/mobpush_plugin.dart';
 
 void main() {
   const MethodChannel channel = MethodChannel('mobpush_plugin');
