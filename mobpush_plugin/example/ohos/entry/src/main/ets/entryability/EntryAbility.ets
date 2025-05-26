@@ -2,7 +2,7 @@ import { EventChannel, FlutterAbility, FlutterEngine,Any } from '@ohos/flutter_o
 import { GeneratedPluginRegistrant } from '../plugins/GeneratedPluginRegistrant';
 import AbilityConstant from '@ohos.app.ability.AbilityConstant';
 import Want from '@ohos.app.ability.Want';
-import MobpushPlugin from 'mobpush_plugin';
+import MobpushPlugin from 'mobpush_plugin_ohos';
 import { abilityAccessCtrl } from '@kit.AbilityKit';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { bundleManager } from '@kit.AbilityKit';

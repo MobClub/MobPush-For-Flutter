@@ -1,7 +1,7 @@
 import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
-import MobpushPlugin from 'mobpush_plugin';
+import MobpushPlugin from 'mobpush_plugin_ohos';
 
 const DOMAIN = 0x0000;
 
