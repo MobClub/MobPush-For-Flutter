@@ -159,28 +159,28 @@ class MobpushPlugin {
 	/*
 	 *设置远程推送，向用户授权(仅 iOS).
 	 */
-	static Future<void> setCustomNotification() async {
+	static void setCustomNotification() {
 		_channel.invokeMethod('setCustomNotification');
 	}
 
 	/*
 	 *设置远程推送环境 (仅 iOS).
 	 */
-	static Future<void> setAPNsForProduction(bool isPro) async {
+	static void setAPNsForProduction(bool isPro) {
 		_channel.invokeMethod('setAPNsForProduction', {'isPro': isPro});
 	}
 
 	/*
 	 *设置角标 (仅 iOS).
 	 */
-	static Future<void> setBadge(int badge) async {
+	static void setBadge(int badge) {
 		_channel.invokeMethod('setBadge', {'badge': badge});
 	}
 
 	/*
 	 *清空角标，不清除通知栏消息记录 (仅 iOS).
 	 */
-	static Future<void> clearBadge() async {
+	static void clearBadge() {
 		_channel.invokeMethod('clearBadge');
 	}
 
@@ -189,14 +189,14 @@ class MobpushPlugin {
 	 *默认3个选项都有
 	 *iOS 10以上设置生效.(仅 iOS).
 	 */
-	static Future<void> setAPNsShowForegroundType(int type) async {
+	static void setAPNsShowForegroundType(int type) {
 		_channel.invokeMethod('setAPNsShowForegroundType', {'type': type});
 	}
 
 	/*
 	 *设置地区：regionId 默认0（国内），1:海外  (仅 iOS).
 	 */
-	static Future<void> setRegionId(int regionId) async {
+	static void setRegionId(int regionId) {
 		_channel.invokeMethod('setRegionId', {'regionId': regionId});
 	}
 
@@ -204,7 +204,7 @@ class MobpushPlugin {
 	 *注册appkey和appsecret
 	 * (仅 iOS).
 	 */
-	static Future<void> registerApp(String appKey, String appSecret) async {
+	static void registerApp(String appKey, String appSecret) {
 		_channel.invokeMethod('registerApp', {'appKey': appKey, 'appSecret': appSecret});
 	}
 
