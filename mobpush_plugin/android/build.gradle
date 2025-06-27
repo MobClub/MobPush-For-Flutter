@@ -20,9 +20,18 @@ rootProject.allprojects {
 }
 
 apply plugin: 'com.android.library'
+def mobCompileSdkVersion = 28
+try {
+    mobCompileSdkVersion = flutter.compileSdkVersion
+    if (rootProject.hasProperty("zzt-compileSdkVersion")) {
+        mobCompileSdkVersion = Integer.parseInt(rootProject.getProperty('zzt-compileSdkVersion'))
+    }
+} catch (Throwable throwable) {
+
+}
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion mobCompileSdkVersion
     if (project.android.hasProperty("namespace")) {
         namespace 'com.mob.flutter.mobpush'
     }
