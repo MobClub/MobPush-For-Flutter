@@ -3,7 +3,7 @@
 #
 Pod::Spec.new do |s|
   # 标准: 名字需要和文件名字保持一致，不带后缀
-  s.name             = 'mobpush_plugin' 
+  s.name             = 'mobpush_plugin_ohos' 
   # 标准: ios目录有改动，需要更新版本号
   s.version          = '1.3.0' 
   # 标准: 需要添加内容
